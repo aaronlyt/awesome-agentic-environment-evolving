@@ -4,7 +4,7 @@ Thanks for improving this list! Please read the scope rules and format below bef
 
 ## Scope Rules (what gets accepted)
 
-The list is about **environments as first-class, evolving citizens of LLM agents**. Acceptance criteria:
+The list is about **environments as first-class citizens in LLM-agent research**. Acceptance criteria:
 
 1. **In**: environment synthesis, environment evolution mechanisms, environment quality/verification/reward, agentic data generation paradigms, domain training environments, agent-specific infrastructure (sandboxes, platforms, protocols, EaaS).
 2. **Embodied / game world models**: only if used for **LLM/VLA agent training or evaluation**. Pure video generation and game reconstruction papers are out.
