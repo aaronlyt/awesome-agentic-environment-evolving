@@ -224,3 +224,19 @@ awesome-agentic-environment-evolving
 - **自适应生成**：§3.6（与 §4 演化机制以交叉引用衔接）
 
 由此：ACE 质量目标（原 6.1）归入 §5（质量章引言），scaling 实证（原 6.4）归入 §9.1（与新 §9"Scaling Evidence & Open Problems"合并）。全列表从十章缩为九章（领域环境→§6、基础设施→§7、训练栈→§8）。
+
+---
+
+## 附记：事实核查 pass（2026-09-01 v2.1）
+
+用三个只读 subagent 分别把 README 全部 `src:` 标注（324 行表格、~250 个带来源标注的条目）逐条对回三篇源综述原文，发现并修复 40 处偏差：
+
+- **章节/表引用错位（17 处）**：多数是把同一篇论文放进了综述的另一节（如 Agent2World 实为 AEE §5.1.1 任务驱动表、UI-Simulator 实为 §7.1.2 神经演化、AgentFrontier 实为 §6.3.3 轨迹精炼、ScienceWorld 实为 §4.3 具身域表）；ACE 侧 8 个 `ACE-T1/T2` 实际只出现在正文而非表中（CodeGym、ToolVerse、ASTRA、AgentTrek、Plan-and-Act、Taskbench、Tool-R0×2），降为裸 `src:ACE`。
+- **虚构来源（3 处）**：SOTOPIA/Melting Pot 的 AEE 标注、Generative Agents 的 ACE-T3、TopoCurate 的 ACE 均不在对应综述中——已改为真实出处（TopoCurate 实为 AEE §6.3.3）。
+- **route 标签与综述自身分类冲突（4 处）**：V-GameGym、EnvScaler、InfiniteWeb、SWE-Universe 的 route 改回 AEE 表格的原始归类。
+- **结构归属修正（图例）**：`evolution:` 五值中只有 difficulty/neural/scaling 出自 AEE §7，co-evolve 是 §8.6，verifier 来自 ES——图例已逐值标注；并注明无 `src:` 章节号的行为编辑性分类。
+- **ES 归属收紧**：§9.2 开放方向中 EaaS/learnability 并非 ES future-work 原文，归属句改为"AEE §8 + ES §5.2–§6/App. A + 本地策展"；§4.5 引用改为 ES §5.2 & App. A.2；§9.1 补 ES App. B Table 2 的实证数据（SWE-Gym 2,438→20.6 / R2E-Gym 8,135→34.4 / SWE-Smith 50,137→40.2）。
+- **小的表述精度**：ACE 的 e=(D,v) 均为 optional；难度公式 C_z 无误；多样性条件化是 Eq. 12（coverage/entropy 是 Eq. 13）；OTC=Optimal Tool Calls；AndroidWorld 116 tasks；API-Bank 73 APIs/314 tasks；Matrix-Game 的"minute-level"属 2.0 代；Simia 与 Simulating Environments with Reasoning Models 为同工双列，已互注。
+- **意外收获**：AgentEvolver 的真实 arXiv ID（2511.10395）从 AEE 参考文献补入。
+
+未发现公式、符号或章节级的结构性错误——ACE 的 e/d 形式化、三分类、五范式，AEE 的三路线×质量四维，ES 的 GEF 循环与生成-验证不对称均与原文一致。
