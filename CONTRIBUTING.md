@@ -16,18 +16,19 @@ If your entry doesn't fit an existing subsection, open an issue first — we can
 
 ## Entry Format
 
+Add one **table row** in the correct subsection:
+
 ```markdown
-- **Name** · venue/year — one-line description of what it does and why it matters.
-  `E-source: real|llm-synth|programmatic` `produces: E,q,τ,v` [arXiv:XXXX.XXXXX](https://arxiv.org/abs/XXXX.XXXXX) · [Code](https://github.com/...)
+| **Name** | Venue Year | One-line summary of the mechanism (condense the source survey's description when available). | `src:AEE-5.1.1` `route:de-novo` `E:programmatic` `produces:E,q` | [XXXX.XXXXX](https://arxiv.org/abs/XXXX.XXXXX) |
 ```
 
-Rules:
+The tag vocabulary is defined in the README legend (`src:` survey provenance, `E:` construction source, `route:` synthesis route, `evolution:` mechanism, `paradigm:` data-generation paradigm, `produces:` output factors, `quality:` quality dimension, `verify:` verification type). Use the subset that applies. Rules:
 
-- One line per entry; keep descriptions factual and mechanism-focused (what it does), not marketing (what it claims).
-- Prefer linking **arXiv abs pages**; use OpenReview/ACL Anthology when that's the canonical source.
+- Keep the one-liner factual and mechanism-focused (what it does), not marketing (what it claims). When the work appears in a source survey (AEE / ES / ACE), prefer condensing the survey's own description and record it via `src:`.
+- Prefer linking **arXiv abs pages**; use OpenReview/ACL Anthology when that's the canonical source. Leave the arXiv cell as `—` rather than guessing an ID.
 - **Code links must be verified** — do not add a code link unless you have confirmed the repo exists and matches the paper. Unverified links are worse than no links.
-- Tag entries with ACE `E-source` (environment construction source) and `produces` (which data factors it outputs) when it aids classification; optional for domain benchmarks.
-- Venue tags use the major-venue abbreviation + year (e.g., `ICML 2026`). Preprints: just the year.
+- Venue cells use the major-venue abbreviation + year (e.g., `ICML 2026`). Preprints: just the year.
+- Escape `|` inside cells — use `·` or `/` instead.
 
 ## Where to place an entry
 

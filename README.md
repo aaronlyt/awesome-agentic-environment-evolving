@@ -36,7 +36,17 @@ The field is converging on a paradigm shift: environments are no longer passive 
 - [9. Training with Evolving Environments](#9-training-with-evolving-environments)
 - [10. Open Problems & Science of Environments](#10-open-problems--science-of-environments)
 
-*Entry format: **Name** · venue/year — one-liner. `E-source` tags use the ACE taxonomy of environment construction (real/curated · LLM-synthesized · programmatic/executable, [ACE §3.2](https://arxiv.org/abs/2608.27260)); `produces` lists which data factors are output (E environment, q task, τ trajectory, v verifier). Code links are being verified and added progressively — see [CONTRIBUTING](CONTRIBUTING.md).*
+*Each category lists papers in a table. The **One-liner** column condenses what the source surveys say about the work; the **Tags** column records survey provenance and taxonomy labels (all keys optional):*
+
+- `src:` the source survey that lists the work — **AEE** = *Agentic Environment Engineering* ([2606.12191](https://arxiv.org/abs/2606.12191)) · **ES** = *Environment Scaling* ([2511.09586](https://arxiv.org/abs/2511.09586)) · **ACE** = *What Makes Good Agentic Data* ([2608.27260](https://arxiv.org/abs/2608.27260)), optionally with a table/section ref (e.g. `ACE-T1`). Works without `src:` were added by local curation (arXiv watch queue).
+- `E:` environment construction source (ACE §3.2): `real` · `llm-synth` (LLM-generated symbolic specs) · `programmatic` (executable implementation) · `neural` (the transition function itself is a network, AEE §5.2)
+- `route:` synthesis route (AEE §5.1): `task` (wrap real assets) · `real-world` (project real media) · `de-novo` (from scratch)
+- `evolution:` evolution mechanism (AEE §7): `difficulty` · `neural` · `scaling` · `co-evolve` · `verifier`
+- `paradigm:` data-generation paradigm (ACE §3): `forward` · `task-first` · `trajectory-first` · `structure-first` · `adaptive`
+- `produces:` data factors output (ACE §2.4): subset of `E,q,τ,v`
+- `quality:` quality dimension (AEE §5.3 + ACE lens): `correctness` · `complexity` · `diversity` · `fidelity` · `reward`
+
+*Code links are being verified and added progressively — see [CONTRIBUTING](CONTRIBUTING.md).*
 
 ---
 
@@ -44,16 +54,20 @@ The field is converging on a paradigm shift: environments are no longer passive 
 
 ### 1.1 Surveys
 
-- **Agentic Environment Engineering for LLMs: A Survey of Environment Modeling, Synthesis, Evaluation, and Application** · 2026 — the lifecycle survey this list's skeleton follows: 8 attribute pairs × 8 domains × 2 synthesis paradigms × 4 quality dimensions × agent & environment evolution. [arXiv:2606.12191](https://arxiv.org/abs/2606.12191)
-- **Environment Scaling for Interactive Agentic Experience Collection: A Survey** · NeurIPS'25 SEA Workshop — environments as producers of experiential data; the Generation–Execution–Feedback (GEF) loop; generator–verifier asymmetry. [arXiv:2511.09586](https://arxiv.org/abs/2511.09586) · [companion list](https://github.com/lukahhcm/Awesome_Scaling_Environments)
-- **What Makes Good Agentic Data? An ACE Lens on Data Generation for LLM Agents** · 2026 — quality lens for agentic data: Accuracy (admission condition) – Complexity (learner-relative calibration) – divErsity (behavioral coverage); data object d = (E, q, τ, v); forward vs. reverse generation. [arXiv:2608.27260](https://arxiv.org/abs/2608.27260)
-- **A Survey of Self-Evolving Agents** · 2025 — agent-centric view of self-evolution; environment appears as one component. [list](https://github.com/XMUDeepLIT/Awesome-Self-Evolving-Agents)
+| Survey | Venue | One-liner | Link |
+|---|---|---|---|
+| **Agentic Environment Engineering for LLMs** | 2026 | The lifecycle survey this list's skeleton follows: 8 attribute pairs × 8 domains × 2 synthesis paradigms × 4 quality dimensions × agent & environment evolution (582 refs). | [arXiv:2606.12191](https://arxiv.org/abs/2606.12191) |
+| **Environment Scaling for Interactive Agentic Experience Collection** | NeurIPS'25 SEA Workshop | Environments as producers of experiential data; the Generation–Execution–Feedback (GEF) loop; generator–verifier asymmetry. | [arXiv:2511.09586](https://arxiv.org/abs/2511.09586) · [companion list](https://github.com/lukahhcm/Awesome_Scaling_Environments) |
+| **What Makes Good Agentic Data? An ACE Lens** | 2026 | Quality lens — Accuracy (admission condition) – Complexity (learner-relative calibration) – divErsity (behavioral coverage); data object d = (E, q, τ, v); forward vs. reverse generation. | [arXiv:2608.27260](https://arxiv.org/abs/2608.27260) |
+| **A Survey of Self-Evolving Agents** | 2025 | Agent-centric view of self-evolution; the environment appears as one component (contrast with this list's environment-centric axis). | [list](https://github.com/XMUDeepLIT/Awesome-Self-Evolving-Agents) |
 
 ### 1.2 Position Papers
 
-- **Welcome to the Era of Experience** · Silver & Sutton, 2025 — the programmatic statement that agents must learn from their own interaction data, not human-static corpora.
-- **AgentScaler: Towards General Agentic Intelligence via Environment Scaling** · ICLR 2026 — the manifesto-paper for environment scaling: 30k heterogeneous APIs turned into diverse environments by treating function calls as database reads/writes. [arXiv:2509.13311](https://arxiv.org/abs/2509.13311)
-- **Scalable Environments Drive Generalizable Agents** · 2026 — distinguishes trajectory scaling / task scaling / **environment scaling**; argues generalization requires scaling the distribution of executable rule sets; contrasts procedural generators vs. generative world models. [arXiv:2605.18181](https://arxiv.org/abs/2605.18181)
+| Paper | Venue | One-liner | Link |
+|---|---|---|---|
+| **Welcome to the Era of Experience** | Silver & Sutton, 2025 | The programmatic statement: agents must learn from their own interaction data, not static human corpora. | — |
+| **AgentScaler** | ICLR 2026 | The manifesto-paper of environment scaling: 30k heterogeneous APIs turned into diverse environments by treating function calls as database reads/writes. | [arXiv:2509.13311](https://arxiv.org/abs/2509.13311) |
+| **Scalable Environments Drive Generalizable Agents** | 2026 | Distinguishes trajectory scaling / task scaling / environment scaling; generalization requires scaling the distribution of executable rule sets. | [arXiv:2605.18181](https://arxiv.org/abs/2605.18181) |
 
 ## 2. Formalization & Environment Attributes
 
@@ -70,94 +84,112 @@ Dual-label organization: the lifecycle survey's **synthesis route** (what real m
 
 ### 3.1 Symbolic / Programmatic Synthesis
 
-**Task-driven** — wrap static real assets (repos, issues, tasks) into executable environments.
+**Task-driven** — wrap static real assets (repos, issues, tasks) into executable environments (AEE §5.1.1).
 
-- **SWE-Gym** · ICML 2025 — 11 Python repos packaged as Docker environments with hybrid validators; trains both SWE agents and verifiers. [arXiv:2412.21139](https://arxiv.org/abs/2412.21139)
-- **R2E-Gym** · COLM 2025 — procedural SWE environments + hybrid (test & LLM) verification; 8,135 tasks. [arXiv:2504.07164](https://arxiv.org/abs/2504.07164)
-- **SWE-smith** · NeurIPS 2025 — 50k synthesized SWE tasks from a single shared image via transient bug injection. [arXiv:2504.21798](https://arxiv.org/abs/2504.21798)
-- **Scale-SWE** · 2026 — three-agent collaboration (Environment Builder / Unittest Creator / Problem Writer) immersed in the GitHub universe. [arXiv:2602.09892](https://arxiv.org/abs/2602.09892)
-- **SWE-Hub** · 2026 — system-level real-bug environments via Env Agent + Bug Agent. [arXiv:2603.00575](https://arxiv.org/abs/2603.00575)
-- **MEnvAgent** · 2026 — incremental patching to *reuse* environments across tasks instead of rebuilding. [arXiv:2601.22859](https://arxiv.org/abs/2601.22859)
-- **DockSmith** · 2026 — a *trained* model that generates and repairs Dockerfiles for environment images. [arXiv:2602.00592](https://arxiv.org/abs/2602.00592)
-- **SCALER** · 2026 — competitive-programming data synthesized into verifiable environments with tunable difficulty for RL. [arXiv:2601.04809](https://arxiv.org/abs/2601.04809)
-- **AgentFounder / Agentic CPT** · 2025 — turns unstructured corpora (Wikipedia/CommonCrawl) into interactive environments for continued pre-training. [arXiv:2509.13310](https://arxiv.org/abs/2509.13310)
-- **daVinci-Env (OpenSWE)** · 2026 — 45,320 fully transparent executable Docker environments from 12.8k repos; the largest open SWE environment synthesis stack. [arXiv:2603.13023](https://arxiv.org/abs/2603.13023)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **SWE-Gym** | ICML 2025 | 11 Python repos packaged as Docker environments with hybrid validators; trains both SWE agents and verifiers. | `src:AEE-5.1.1` `E:real` `route:task` `produces:E,τ,v` | [2412.21139](https://arxiv.org/abs/2412.21139) |
+| **R2E-Gym** | COLM 2025 | Procedural SWE environments + hybrid test/LLM verification; 8,135 tasks. | `src:AEE-5.1.1,ES` `E:real` `route:task` `produces:E,q,v` | [2504.07164](https://arxiv.org/abs/2504.07164) |
+| **SWE-smith** | NeurIPS 2025 | 50k synthesized SWE tasks from a single shared image via transient bug injection. | `src:AEE-5.1.1,ES` `E:real` `route:task` `produces:q` | [2504.21798](https://arxiv.org/abs/2504.21798) |
+| **Scale-SWE** | 2026 | Environment Builder / Unittest Creator / Problem Writer agents immersed in the GitHub universe. | `src:AEE-5.1.1` `E:real` `route:task` | [2602.09892](https://arxiv.org/abs/2602.09892) |
+| **SWE-Hub** | 2026 | System-level real-bug environments via Env Agent + Bug Agent. | `src:AEE-5.1.1` `E:real` `route:task` | [2603.00575](https://arxiv.org/abs/2603.00575) |
+| **MEnvAgent** | 2026 | Incremental patching to *reuse* environments across tasks instead of rebuilding. | `src:AEE-5.1.1` `route:task` | [2601.22859](https://arxiv.org/abs/2601.22859) |
+| **DockSmith** | 2026 | A *trained* model generates and repairs Dockerfiles for environment images. | `src:AEE-5.1.1` `route:task` | [2602.00592](https://arxiv.org/abs/2602.00592) |
+| **SCALER** | 2026 | Competitive-programming data → verifiable environments with tunable difficulty for RL. | `src:AEE-5.1.1,7.2` `route:task` `evolution:difficulty` | [2601.04809](https://arxiv.org/abs/2601.04809) |
+| **AgentFounder (Agentic CPT)** | 2025 | Wikipedia/CommonCrawl turned into interactive environments for continued pre-training. | `src:AEE-5.1.1` `route:task` | [2509.13310](https://arxiv.org/abs/2509.13310) |
+| **daVinci-Env (OpenSWE)** | 2026 | 45,320 transparent Docker environments from 12.8k repos; the largest open SWE environment stack. | `E:real` `route:task` `produces:E,v` | [2603.13023](https://arxiv.org/abs/2603.13023) |
 
-**Real-world-driven** — project real interaction media (web, OS, games, tools) into simplified virtual environments.
+**Real-world-driven** — project real interaction media (web, OS, games, tools) into simplified virtual environments (AEE §5.1.2).
 
-- **AgentSynth** · 2025 — exploits information asymmetry: generating easy sub-tasks stepwise is far cheaper than solving one long-horizon task; difficulty-controllable. [arXiv:2506.14205](https://arxiv.org/abs/2506.14205)
-- **TaskCraft** · 2025 — web-grounded, difficulty-tunable tool-call task synthesis (compositional scaling). [arXiv:2506.10055](https://arxiv.org/abs/2506.10055)
-- **OS-Genesis** · ACL 2025 — reverse task synthesis from GUI trajectories, avoiding manual curation. [paper](https://aclanthology.org/) *(trajectory-first; see also §6.4)*
-- **VeriEnv** · 2026 — LMs as *environment creators*: clone real websites into executable, programmatically verifiable synthetic environments. [arXiv:2603.10505](https://arxiv.org/abs/2603.10505)
-- **Training Needs Trustworthy Worlds** · 2026 — verified synthetic web environments for agent learning. [arXiv:2608.21898](https://arxiv.org/abs/2608.21898)
-- **AutoWebWorld** · 2026 — websites as finite-state machines; systematic enumeration and verification of web environments ("infinite verifiable web environments"). [arXiv:2602.14296](https://arxiv.org/abs/2602.14296)
-- **InfiniteWeb** · 2026 — lightweight specs auto-expanded into functional websites + tasks + reward evaluators. [arXiv:2601.04126](https://arxiv.org/abs/2601.04126)
-- **V-GameGym** · 2025 — visual-rendering feedback environments built on games. [arXiv:2509.20136](https://arxiv.org/abs/2509.20136)
-- **MedMCP-Calc** · 2026 — MCP environments over real EHR stores + clinical guideline retrieval. [arXiv:2601.23049](https://arxiv.org/abs/2601.23049)
-- **SWE-Universe** · 2026 — million-scale real verifiable environments. [arXiv:2602.02361](https://arxiv.org/abs/2602.02361)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AgentSynth** | 2025 | Exploits information asymmetry: generating easy sub-tasks stepwise ≪ solving one hard long-horizon task; difficulty-controllable. | `src:AEE-5.1.2` `route:real-world` | [2506.14205](https://arxiv.org/abs/2506.14205) |
+| **TaskCraft** | 2025 | Web-grounded, difficulty-tunable tool-call task synthesis (compositional scaling). | `src:AEE-5.1.2,ES` `route:real-world` `produces:q` | [2506.10055](https://arxiv.org/abs/2506.10055) |
+| **OS-Genesis** | ACL 2025 | Reverse task synthesis from GUI trajectories, avoiding manual curation. | `src:ES,ACE-T2` `route:real-world` `paradigm:trajectory-first` | — |
+| **VeriEnv** | 2026 | LMs as *environment creators*: clone real websites into executable, programmatically verifiable environments. | `src:AEE-5.1.2` `route:real-world` `produces:E,v` | [2603.10505](https://arxiv.org/abs/2603.10505) |
+| **Training Needs Trustworthy Worlds** | 2026 | Verified synthetic web environments for agent learning. | `src:arxiv-watch` `route:real-world` | [2608.21898](https://arxiv.org/abs/2608.21898) |
+| **AutoWebWorld** | 2026 | Websites as finite-state machines; systematic enumeration and verification ("infinite verifiable web environments"). | `src:AEE-5.1.2,7.3.1` `route:real-world` | [2602.14296](https://arxiv.org/abs/2602.14296) |
+| **InfiniteWeb** | 2026 | Lightweight specs auto-expanded into functional websites + tasks + reward evaluators. | `src:AEE-5.1.2,7.3.1` `route:real-world` `produces:E,q,v` | [2601.04126](https://arxiv.org/abs/2601.04126) |
+| **V-GameGym** | 2025 | Visual-rendering feedback environments built on games. | `src:AEE-5.1.2` `route:real-world` | [2509.20136](https://arxiv.org/abs/2509.20136) |
+| **MedMCP-Calc** | 2026 | MCP environments over real EHR stores + clinical guideline retrieval. | `src:AEE-5.1.2` `route:real-world` | [2601.23049](https://arxiv.org/abs/2601.23049) |
+| **SWE-Universe** | 2026 | Million-scale real verifiable environments. | `src:AEE-5.1.2` `E:real` `route:task` | [2602.02361](https://arxiv.org/abs/2602.02361) |
 
-**De Novo** — synthesize environments from scratch with minimal seeds; the closest to "environment scaling as free expansion."
+**De Novo** — synthesize environments from scratch with minimal seeds; the closest to "environment scaling as free expansion" (AEE §5.1.3).
 
-- **AutoForge** · 2025 — builds scalable state structures and a tool-call logic DAG before code generation; RL-stabilized. [arXiv:2512.22857](https://arxiv.org/abs/2512.22857)
-- **Agent World Model** · ICML 2026 — "Infinity Synthetic Environments for Agentic RL": code-driven, DB-backed fully synthetic pipeline reaching 1,000+ environments with execution-level self-correction. [arXiv:2602.10090](https://arxiv.org/abs/2602.10090)
-- **ScaleEnv** · 2026 — from-scratch fully interactive environments + verifiable tasks; clean evidence that *domain count → generalization* on unseen benchmarks. [arXiv:2602.06820](https://arxiv.org/abs/2602.06820)
-- **EnvFactory** · 2026 — automatic exploration/validation of stateful executable tool environments (85 envs, 7 domains); shows a *few strongly verified environments beat masses of redundant ones*. [arXiv:2605.18703](https://arxiv.org/abs/2605.18703)
-- **EnvScaler** · ACL Findings 2026 — SkelBuilder (environment skeletons) + ScenGenerator (scenario instantiation + rule validators); 191 environments / ~7k scenarios. [arXiv:2601.05808](https://arxiv.org/abs/2601.05808)
-- **Agent-World** · 2026 — self-evolving training arena: autonomous discovery of MCP/tool environments + controllable-difficulty task synthesis; environment and policy co-evolve. [arXiv:2604.18292](https://arxiv.org/abs/2604.18292)
-- **AutoEnv** · 2025 — environments as factorizable distributions of transitions/observations/rewards; unified generation of heterogeneous environments for cross-environment learning. [arXiv:2511.19304](https://arxiv.org/abs/2511.19304)
-- **LOGIGEN** · 2026 — logic-driven forward deduction; rules compiled into SQLite-backed physical environments. [arXiv:2603.00540](https://arxiv.org/abs/2603.00540)
-- **SWE-Playground** · 2025 — first fully synthetic SWE training pipeline, fully off GitHub. [arXiv:2512.12216](https://arxiv.org/abs/2512.12216)
-- **Endless Terminals** · 2026 — samples file-operation/network-config dimensions to synthesize thousands of terminal environments. [arXiv:2601.16443](https://arxiv.org/abs/2601.16443)
-- **gg-bench** · 2025 — randomly samples *brand-new* two-player games; contamination-proof by construction. [arXiv:2505.07215](https://arxiv.org/abs/2505.07215)
-- **RandomWorld** · EMNLP 2025 — procedural environment generation for tool agents. [arXiv:2506.11045](https://arxiv.org/abs/2506.11045)
-- **NL2Plan** · 2024 — natural-language PDDL environment generation. [arXiv:2405.04215](https://arxiv.org/abs/2405.04215)
-- **Envs-FORGE** · 2026 — frontier-optimized, reward-grounded environment synthesis for agent RL. [arXiv:2608.14312](https://arxiv.org/abs/2608.14312)
-- **AgentMercury** · 2026 — agents synthesize verifiable business-scenario environments at scale. [arXiv:2608.20634](https://arxiv.org/abs/2608.20634)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AutoForge** | 2025 | Builds scalable state structures and a tool-call logic DAG before code generation; RL-stabilized. | `src:AEE-5.1.3,7.3.1,ACE-T1` `E:programmatic` `route:de-novo` `produces:E,q` | [2512.22857](https://arxiv.org/abs/2512.22857) |
+| **Agent World Model** | ICML 2026 | "Infinity Synthetic Environments": code-driven, DB-backed fully synthetic pipeline reaching 1,000+ environments with execution-level self-correction. | `src:AEE-5.1.3,7.3.1,ACE-T1` `E:programmatic` `route:de-novo` | [2602.10090](https://arxiv.org/abs/2602.10090) |
+| **ScaleEnv** | 2026 | From-scratch interactive environments + verifiable tasks; clean evidence that *domain count → generalization*. | `src:AEE-5.1.3,ACE-T1` `E:programmatic` `route:de-novo` | [2602.06820](https://arxiv.org/abs/2602.06820) |
+| **EnvFactory** | 2026 | Automatic exploration/validation of stateful executable tool environments; a *few strongly verified environments beat masses of redundant ones*. | `src:ACE-T1` `E:programmatic` `route:de-novo` | [2605.18703](https://arxiv.org/abs/2605.18703) |
+| **EnvScaler** | ACL Findings 2026 | SkelBuilder (environment skeletons) + ScenGenerator (scenario instantiation + rule validators); 191 environments / ~7k scenarios. | `src:AEE-7.3.1,ACE-T1` `E:programmatic` `route:de-novo` | [2601.05808](https://arxiv.org/abs/2601.05808) |
+| **Agent-World** | 2026 | Self-evolving training arena: autonomous MCP/tool environment discovery + difficulty-controlled task synthesis. | `src:ACE-T1` `E:programmatic` `route:de-novo` `evolution:co-evolve` | [2604.18292](https://arxiv.org/abs/2604.18292) |
+| **AutoEnv** | 2025 | Environments as factorizable distributions of transitions/observations/rewards; unified heterogeneous generation. | `src:AEE-5.1.3,7.3.2,ES` `route:de-novo` | [2511.19304](https://arxiv.org/abs/2511.19304) |
+| **LOGIGEN** | 2026 | Logic-driven forward deduction; rules compiled into SQLite-backed physical environments. | `src:AEE-5.1.3,ACE` `route:de-novo` | [2603.00540](https://arxiv.org/abs/2603.00540) |
+| **SWE-Playground** | 2025 | First fully synthetic SWE training pipeline, fully off GitHub. | `src:AEE-5.1.3` `route:de-novo` | [2512.12216](https://arxiv.org/abs/2512.12216) |
+| **Endless Terminals** | 2026 | Samples file-operation/network-config dimensions into thousands of terminal environments. | `src:AEE-5.1.3` `route:de-novo` | [2601.16443](https://arxiv.org/abs/2601.16443) |
+| **gg-bench** | 2025 | Randomly samples *brand-new* two-player games; contamination-proof by construction. | `src:AEE-5.1.3` `route:de-novo` | [2505.07215](https://arxiv.org/abs/2505.07215) |
+| **RandomWorld** | EMNLP 2025 | Procedural environment generation for tool agents. | `src:ES` `route:de-novo` | [2506.11045](https://arxiv.org/abs/2506.11045) |
+| **NL2Plan** | 2024 | Natural-language PDDL environment generation. | `src:AEE-5.1.3` `route:de-novo` | [2405.04215](https://arxiv.org/abs/2405.04215) |
+| **Envs-FORGE** | 2026 | Frontier-optimized, reward-grounded environment synthesis for agent RL. | `src:arxiv-watch` `route:de-novo` `evolution:difficulty` | [2608.14312](https://arxiv.org/abs/2608.14312) |
+| **AgentMercury** | 2026 | Agents synthesize verifiable business-scenario environments at scale. | `src:arxiv-watch` `route:de-novo` | [2608.20634](https://arxiv.org/abs/2608.20634) |
 
 ### 3.2 Neural Synthesis (World-Model-as-Environment)
 
-The transition function P is parameterized by a network. Three abstraction levels (lifecycle survey §5.2).
+The transition function P is parameterized by a network. Three abstraction levels (AEE §5.2).
 
 **Pixel-level** — high fidelity, high redundancy.
 
-- **DreamGen** · 2025 — video world model (WAN2.1) generating synthetic robot trajectories from ~1000 videos. [arXiv:2505.12705](https://arxiv.org/abs/2505.12705)
-- **GameNGen** · 2024 — a diffusion model as a real-time game engine (DOOM). [arXiv:2408.14837](https://arxiv.org/abs/2408.14837)
-- **Matrix-Game** · 2025 — large-scale Minecraft data, key-mouse continuous input, minute-level stable interaction. [arXiv:2506.18701](https://arxiv.org/abs/2506.18701)
-- **NeuralOS** · 2025 — hierarchical RNN maintains persistent OS state + diffusion rendering. [arXiv:2507.08800](https://arxiv.org/abs/2507.08800)
-- **DreamZero** · 2026 — "World Action Models are Zero-shot Policies". [arXiv:2602.15922](https://arxiv.org/abs/2602.15922)
-- **Pandora** · 2024 — world-model with rule-controllable generation. [arXiv:2406.09455](https://arxiv.org/abs/2406.09455)
-- **Genie 3** · DeepMind 2025 — real-time, long-horizon-consistent interactive world model (technical report).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **DreamGen** | 2025 | Video world model (WAN2.1) generating synthetic robot trajectories from ~1000 videos. | `src:AEE-5.2.1` `E:neural` `produces:τ` | [2505.12705](https://arxiv.org/abs/2505.12705) |
+| **GameNGen** | 2024 | A diffusion model as a real-time game engine (DOOM). | `src:AEE-5.2.1` `E:neural` | [2408.14837](https://arxiv.org/abs/2408.14837) |
+| **Matrix-Game** | 2025 | Large-scale Minecraft data; key-mouse continuous input; minute-level stable interaction. | `src:AEE-5.2.1` `E:neural` | [2506.18701](https://arxiv.org/abs/2506.18701) |
+| **NeuralOS** | 2025 | Hierarchical RNN maintains persistent OS state + diffusion rendering. | `src:AEE-5.2.1` `E:neural` | [2507.08800](https://arxiv.org/abs/2507.08800) |
+| **DreamZero** | 2026 | "World Action Models are Zero-shot Policies." | `src:AEE-5.2.1` `E:neural` | [2602.15922](https://arxiv.org/abs/2602.15922) |
+| **Pandora** | 2024 | World model with rule-controllable generation. | `src:AEE-5.2.1` `E:neural` | [2406.09455](https://arxiv.org/abs/2406.09455) |
+| **Genie 3** | DeepMind 2025 | Real-time, long-horizon-consistent interactive world model (technical report). | `src:ES` `E:neural` | — |
 
-**Token-level** — environments represented in language; cheap, abstract, planning-friendly.
+**Token-level** — environments represented in language; cheap, abstract, planning-friendly (AEE §5.2.2).
 
-- **WebWorld** · 2026 — first large-scale open web world model, trained on 1M+ real open-web interactions; safe offline synthesis of web-agent trajectories (+9.2 WebArena for Qwen3-14B). [arXiv:2602.14721](https://arxiv.org/abs/2602.14721)
-- **WebDreamer** · TMLR 2025 — a strong LLM prompted *as* the web world model for model-predictive planning.
-- **Code2World** · 2026 — GUI states as renderable code; rendering-perception RL alignment. [arXiv:2602.09856](https://arxiv.org/abs/2602.09856)
-- **MobileDreamer** · 2026 — structured text representation of GUI elements + rollout-imagination trees. [arXiv:2601.04035](https://arxiv.org/abs/2601.04035)
-- **UI-Simulator** · 2025 — LLM generates future UI states and guides rollouts for data synthesis. [arXiv:2510.14969](https://arxiv.org/abs/2510.14969)
-- **gWorld / SWE-World / Simia** · 2025-26 — LLM-as-simulator lines for GUI, SWE, and general environments. [arXiv:2602.01576](https://arxiv.org/abs/2602.01576) · [arXiv:2602.03419](https://arxiv.org/abs/2602.03419) · [arXiv:2511.01824](https://arxiv.org/abs/2511.01824)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **WebWorld** | 2026 | First large-scale open web world model, trained on 1M+ real open-web interactions; safe offline trajectory synthesis (+9.2 WebArena for Qwen3-14B). | `src:AEE-5.2.2` `E:neural` `produces:τ` | [2602.14721](https://arxiv.org/abs/2602.14721) |
+| **WebDreamer** | TMLR 2025 | A strong LLM prompted *as* the web world model for model-predictive planning. | `src:AEE-5.2.2` `E:neural` | — |
+| **Code2World** | 2026 | GUI states as renderable code; rendering-perception RL alignment. | `src:AEE-5.2.2,7.1` `E:neural` | [2602.09856](https://arxiv.org/abs/2602.09856) |
+| **MobileDreamer** | 2026 | Structured text representation of GUI elements + rollout-imagination trees. | `src:AEE-5.2.2` `E:neural` | [2601.04035](https://arxiv.org/abs/2601.04035) |
+| **UI-Simulator** | 2025 | LLM generates future UI states and guides rollouts for data synthesis. | `src:AEE-5.2.2` `E:neural` `produces:τ` | [2510.14969](https://arxiv.org/abs/2510.14969) |
+| **gWorld** | 2026 | LLM-as-simulator for GUI environments. | `src:AEE-5.2.2` `E:neural` | [2602.01576](https://arxiv.org/abs/2602.01576) |
+| **SWE-World** | 2026 | LLM-as-simulator for SWE environments. | `src:AEE-5.2.2` `E:neural` | [2602.03419](https://arxiv.org/abs/2602.03419) |
+| **Simia** | 2025 | Reasoning models simulate environments to train agents. | `src:AEE-5.2.2,7.1` `E:neural` `produces:q,τ` | [2511.01824](https://arxiv.org/abs/2511.01824) |
 
-**Latent-level** — compact learned representations.
+**Latent-level** — compact learned representations (AEE §5.2.3).
 
-- **V-JEPA 2** · 2025 — 1M hours of video pre-training + 62h robot data → zero-shot robot planning. [arXiv:2506.09985](https://arxiv.org/abs/2506.09985)
-- **DINO-WM** · 2024 — world model on frozen DINOv2 features; zero-shot planning. [arXiv:2411.04983](https://arxiv.org/abs/2411.04983)
-- **IWM** · 2024 — "in-context" world models. [arXiv:2403.00504](https://arxiv.org/abs/2403.00504)
-- **AdaWorld** · ICML 2025 — latent-action-conditioned, adaptable world models.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **V-JEPA 2** | 2025 | 1M hours of video pre-training + 62h robot data → zero-shot robot planning. | `src:AEE-5.2.3` `E:neural` | [2506.09985](https://arxiv.org/abs/2506.09985) |
+| **DINO-WM** | 2024 | World model on frozen DINOv2 features; zero-shot planning. | `src:AEE-5.2.3` `E:neural` | [2411.04983](https://arxiv.org/abs/2411.04983) |
+| **IWM** | 2024 | "In-context" world models. | `src:AEE-5.2.3` `E:neural` | [2403.00504](https://arxiv.org/abs/2403.00504) |
+| **AdaWorld** | ICML 2025 | Latent-action-conditioned, adaptable world models. | `src:AEE-5.2.3` `E:neural` | — |
 
 ### 3.3 Compositional Synthesis
 
 Compose verifiable environments/tasks recursively rather than linearly expanding.
 
-- **RACES** · 2026 — "Verifiable Environments Are LEGO Bricks": recursive composition (type matching + SEQUENTIAL/PARALLEL/SORT/SELECT operators); 50 composed environments ≈ 300 standalone ones. [arXiv:2606.12373](https://arxiv.org/abs/2606.12373)
-- **BUTTON** · ICLR 2025 — composes atomic tasks into complex multi-turn requests before synthesizing functions and trajectories. *(see also §6.4)*
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **RACES** | 2026 | "Verifiable Environments Are LEGO Bricks": recursive composition (type matching + SEQUENTIAL/PARALLEL/SORT/SELECT operators); 50 composed environments ≈ 300 standalone ones. | `E:programmatic` `produces:E,v` | [2606.12373](https://arxiv.org/abs/2606.12373) |
+| **BUTTON** | ICLR 2025 | Composes atomic tasks into complex multi-turn requests before synthesizing functions and trajectories. | `src:ACE-T2` `paradigm:task-first` `produces:q,τ` | — |
 
 ### 3.4 Harnessing Static Environments (Reuse over Rebuild)
 
 Re-activate existing static worlds instead of synthesizing new ones.
 
-- **EnvHarness** · 2026 — programmable plugin layer wrapping static environments (preserving original validators) to reshape behavior; EnvRigger diagnoses policy defects from trajectories and synthesizes harnesses; up to +9.0 held-out. [arXiv:2608.19880](https://arxiv.org/abs/2608.19880)
-- **Environment Tuning** · 2025 — "Don't just fine-tune the agent, tune the environment": manual curricula + environment augmentation + progress feedback. [arXiv:2510.10197](https://arxiv.org/abs/2510.10197)
-- **CLI-Gym** · 2026 — "environment reversal": deliberately corrupts environments to generate error-recovery training data. [arXiv:2602.10999](https://arxiv.org/abs/2602.10999)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **EnvHarness** | 2026 | Programmable plugin layer wraps static environments (preserving original validators) to reshape behavior; EnvRigger diagnoses policy defects from trajectories; up to +9.0 held-out. | `src:—` `produces:E,v` | [2608.19880](https://arxiv.org/abs/2608.19880) |
+| **Environment Tuning** | 2025 | "Don't just fine-tune the agent, tune the environment": manual curricula + environment augmentation + progress feedback. | `src:AEE-7.2` `evolution:difficulty` | [2510.10197](https://arxiv.org/abs/2510.10197) |
+| **CLI-Gym** | 2026 | "Environment reversal": deliberately corrupts environments to generate error-recovery training data. | `src:AEE-5.1.1` `route:task` `produces:τ` | [2602.10999](https://arxiv.org/abs/2602.10999) |
 
 ## 4. Environment Evolution Mechanisms ★
 
@@ -165,80 +197,95 @@ The core differentiator of this list: how environments *change over training tim
 
 ### 4.1 Difficulty-Driven Evolution (Curricula)
 
-Environment adjusts task difficulty to the learner's current capability frontier.
+Environment adjusts task difficulty to the learner's current capability frontier (AEE §7.2).
 
-- **RLVE** · ICML 2026 — adaptive verifiable environments: when pass-rate at the current upper-difficulty band exceeds a threshold, the distribution shifts harder. [arXiv:2511.07317](https://arxiv.org/abs/2511.07317)
-- **GenEnv** · 2025 — α-Curriculum Reward drives task-generation success rate toward a target band; difficulty-aligned agent–environment co-evolution. [arXiv:2512.19682](https://arxiv.org/abs/2512.19682)
-- **DreamGym** · 2025 — adaptive task generation favoring high reward-entropy tasks for online RL. [arXiv:2511.03773](https://arxiv.org/abs/2511.03773)
-- **AgentFrontier** · 2025 — Zone-of-Proximal-Development-guided data synthesis that pushes the capability frontier as the model advances. [arXiv:2510.24695](https://arxiv.org/abs/2510.24695)
-- **EvoEnv (Learning to Build the Environment)** · 2026 — a *single policy* is both environment generator and solver; verifiable Python environments from 10 seeds with staged checks, difficulty calibration, novelty checks; fixed-data RLVR *degrades* while self-synthesized improves (72.4→74.8). [arXiv:2605.14392](https://arxiv.org/abs/2605.14392)
-- **ReSyn** · 2026 — autonomously scales reasoning environments (instance generators + verifiers) to replace hand-written procedural ones for RLVR. [arXiv:2602.20117](https://arxiv.org/abs/2602.20117)
-- **EnvGen** · 2024 — LLM adjusts game-environment configs targeting the agent's weaknesses. [arXiv:2403.12014](https://arxiv.org/abs/2403.12014)
-- **Eurekaverse** · 2024 — LLM evolves parkour terrains from training statistics. [arXiv:2411.01775](https://arxiv.org/abs/2411.01775)
-- **Reasoning Core** · 2025 — scalable symbolic reasoning environments with continuously controllable difficulty. [arXiv:2509.18083](https://arxiv.org/abs/2509.18083)
-- **EvoCurr** · 2025 — behavior-code-generated curricula. [arXiv:2508.09586](https://arxiv.org/abs/2508.09586)
-- **ADACTRL** · 2025 — difficulty-aware budget allocation. [arXiv:2505.18822](https://arxiv.org/abs/2505.18822)
-- **WebRL** · ICLR 2025 — self-evolving online curriculum RL for web agents.
-- **SCALER** · 2026 — online difficulty controller keeps rollout accuracy inside a target band. [arXiv:2601.04809](https://arxiv.org/abs/2601.04809)
-- **CuES** · 2025 — intrinsic-curiosity-driven exploration and task synthesis without predefined tasks. [arXiv:2512.01311](https://arxiv.org/abs/2512.01311)
-- **UED classics** · 2019-24 — Unsupervised Environment Design: **PAIRED** [arXiv:2012.02096](https://arxiv.org/abs/2012.02096), adversarial regret-minimizing environment generators; ACCEL, MAESTRO, ReMiDi, DataEnvGym (teacher-side generation driven by student errors).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **RLVE** | ICML 2026 | Adaptive verifiable environments: when pass-rate at the current upper-difficulty band exceeds a threshold, the distribution shifts harder. | `src:AEE-7.2,ES` `evolution:difficulty` | [2511.07317](https://arxiv.org/abs/2511.07317) |
+| **GenEnv** | 2025 | α-Curriculum Reward drives task-generation success rate toward a target band; difficulty-aligned agent–environment co-evolution. | `src:AEE-7.2` `evolution:difficulty,co-evolve` | [2512.19682](https://arxiv.org/abs/2512.19682) |
+| **DreamGym** | 2025 | Adaptive task generation favoring high reward-entropy tasks for online RL. | `src:AEE-7.2` `evolution:difficulty` | [2511.03773](https://arxiv.org/abs/2511.03773) |
+| **AgentFrontier** | 2025 | Zone-of-Proximal-Development-guided synthesis that pushes the capability frontier as the model advances. | `src:AEE-7.2,ACE` `evolution:difficulty` `paradigm:adaptive` | [2510.24695](https://arxiv.org/abs/2510.24695) |
+| **EvoEnv (Learning to Build the Environment)** | 2026 | A *single policy* is both environment generator and solver; verifiable Python environments from 10 seeds; fixed-data RLVR *degrades* while self-synthesized improves (72.4→74.8). | `src:—` `evolution:difficulty,co-evolve` `produces:E,v` | [2605.14392](https://arxiv.org/abs/2605.14392) |
+| **ReSyn** | 2026 | Autonomously scales reasoning environments (instance generators + verifiers) to replace hand-written procedural ones for RLVR. | `evolution:difficulty` `produces:E,v` | [2602.20117](https://arxiv.org/abs/2602.20117) |
+| **EnvGen** | 2024 | LLM adjusts game-environment configs targeting the agent's weaknesses. | `src:AEE-7.2,ES` `evolution:difficulty` | [2403.12014](https://arxiv.org/abs/2403.12014) |
+| **Eurekaverse** | 2024 | LLM evolves parkour terrains from training statistics. | `src:AEE-7.2` `evolution:difficulty` | [2411.01775](https://arxiv.org/abs/2411.01775) |
+| **Reasoning Core** | 2025 | Scalable symbolic reasoning environments with continuously controllable difficulty. | `src:AEE-7.2` `evolution:difficulty` | [2509.18083](https://arxiv.org/abs/2509.18083) |
+| **EvoCurr** | 2025 | Behavior-code-generated curricula. | `src:ES` `evolution:difficulty` | [2508.09586](https://arxiv.org/abs/2508.09586) |
+| **ADACTRL** | 2025 | Difficulty-aware budget allocation. | `src:ES` `evolution:difficulty` | [2505.18822](https://arxiv.org/abs/2505.18822) |
+| **WebRL** | ICLR 2025 | Self-evolving online curriculum RL for web agents. | `src:AEE-6.4,ES` `evolution:difficulty` | — |
+| **SCALER** | 2026 | Online difficulty controller keeps rollout accuracy inside a target band. | `src:AEE-7.2` `evolution:difficulty` | [2601.04809](https://arxiv.org/abs/2601.04809) |
+| **CuES** | 2025 | Intrinsic-curiosity-driven exploration and task synthesis without predefined tasks. | `src:AEE-7.2` `evolution:difficulty` | [2512.01311](https://arxiv.org/abs/2512.01311) |
+| **POET** | 2019 | Foundational paired open-ended environment–agent co-evolution: mutate + minimal-criterion filter + transfer. | `src:AEE-7.2` `evolution:difficulty,co-evolve` | [1901.01753](https://arxiv.org/abs/1901.01753) |
+| **PAIRED** | NeurIPS 2021 | Adversarial regret-minimizing environment generators (UED). | `src:AEE-7.2` `evolution:difficulty` | [2012.02096](https://arxiv.org/abs/2012.02096) |
+| **ACCEL** | ICML 2022 | Regret-based editing that preserves high-value environments against curriculum collapse (UED). | `src:AEE-7.2` `evolution:difficulty` | — |
+| **MAESTRO / ReMiDi / DataEnvGym** | 2022-25 | Later UED lines: guided minimax regret; teacher-side data/environment generation driven by student errors (DataEnvGym, ICLR 2025). | `src:AEE-7.2` `evolution:difficulty` | — |
 
 ### 4.2 Neural-Driven Evolution (Self-Play & World Models)
 
-The environment is instantiated by a learnable model — often the agent itself.
+The environment is instantiated by a learnable model — often the agent itself (AEE §7.1).
 
-- **Absolute Zero** · 2025 — one model is both proposer and solver; zero-data self-play reasoning. [arXiv:2505.03335](https://arxiv.org/abs/2505.03335)
-- **R-Zero** · 2025 — challenger–solver co-evolution from zero data. [arXiv:2508.05004](https://arxiv.org/abs/2508.05004)
-- **Self-Challenging** · 2025 — the same model first challenges (synthesizes verifiable tasks) then executes (learns). [arXiv:2506.01716](https://arxiv.org/abs/2506.01716)
-- **SSR / SWE-RL** · 2025 — one model alternately injects and fixes bugs (self-play environment). [arXiv:2512.18552](https://arxiv.org/abs/2512.18552)
-- **Active Zero** · 2026 — Searcher/Questioner/Solver co-evolve to actively retrieve frontier samples. [arXiv:2602.11241](https://arxiv.org/abs/2602.11241)
-- **Vision-zero** · 2025 — gamified visual-reasoning self-play. [arXiv:2509.25541](https://arxiv.org/abs/2509.25541)
-- **WebEvolver** · EMNLP 2025 — world model and agent policy jointly evolve (planning simulator + trajectory factory).
-- **Agent2World** · 2025 — agents learn a symbolic world model from multi-agent feedback. [arXiv:2512.22336](https://arxiv.org/abs/2512.22336)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Absolute Zero** | 2025 | One model is both proposer and solver; zero-data self-play reasoning. | `src:AEE-7.1,ES` `evolution:neural` | [2505.03335](https://arxiv.org/abs/2505.03335) |
+| **R-Zero** | 2025 | Challenger–solver co-evolution from zero data. | `src:ES` `evolution:neural` | [2508.05004](https://arxiv.org/abs/2508.05004) |
+| **Self-Challenging** | 2025 | The same model first challenges (synthesizes verifiable tasks) then executes (learns). | `src:AEE-7.1` `evolution:neural` | [2506.01716](https://arxiv.org/abs/2506.01716) |
+| **SSR / SWE-RL** | 2025 | One model alternately injects and fixes bugs (self-play environment). | `src:AEE-7.1` `evolution:neural` | [2512.18552](https://arxiv.org/abs/2512.18552) |
+| **Active Zero** | 2026 | Searcher/Questioner/Solver co-evolve to actively retrieve frontier samples. | `src:AEE-7.1` `evolution:neural` | [2602.11241](https://arxiv.org/abs/2602.11241) |
+| **Vision-zero** | 2025 | Gamified visual-reasoning self-play. | `src:AEE-7.1` `evolution:neural` | [2509.25541](https://arxiv.org/abs/2509.25541) |
+| **WebEvolver** | EMNLP 2025 | World model and agent policy jointly evolve (planning simulator + trajectory factory). | `src:AEE-7.1,ACE-T2` `evolution:neural,co-evolve` | — |
+| **Agent2World** | 2025 | Agents learn a symbolic world model from multi-agent feedback. | `src:AEE-7.1` `evolution:neural` | [2512.22336](https://arxiv.org/abs/2512.22336) |
 
 ### 4.3 Scaling-Driven Evolution
 
-Expand the environment *distribution itself* rather than adjusting difficulty. Two granularities (lifecycle survey §7.3).
+Expand the environment *distribution itself* rather than adjusting difficulty. Two granularities (AEE §7.3).
 
 **Scenario-level** — more tasks/trajectories/websites/workflows within one interaction paradigm.
 
-- **AgentScaler** · ICLR 2026 — 30k heterogeneous APIs; expands tool × user-intent × execution-path combinations. [arXiv:2509.13311](https://arxiv.org/abs/2509.13311)
-- **EnvScaler** · ACL Findings 2026 — skeleton → scenario instantiation pipeline. [arXiv:2601.05808](https://arxiv.org/abs/2601.05808)
-- **FTRL** · 2025 — automated environment construction with feedback-driven tool-use improvement. [arXiv:2508.08791](https://arxiv.org/abs/2508.08791)
-- Also: AutoForge, InfiniteWeb, WebWorld (§3).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AgentScaler** | ICLR 2026 | 30k heterogeneous APIs; expands tool × user-intent × execution-path combinations (function calls as DB reads/writes). | `src:AEE-5.1.1,7.3.1,ES` `evolution:scaling` `E:real` | [2509.13311](https://arxiv.org/abs/2509.13311) |
+| **EnvScaler** | ACL Findings 2026 | Skeleton → scenario instantiation pipeline. | `src:AEE-7.3.1,ACE-T1` `evolution:scaling` `E:programmatic` | [2601.05808](https://arxiv.org/abs/2601.05808) |
+| **FTRL** | 2025 | Automated environment construction with feedback-driven tool-use improvement. | `src:AEE-7.3.1,ES` `evolution:scaling` | [2508.08791](https://arxiv.org/abs/2508.08791) |
+| AutoForge · InfiniteWeb · WebWorld | — | Scenario-level scaling exemplars — see §3.1 / §3.2 for entries. | `evolution:scaling` | — |
 
-**Environment-level** — heterogeneous, cross-domain environment expansion.
+**Environment-level** — heterogeneous, cross-domain environment expansion (AEE §7.3.2).
 
-- **ARE** · 2025 — "Scaling up agent environments and evaluations" (Meta): general platform for constructing and orchestrating heterogeneous environments. [arXiv:2509.17158](https://arxiv.org/abs/2509.17158)
-- **AutoEnv** · 2025 — factorized environment distributions for cross-environment generalization studies. [arXiv:2511.19304](https://arxiv.org/abs/2511.19304)
-- Also: Agent World Model, Agent-World, ScaleEnv, EnvFactory, daVinci-Env (§3.1).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **ARE** | 2025 | "Scaling up agent environments and evaluations" (Meta): a general platform for constructing and orchestrating heterogeneous environments. | `src:AEE-7.3.2,ES` `evolution:scaling` | [2509.17158](https://arxiv.org/abs/2509.17158) |
+| **AutoEnv** | 2025 | Factorized environment distributions for cross-environment generalization studies. | `src:AEE-7.3.2,ES` `evolution:scaling` | [2511.19304](https://arxiv.org/abs/2511.19304) |
+| Agent World Model · Agent-World · ScaleEnv · EnvFactory · daVinci-Env | — | Environment-level scaling exemplars — see §3.1 for entries. | `evolution:scaling` | — |
 
 ### 4.4 Agent–Environment Co-Evolution
 
-Bidirectional: the environment tracks the agent's weaknesses and new capabilities; both drift together.
+Bidirectional: the environment tracks the agent's weaknesses and new capabilities; both drift together (AEE §8.6).
 
-- **GenEnv** · 2025 — difficulty-aligned co-evolution of environment simulator and agent. [arXiv:2512.19682](https://arxiv.org/abs/2512.19682)
-- **EvoEnv** · 2026 — single-policy generator+solver co-evolution. [arXiv:2605.14392](https://arxiv.org/abs/2605.14392)
-- **Agent-World** · 2026 — environment and policy co-evolve in a training arena. [arXiv:2604.18292](https://arxiv.org/abs/2604.18292)
-- **Socratic-Zero** · 2025 — data-free agent co-evolution via self-questioning. [arXiv:2509.24726](https://arxiv.org/abs/2509.24726)
-- **From Trainee to Trainer** · 2026 — LLMs design their own training environments (multi-agent reasoning). [arXiv:2606.17682](https://arxiv.org/abs/2606.17682)
-- **EigenData** · 2026 — hierarchical multi-agent engine synthesizing tool dialogues with per-instance executable checkers; self-evolving loop + GRPO-style RL (τ²-bench Airline 73.0). [arXiv:2601.22607](https://arxiv.org/abs/2601.22607)
-- **Tool-R0** · 2026 — zero-data self-evolving tool-learning agent.
-- **AgentEvolver** · 2025 — self-questioning + experience-guided evolution.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **GenEnv** | 2025 | Difficulty-aligned co-evolution of environment simulator and agent. | `src:AEE-7.2,ACE` `evolution:co-evolve` | [2512.19682](https://arxiv.org/abs/2512.19682) |
+| **EvoEnv** | 2026 | Single-policy generator+solver co-evolution. | `evolution:co-evolve` `produces:E,v` | [2605.14392](https://arxiv.org/abs/2605.14392) |
+| **Agent-World** | 2026 | Environment and policy co-evolve in a training arena. | `src:ACE-T1` `evolution:co-evolve` | [2604.18292](https://arxiv.org/abs/2604.18292) |
+| **Socratic-Zero** | 2025 | Data-free agent co-evolution via self-questioning. | `src:ES` `evolution:co-evolve` | [2509.24726](https://arxiv.org/abs/2509.24726) |
+| **From Trainee to Trainer** | 2026 | LLMs design their own training environments (multi-agent reasoning). | `evolution:co-evolve` | [2606.17682](https://arxiv.org/abs/2606.17682) |
+| **EigenData** | 2026 | Hierarchical multi-agent engine synthesizing tool dialogues with per-instance executable checkers; self-evolving loop + GRPO-style RL (τ²-bench Airline 73.0). | `evolution:co-evolve` `produces:q,τ,v` | [2601.22607](https://arxiv.org/abs/2601.22607) |
+| **Tool-R0** | 2026 | Zero-data self-evolving tool-learning agent. | `src:ACE-T2` `evolution:co-evolve` `paradigm:adaptive` | — |
+| **AgentEvolver** | 2025 | Self-questioning + experience-guided evolution. | `src:ACE-T2,AEE-6.4` `evolution:co-evolve` `paradigm:adaptive` | — |
 
 ### 4.5 Generator–Verifier Co-Evolution
 
-Verifiers themselves are generated and refined alongside environments — the answer to generator–verifier asymmetry (Environment Scaling survey §Feedback).
+Verifiers themselves are generated and refined alongside environments — the answer to generator–verifier asymmetry (ES survey, feedback chapter).
 
-- **Rubrics as Rewards** · 2025 — fine-grained rubrics as scalable reward signals. [arXiv:2507.17746](https://arxiv.org/abs/2507.17746)
-- **DR Tulu** · 2025 — evolving rubrics for deep-research RL. [arXiv:2511.19399](https://arxiv.org/abs/2511.19399)
-- **Writing-zero** · 2025 — verifiable-reward RL extended to creative writing. [arXiv:2506.00103](https://arxiv.org/abs/2506.00103)
-- **Generative Verifiers** · 2024 — verifier LMs prompted to reason then judge. [arXiv:2408.15240](https://arxiv.org/abs/2408.15240)
-- **WebShepherd** · 2025 — process reward model for web-agent rollouts. [arXiv:2505.15277](https://arxiv.org/abs/2505.15277)
-- **CoPER** · 2025 — policy and reward co-optimization. [arXiv:2508.05613](https://arxiv.org/abs/2508.05613)
-- **URPO** · 2025 — unified reward-policy optimization. [arXiv:2507.17515](https://arxiv.org/abs/2507.17515)
-- **RLPR** · 2025 — reward from preference / reference-free verifiers. [arXiv:2506.18254](https://arxiv.org/abs/2506.18254)
-- **Crossing the Reward Bridge** · 2025 — verifier-model-free RL via judge co-training. [arXiv:2503.23829](https://arxiv.org/abs/2503.23829)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Rubrics as Rewards** | 2025 | Fine-grained rubrics as scalable reward signals. | `src:ES` `evolution:verifier` `quality:reward` | [2507.17746](https://arxiv.org/abs/2507.17746) |
+| **DR Tulu** | 2025 | Evolving rubrics for deep-research RL. | `src:ES` `evolution:verifier` | [2511.19399](https://arxiv.org/abs/2511.19399) |
+| **Writing-zero** | 2025 | Verifiable-reward RL extended to creative writing. | `src:ES` `evolution:verifier` | [2506.00103](https://arxiv.org/abs/2506.00103) |
+| **Generative Verifiers** | 2024 | Verifier LMs prompted to reason then judge. | `src:ES` `evolution:verifier` | [2408.15240](https://arxiv.org/abs/2408.15240) |
+| **WebShepherd** | 2025 | Process reward model for web-agent rollouts. | `src:ES` `evolution:verifier` `verify:prm` | [2505.15277](https://arxiv.org/abs/2505.15277) |
+| **CoPER** | 2025 | Policy and reward co-optimization. | `src:ES` `evolution:verifier` | [2508.05613](https://arxiv.org/abs/2508.05613) |
+| **URPO** | 2025 | Unified reward-policy optimization. | `src:ES` `evolution:verifier` | [2507.17515](https://arxiv.org/abs/2507.17515) |
+| **RLPR** | 2025 | Reference-free verifiers as reward source. | `src:ES` `evolution:verifier` | [2506.18254](https://arxiv.org/abs/2506.18254) |
+| **Crossing the Reward Bridge** | 2025 | Verifier-model-free RL via judge co-training. | `src:ES` `evolution:verifier` | [2503.23829](https://arxiv.org/abs/2503.23829) |
 
 ## 5. Quality, Verification & Reward
 
@@ -246,52 +293,73 @@ What makes an environment *good* — four dimensions (lifecycle survey §5.3) un
 
 ### 5.1 Correctness
 
-State transitions must be legal, tasks solvable, validators trustworthy — accuracy is the *admission condition*, not a tradeable metric (ACE §4).
+State transitions must be legal, tasks solvable, validators trustworthy — accuracy is the *admission condition*, not a tradeable metric (ACE §4). Mechanism groups: execution & unit tests (SWE-Gym, Scale-SWE, GameDevBench, V-GameGym, ScaleEnv, Endless Terminals — §3); gold-trajectory comparison (AutoForge, AgentSynth, SciAgentGym).
 
-- Execution & unit tests as ground truth: SWE-Gym, Scale-SWE, GameDevBench (Godot test harness), V-GameGym (sandbox auto-repair), ScaleEnv (programmatic tests), Endless Terminals (container build + init/completion tests) — see §3.
-- Gold-trajectory / terminal-state comparison: AutoForge (gold tool sequences), AgentSynth (stepwise verifier), SciAgentGym.
-- **Verifier reliability itself**: **MCP-Universe** · 2025 — static+dynamic evaluators replacing unstable LLM judges. [arXiv:2508.14704](https://arxiv.org/abs/2508.14704) · **InterCode** · 2023 — gold-command-validated reward functions. [arXiv:2306.14898](https://arxiv.org/abs/2306.14898) · **OSWorld-MCP** · 2025 — execution validation + expert review. [arXiv:2510.24563](https://arxiv.org/abs/2510.24563)
-- Correctness for *neural* environments, redefined as constraint satisfaction: DreamGen (VLM scoring), Matrix-Game (inverse-dynamics action consistency), Genie Envisioner (symmetric Hausdorff + NDTW), MobileDreamer (mIoU box overlap).
-- **Anchor** · 2026 — mitigates artifact drift when generating agent benchmarks via component-level validation.
-- Layered rule–model–human checking (ACE §4): format → execution → semantic, at step and trajectory level — APIGen is the canonical example.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **MCP-Universe** | 2025 | Static + dynamic evaluators replacing unstable LLM judges for verifier reliability. | `src:AEE-5.3,ES` `quality:correctness` `verify:executable` | [2508.14704](https://arxiv.org/abs/2508.14704) |
+| **InterCode** | 2023 | Gold-command-validated reward functions in interactive terminals. | `src:AEE-5.3,ES` `quality:correctness` `verify:executable` | [2306.14898](https://arxiv.org/abs/2306.14898) |
+| **OSWorld-MCP** | 2025 | Execution validation + expert review for environment correctness. | `src:AEE-5.3` `quality:correctness` | [2510.24563](https://arxiv.org/abs/2510.24563) |
+| **Anchor** | 2026 | Mitigates artifact drift when generating agent benchmarks via component-level validation. | `src:ACE` `quality:correctness` | — |
+| **APIGen** | NeurIPS 2024 | The canonical layered check: format → execution → semantic review, at step and trajectory level (ACE §4 exemplar). | `src:ACE-T1` `quality:correctness` `verify:judge` | — |
+
+*Correctness for neural environments is redefined as constraint satisfaction (AEE §5.3): DreamGen (VLM scoring), Matrix-Game (inverse-dynamics action consistency), Genie Envisioner (symmetric Hausdorff + NDTW), MobileDreamer (mIoU).*
 
 ### 5.2 Complexity & Learnability
 
-Difficulty is learner- and configuration-relative (ACE §5): C_z(d) = 1 − Pr[v(d,τ)=1 | d, z] for model+scaffold+tools+budget z. Train in the "learnable band" near the capability frontier; keep harder tails for evaluation.
+Difficulty is learner- and configuration-relative (ACE §5): C_z(d) = 1 − Pr[v(d,τ)=1 | d, z] for model+scaffold+tools+budget z. Train in the "learnable band" near the capability frontier; keep harder tails for evaluation. Structural quantification exemplars: AutoForge (DAG depth), OSWorld-MCP (tool turns), LOGIGEN (permissions + irreversible transitions), NL2Plan (planner length).
 
-- Structural quantification: AutoForge (DAG depth), OSWorld-MCP (tool-turn counts), LOGIGEN (multi-variable + role permissions + irreversible transitions), NL2Plan (optimal-plan-length binning).
-- Calibration against strong models / humans: gg-bench (self-play win-rate-gap filtering), AI Gamestore (expert cognitive ratings).
-- Failure-driven, model-aware filtering: **AgentFrontier** · 2025 — ZPD-guided frontier pushing. [arXiv:2510.24695](https://arxiv.org/abs/2510.24695) · **GenEnv** · 2025 — success rate steered to a target band. [arXiv:2512.19682](https://arxiv.org/abs/2512.19682) · **Recursive Synthesis** · 2026 — per-round pass-rate descent as verified difficulty growth · **From Failure to Mastery** · 2026 — failure-driven hard-sample generation · **Learning with Challenges** · 2026 — adaptive mobile-GUI difficulty · **Tool-R0** · 2026 · **Breaking the Solver Bottleneck** · 2026 — train generators at the learnable frontier · **ToolACE-R** · AAAI 2026 — model-aware iterative refinement · **Agent Psychometrics** · 2026 — per-task performance prediction.
-- Bidirectional calibration (simplify, don't only harden): WRIT · 2026 — write/read-intensive trajectories · **HiL-Bench** · 2026 — human-in-the-loop help-seeking · scaffolding changes the execution config z itself (ACE §5.7).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AgentFrontier** | 2025 | ZPD-guided synthesis pushing the capability frontier as the model advances. | `src:ACE,AEE-7.2` `quality:complexity` | [2510.24695](https://arxiv.org/abs/2510.24695) |
+| **GenEnv** | 2025 | Task-generation success rate steered toward a target band. | `src:AEE-7.2,ACE` `quality:complexity` | [2512.19682](https://arxiv.org/abs/2512.19682) |
+| **Recursive Synthesis** | 2026 | Per-round pass-rate descent as *verified* difficulty growth. | `src:ACE` `quality:complexity` | — |
+| **From Failure to Mastery** | 2026 | Failure-driven hard-sample generation. | `src:ACE` `quality:complexity` | — |
+| **Learning with Challenges** | 2026 | Adaptive difficulty for mobile-GUI training. | `src:ACE` `quality:complexity` | — |
+| **Tool-R0** | 2026 | Zero-data self-evolution keeps tasks at the learnable frontier. | `src:ACE-T2` `quality:complexity` | — |
+| **Breaking the Solver Bottleneck** | 2026 | Train task generators at the learnable frontier. | `src:ACE` `quality:complexity` | — |
+| **ToolACE-R** | AAAI 2026 | Model-aware iterative training and adaptive refinement. | `src:ACE` `quality:complexity` | — |
+| **Agent Psychometrics** | 2026 | Predicting per-task performance for difficulty targeting. | `src:ACE` `quality:complexity` | — |
+| **gg-bench** | 2025 | Self-play win-rate-gap filtering calibrates difficulty. | `src:AEE-5.3` `quality:complexity` | [2505.07215](https://arxiv.org/abs/2505.07215) |
+| **WRIT** | 2026 | Write/read-intensive trajectories: bidirectional calibration (simplify, don't only harden). | `src:ACE` `quality:complexity` | — |
+| **HiL-Bench** | 2026 | Human-in-the-loop help-seeking benchmark. | `src:ACE` `quality:complexity` | — |
 
 ### 5.3 Diversity Measurement
 
-- **Vendi Score** · 2023 — practical batch-diversity metric. [arXiv:2309.00145](https://arxiv.org/abs/2309.00145)
-- Behavioral coverage / normalized entropy, conditional on accuracy + learnable complexity (ACE §6, Eq. 13); action-graph and dependency-path fingerprints for redundancy.
-- Embedding dedup: Agent World Model (scenario-collapse prevention), EnvScaler (embedding similarity + t-SNE checks).
-- Structural coverage: AutoForge (tool-DAG random walks), MCP-Universe (multi-server tool combinations), TaskCraft (multi-hop).
-- Output-distribution diversity for neural environments: Genie Envisioner (CLIP pairwise similarity), AdaWorld (cross-context transfer), I-JEPA (multi-sample decoding).
-- Coverage-guided scaling: **DIVE** · 2026 — per-task toolset coverage improves OOD generalization · **Beyond Quantity** · 2026 — *trajectory diversity* scaling beats quantity scaling.
-- Perturbation & counterfactual variation: **Can Agents Generalize to the Open World?** · 2026 · domain-randomization classics (see also UED in §4.1).
+Behavioral coverage / normalized entropy, conditional on accuracy + learnable complexity (ACE §6, Eq. 13). Grouped exemplars: embedding dedup (Agent World Model scenario-collapse prevention, EnvScaler t-SNE); structural coverage (AutoForge tool-DAG walks, MCP-Universe multi-server, TaskCraft multi-hop); neural output diversity (Genie Envisioner CLIP similarity, AdaWorld, I-JEPA multi-decode); perturbation & counterfactuals (Can Agents Generalize to the Open World?, 2026; domain randomization — see UED in §4.1).
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Vendi Score** | 2023 | Practical batch-diversity metric adopted for agentic data. | `src:ACE` `quality:diversity` | [2309.00145](https://arxiv.org/abs/2309.00145) |
+| **DIVE** | 2026 | Per-task toolset coverage improves OOD generalization. | `src:ACE,AEE` `quality:diversity` | — |
+| **Beyond Quantity** | 2026 | *Trajectory diversity* scaling beats quantity scaling. | `src:ACE` `quality:diversity` | — |
 
 ### 5.4 Fidelity (Sim-to-Real)
 
-- **WorldScore** · 2025 — unified evaluation of world generation & simulation. [arXiv:2504.00983](https://arxiv.org/abs/2504.00983)
-- **Web Turing Score** (WebWorld) · 2026 — can an LLM distinguish real from simulated web environments? [arXiv:2602.14721](https://arxiv.org/abs/2602.14721)
-- **WorldPrediction** · 2025 — physical-commonsense evaluation for world models. [arXiv:2506.04363](https://arxiv.org/abs/2506.04363)
-- Physics & motion metrics: DreamGen (rigid-body motion checks), GAIA-2 (keypoint-trajectory distance) [arXiv:2503.20523](https://arxiv.org/abs/2503.20523), EnerVerse (expert-judged continuity).
-- The four sim-to-real gaps (lifecycle survey §8.5): correctness, difficulty, diversity, fidelity — e.g., LLM-generated pages can encode invalid transitions that teach pseudo-policies.
-- **VeriEnv** · 2026 — clones *real* websites as executable environments to attack the realism gap. [arXiv:2603.10505](https://arxiv.org/abs/2603.10505)
+The four sim-to-real gaps (AEE §8.5): correctness, difficulty, diversity, fidelity — e.g., LLM-generated pages can encode invalid transitions that teach pseudo-policies.
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **WorldScore** | 2025 | Unified evaluation of world generation & simulation. | `src:ES` `quality:fidelity` | [2504.00983](https://arxiv.org/abs/2504.00983) |
+| **Web Turing Score** (WebWorld) | 2026 | Can an LLM distinguish real from simulated web environments? | `src:AEE-5.3` `quality:fidelity` | [2602.14721](https://arxiv.org/abs/2602.14721) |
+| **WorldPrediction** | 2025 | Physical-commonsense evaluation for world models. | `src:ES` `quality:fidelity` | [2506.04363](https://arxiv.org/abs/2506.04363) |
+| **GAIA-2** | 2025 | Keypoint-trajectory distance for video world models (FVD/LPIPS lines: DreamGen physics checks, EnerVerse continuity). | `src:AEE-5.3` `quality:fidelity` `E:neural` | [2503.20523](https://arxiv.org/abs/2503.20523) |
+| **VeriEnv** | 2026 | Clones *real* websites as executable environments to attack the realism gap. | `src:AEE-5.1.2` `quality:fidelity` | [2603.10505](https://arxiv.org/abs/2603.10505) |
 
 ### 5.5 Reward Design & Reward-Hacking Defense
 
-- **Tulu 3 (RLVR)** · 2024 — verifiable rewards in the post-training recipe. [arXiv:2411.15124](https://arxiv.org/abs/2411.15124)
-- **OTC-PO** · 2025 — over-trust correction: reward × tool-call efficiency. [arXiv:2504.14870](https://arxiv.org/abs/2504.14870)
-- **Mock Worlds, Real Skills** · 2026 — simulated tasks + rubric rewards replacing real-environment supervision. [arXiv:2601.22511](https://arxiv.org/abs/2601.22511)
-- Process/step-level rewards: **WebShepherd** · 2025 — web-agent process reward model. [arXiv:2505.15277](https://arxiv.org/abs/2505.15277) · **WebSTAR** · 2025 — step-level filtering · **Search-p1** · 2026 — path-centric reward shaping.
-- **MONA** · 2025 — multi-step-lookahead mitigation for long-horizon reward hacking.
-- **Hack-Verifiable Terminal Bench** · 2026 — evaluates reward hacking in executable terminal environments. [arXiv:2608.22103](https://arxiv.org/abs/2608.22103)
-- ACE's warning: optimizing against a *fixed* validator breeds validator-friendly shortcuts; "validator-accepted" ≠ "independently audited". See §4.5 for generator–verifier co-evolution.
+ACE's warning: optimizing against a *fixed* validator breeds validator-friendly shortcuts; "validator-accepted" ≠ "independently audited". See §4.5 for generator–verifier co-evolution.
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Tulu 3 (RLVR)** | 2024 | Verifiable rewards in the post-training recipe. | `src:ES` `quality:reward` | [2411.15124](https://arxiv.org/abs/2411.15124) |
+| **OTC-PO** | 2025 | Over-trust correction: reward × tool-call efficiency. | `src:AEE-6.4` `quality:reward` | [2504.14870](https://arxiv.org/abs/2504.14870) |
+| **Mock Worlds, Real Skills** | 2026 | Simulated tasks + rubric rewards replacing real-environment supervision. | `src:ACE` `quality:reward` `verify:rubric` | [2601.22511](https://arxiv.org/abs/2601.22511) |
+| **WebShepherd** | 2025 | Process reward model for web-agent rollouts. | `src:ES` `quality:reward` `verify:prm` | [2505.15277](https://arxiv.org/abs/2505.15277) |
+| **WebSTAR** | 2025 | Step-level filtering of computer-use trajectories. | `src:ACE` `quality:reward` `verify:judge` | — |
+| **Search-p1** | 2026 | Path-centric reward shaping for search agents. | `src:ACE` `quality:reward` | — |
+| **MONA** | 2025 | Multi-step-lookahead mitigation for long-horizon reward hacking. | `src:ES` `quality:reward` | — |
+| **Hack-Verifiable Terminal Bench** | 2026 | Evaluates reward hacking in executable terminal environments. | `src:arxiv-watch` `quality:reward` | [2608.22103](https://arxiv.org/abs/2608.22103) |
 
 ## 6. Agentic Data Generation
 
@@ -303,147 +371,248 @@ Accuracy (admission condition) – Complexity (learner-relative placement) – d
 
 ### 6.2 Forward Generation (E → q → τ)
 
-**Real / curated environments**
+**Real / curated environments** (ACE-T1 group 1; SWE pipelines from real repos: SWE-Gym, R2E-Gym, SWE-smith, SWE-rebench — see §3.1).
 
-- **ToolLLM** · ICLR 2024 — 16k+ real APIs; the founding large-scale tool dataset.
-- **Gorilla** · NeurIPS 2024 — API-grounded instruction generation at scale.
-- **APIGen** · NeurIPS 2024 — format check → execution → semantic review; the canonical three-layer verification pipeline.
-- **ToolDial** · ICLR 2025 — real API-graph-guided multi-turn dialogues.
-- **Close the Loop (InfTool)** · 2025 — multi-agent role-play toward "infinite" tool-use data.
-- **TOUCAN** · 2025 — 1.5M tool-agent samples synthesized from real MCP environments.
-- SWE pipelines from real repos: SWE-Gym, R2E-Gym, SWE-smith, SWE-rebench (§3.1).
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **ToolLLM** | ICLR 2024 | 16k+ real APIs; the founding large-scale tool dataset. | `src:ACE-T1,T3` `E:real` `paradigm:forward` | — |
+| **Gorilla** | NeurIPS 2024 | API-grounded instruction generation at scale. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
+| **APIGen** | NeurIPS 2024 | Format check → execution → semantic review; the canonical three-layer verification pipeline. | `src:ACE-T1` `E:real` `paradigm:forward` `verify:judge` | — |
+| **ToolDial** | ICLR 2025 | Real API-graph-guided multi-turn dialogues. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
+| **Close the Loop (InfTool)** | 2025 | Multi-agent role-play toward "infinite" tool-use data. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
+| **TOUCAN** | 2025 | 1.5M tool-agent samples synthesized from real MCP environments. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
 
-**LLM-synthesized (symbolic) environments**
+**LLM-synthesized (symbolic) environments** (ACE-T1 group 2 — LLMs generate tool specs/rules; the artifacts remain symbolic).
 
-- **ToolACE** · ICLR 2025 — self-evolving API pool + decision-tree retrieval.
-- **ToolAlpaca** · 2023 — 3k simulated tool cases; the early demonstration.
-- **Seal-Tools** · NLPCC 2024 — self-instruct tool dataset.
-- **SynthTools** · 2025 — hierarchical, verifiable synthesis for scaling agent development.
-- **ToolWeave** · 2026 — synthetic tool graphs → complex multi-turn dialogues.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **ToolACE** | ICLR 2025 | Self-evolving API pool + decision-tree retrieval. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
+| **ToolAlpaca** | 2023 | 3k simulated tool cases; the early demonstration. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
+| **Seal-Tools** | NLPCC 2024 | Self-instruct tool dataset. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
+| **SynthTools** | 2025 | Hierarchical, verifiable synthesis for scaling agent development. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
+| **ToolWeave** | 2026 | Synthetic tool graphs → complex multi-turn dialogues. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
 
-**Programmatic / executable environments**
+**Programmatic / executable environments** (ACE-T1 group 3; also EnvScaler, Agent-World, EnvFactory, ScaleEnv, Agent World Model, LOGIGEN — §3.1).
 
-- EnvScaler, Agent-World, EnvFactory, ScaleEnv, Agent World Model, LOGIGEN (§3.1).
-- **CodeGym** · ICLR 2026 — synthetic code environments for end-to-end tool-use RL. [arXiv:2509.17325](https://arxiv.org/abs/2509.17325)
-- **ToolVerse** · 2026 — many environments + long-horizon tasks unlocking agentic RL.
-- **SciDisco** · 2026 — scientific-discovery environments scaled for turn-level RL.
-- **ASTRA** · 2026 — auto-synthesized trajectory and RL arenas.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **CodeGym** | ICLR 2026 | Synthetic code environments for end-to-end tool-use RL. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | [2509.17325](https://arxiv.org/abs/2509.17325) |
+| **ToolVerse** | 2026 | Many environments + long-horizon tasks unlocking agentic RL. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | — |
+| **SciDisco** | 2026 | Scientific-discovery environments scaled for turn-level RL. | `src:ACE-T1,T3` `E:programmatic` `paradigm:forward` | — |
+| **ASTRA** | 2026 | Auto-synthesized trajectory and RL arenas. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | — |
 
-**Simulator / environment-free variants**
+**Simulator / environment-free variants** (ACE: LLM-based simulators generate stateful responses from specs).
 
-- **Simulating Environments with Reasoning Models** · 2025 — LLM simulators produce stateful responses from API specs.
-- **Environment-free Synthetic Data Generation for API Agents** · 2026.
-- **EnvACE** · 2026 — internalizes environment dynamics via world-model rehearsal.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Simulating Environments with Reasoning Models** | 2025 | LLM simulators produce stateful responses from API specs. | `src:ACE` `E:llm-synth` `paradigm:forward` | — |
+| **Environment-free Synthetic Data Generation for API Agents** | 2026 | Skip the environment entirely; generate interactions directly. | `src:ACE` `paradigm:forward` | — |
+| **EnvACE** | 2026 | Internalizes environment dynamics via world-model rehearsal. | `src:ACE` `paradigm:forward` | — |
 
 ### 6.3 Reverse Generation
 
-**Task-first**
+**Task-first** (ACE-T2; specify capability/goal, then build E and τ).
 
-- **AgentInstruct** · 2024 — capability targets drive agentic-flow synthesis.
-- **BUTTON** · ICLR 2025 — compose atomic tasks into complex multi-turn requests.
-- **Agentic Proposing** · 2026 — problem-first compositional skill synthesis.
-- **ToolBridge** · 2024 — retrofit existing tasks with tools.
-- Tool-integrated math: **ToRA** · ICLR 2024 · **MathCoder** · ICLR 2024 · **MARIO** · ACL Findings 2024 · **AgentMath** · 2025 · **ReTool** · ICLR 2026 · **ToRL** · 2025.
-- Science: **AutoSDT** · EMNLP 2025 — scaling scientific-discovery tasks · **Agentic-Ideation** · 2026 — sample-efficient ideation trajectories.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AgentInstruct** | 2024 | Capability targets drive agentic-flow synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
+| **BUTTON** | ICLR 2025 | Compose atomic tasks into complex multi-turn requests. | `src:ACE-T2` `paradigm:task-first` | — |
+| **Agentic Proposing** | 2026 | Problem-first compositional skill synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToolBridge** | 2024 | Retrofit existing tasks with tools. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToRA** | ICLR 2024 | Tool-integrated mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **MathCoder** | ICLR 2024 | Code-assisted mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **MARIO** | ACL Findings 2024 | Code-interpreter augmented reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **AgentMath** | 2025 | Tool-augmented math reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ReTool** | ICLR 2026 | Strategic tool-use reasoning via RL. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToRL** | 2025 | Tool-integrated RL at scale. | `src:ACE-T2` `paradigm:task-first` | — |
+| **AutoSDT** | EMNLP 2025 | Scaling scientific-discovery tasks. | `src:ACE-T2,T3` `paradigm:task-first` | — |
+| **Agentic-Ideation** | 2026 | Sample-efficient ideation trajectories from reference ideas. | `src:ACE-T2` `paradigm:task-first` | — |
 
-**Trajectory-first**
+**Trajectory-first** (ACE-T2; explore/mine behavior, then write the task).
 
-- **OS-Genesis** · ACL 2025 — reverse GUI trajectory → task.
-- **Learn-by-interact** · ICLR 2025 — interaction-derived task synthesis for real environments.
-- **Trajectory2Task** · ACL 2026 — executable trajectories → complex user intents.
-- **Unlocking Implicit Experience** · ACL 2026 — mine implicit tool workflows from text.
-- **Explorer** · ACL Findings 2025 — exploration-driven web trajectories.
-- **OpenMobile** · 2026 — task+trajectory co-synthesis for mobile agents.
-- **AgentTrek** · ICLR 2025 — web tutorials → replayable trajectories.
-- **Scaling Synthetic Task Generation via Exploration** · 2025 — expand reachable states, then derive tasks.
-- **WebExplorer** · 2025 — explore-and-evolve for long-horizon web agents. [arXiv:2509.06501](https://arxiv.org/abs/2509.06501)
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **OS-Genesis** | ACL 2025 | Reverse GUI trajectory → task. | `src:ACE-T2,T3,ES` `paradigm:trajectory-first` | — |
+| **Learn-by-interact** | ICLR 2025 | Interaction-derived task synthesis for real environments. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Trajectory2Task** | ACL 2026 | Executable trajectories → complex user intents. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Unlocking Implicit Experience** | ACL 2026 | Mine implicit tool workflows from text. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Explorer** | ACL Findings 2025 | Exploration-driven web trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **OpenMobile** | 2026 | Task+trajectory co-synthesis for mobile agents. | `src:ACE-T2,T3` `paradigm:trajectory-first` | — |
+| **AgentTrek** | ICLR 2025 | Web tutorials → replayable trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Scaling Synthetic Task Generation via Exploration** | 2025 | Expand reachable states, then derive tasks. | `src:ACE` `paradigm:trajectory-first` | — |
+| **WebExplorer** | 2025 | Explore-and-evolve for long-horizon web agents. | `src:ES,AEE-6.3` `paradigm:trajectory-first` | [2509.06501](https://arxiv.org/abs/2509.06501) |
 
-**Structure-first**
+**Structure-first** (ACE-T2; generate an intermediate scaffold — tool graph, blueprint, plan — then realize E/q/τ).
 
-- **APIGen-MT** · NeurIPS 2025 — verified blueprints before dialogue realization. [arXiv:2504.03601](https://arxiv.org/abs/2504.03601)
-- **Magnet** · ACL 2025 — tool-graph → dialogue translation.
-- **ToolFlow** · NAACL 2025 — tool-graph-guided coherent dialogues.
-- **ToolACE-MT** · ICLR 2026 — non-autoregressive coarse-to-fine multi-turn generation.
-- **Execution-First** · 2026 — execute tool traces first, then write tasks.
-- **Plan-and-Act** · ICML 2025 — plan-first long-horizon planning.
-- **TaskCraft** · 2025 — scalable agentic-task generation with tunable complexity. [arXiv:2506.10055](https://arxiv.org/abs/2506.10055)
-- **Taskbench** · NeurIPS 2024 · **DeepPlanning** · ACL 2026 — verifiable long-horizon planning benchmark.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **APIGen-MT** | NeurIPS 2025 | Verified blueprints before dialogue realization. | `src:ACE-T2,ES` `paradigm:structure-first` | [2504.03601](https://arxiv.org/abs/2504.03601) |
+| **Magnet** | ACL 2025 | Tool-graph → dialogue translation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **ToolFlow** | NAACL 2025 | Tool-graph-guided coherent dialogues. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **ToolACE-MT** | ICLR 2026 | Non-autoregressive coarse-to-fine multi-turn generation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **Execution-First** | 2026 | Execute tool traces first, then write tasks. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **Plan-and-Act** | ICML 2025 | Plan-first long-horizon planning. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **TaskCraft** | 2025 | Scalable agentic-task generation with tunable complexity. | `src:AEE-5.1.2,ACE,ES` `paradigm:structure-first` | [2506.10055](https://arxiv.org/abs/2506.10055) |
+| **Taskbench** | NeurIPS 2024 | Task-graph benchmark for task automation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **DeepPlanning** | ACL 2026 | Verifiable long-horizon planning benchmark. | `src:ACE` `paradigm:structure-first` | — |
 
-**Adaptive / self-evolving (cross-cutting)**
+**Adaptive / self-evolving** (ACE-T2 cross-cutting; generation strategy revised from accumulated experience).
 
-- **AFlow** · ICLR 2025 — searched agentic workflows. [arXiv:2410.10762](https://arxiv.org/abs/2410.10762)
-- **Chain-of-Agents** · 2025 — distill multi-agent systems into one agent-foundation model.
-- **AgentEvolver** · 2025 — self-questioning + experience-guided evolution.
-- **WebEvolver** · EMNLP 2025 — self-improvement with a co-evolving world model.
-- **SESA** · 2026 — self-play task posing + skill evolution.
-- **Socratic-SWE** · 2026 — trace-derived skills for adaptive task generation.
-- **AgentGen** · KDD 2025 — environment+task generation with bidirectional difficulty. [arXiv:2408.00764](https://arxiv.org/abs/2408.00764)
-- **Tool-R0** · 2026 — zero-data self-evolving tool learning.
-- **From Failure to Mastery** · 2026 — failure-driven hard-sample generation.
-- **Recursive Synthesis** · 2026 — recursive composition of long-horizon terminal tasks.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AFlow** | ICLR 2025 | Searched agentic workflows. | `src:ACE-T2` `paradigm:adaptive` | [2410.10762](https://arxiv.org/abs/2410.10762) |
+| **Chain-of-Agents** | 2025 | Distill multi-agent systems into one agent-foundation model. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **AgentEvolver** | 2025 | Self-questioning + experience-guided evolution. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **WebEvolver** | EMNLP 2025 | Self-improvement with a co-evolving world model. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **SESA** | 2026 | Self-play task posing + skill evolution. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **Socratic-SWE** | 2026 | Trace-derived skills for adaptive task generation. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **AgentGen** | KDD 2025 | Environment+task generation with bidirectional difficulty. | `src:ACE,ES` `paradigm:adaptive` | [2408.00764](https://arxiv.org/abs/2408.00764) |
+| **Tool-R0** | 2026 | Zero-data self-evolving tool learning. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **From Failure to Mastery** | 2026 | Failure-driven hard-sample generation. | `src:ACE` `paradigm:adaptive` | — |
+| **Recursive Synthesis** | 2026 | Recursive composition of long-horizon terminal tasks. | `src:ACE` `paradigm:adaptive` | — |
 
 ### 6.4 Scaling Evidence
 
-- **DIVE** · 2026 — tool-pool coverage → OOD generalization.
-- **Beyond Quantity** · 2026 — diversity scaling > quantity scaling.
-- **ScaleEnv** · 2026 — domain count → held-out generalization. [arXiv:2602.06820](https://arxiv.org/abs/2602.06820)
-- **EnvFactory** · 2026 — few strongly-verified environments > masses of redundant ones. [arXiv:2605.18703](https://arxiv.org/abs/2605.18703)
-- **Skywork-SWE** · 2025 — SWE data scaling laws.
-- ACE's synthesis: the effective scaling variable is the *effective support* of the distribution (valid + learnable + non-redundant), not raw count; quantity scaling saturates as the learner grows.
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **DIVE** | 2026 | Tool-pool coverage → OOD generalization. | `src:ACE` `quality:diversity` | — |
+| **Beyond Quantity** | 2026 | Diversity scaling > quantity scaling. | `src:ACE` `quality:diversity` | — |
+| **ScaleEnv** | 2026 | Domain count → held-out generalization. | `src:ACE-T1` | [2602.06820](https://arxiv.org/abs/2602.06820) |
+| **EnvFactory** | 2026 | Few strongly-verified environments > masses of redundant ones. | `src:ACE-T1` | [2605.18703](https://arxiv.org/abs/2605.18703) |
+| **Skywork-SWE** | 2025 | SWE data scaling laws. | `src:ACE` | — |
+
+*ACE's synthesis: the effective scaling variable is the **effective support** of the distribution (valid + learnable + non-redundant), not raw count; quantity scaling saturates as the learner grows.*
 
 ## 7. Domain Environments & Benchmarks
 
-Only *environmental* resources: interactive, stateful, executable. Static QA benchmarks are out of scope. (The lifecycle survey §4 carries exhaustive per-domain benchmark tables; here we keep the environment-defining works per domain.)
+Only *environmental* resources: interactive, stateful, executable. Static QA benchmarks are out of scope. (The AEE survey §4 carries exhaustive per-domain benchmark tables; here we keep the environment-defining works per domain.)
 
 ### 7.1 GUI / Web / OS
 
-- **WebShop** · NeurIPS 2022 — [arXiv:2207.01206](https://arxiv.org/abs/2207.01206) · **Mind2Web** · NeurIPS 2023 — [arXiv:2306.04570](https://arxiv.org/abs/2306.04570) · **WebArena** · ICLR 2024 — [arXiv:2307.13854](https://arxiv.org/abs/2307.13854) · **VisualWebArena** · 2024 — [arXiv:2401.13649](https://arxiv.org/abs/2401.13649) · **WebVoyager** · 2024 · **WorkArena** · 2024.
-- **OSWorld** · NeurIPS 2024 — [arXiv:2404.07972](https://arxiv.org/abs/2404.07972) · **WindowsAgentArena** · 2024 · **AgentStudio** · 2025 · **OSWorld-MCP** · 2025 — [arXiv:2510.24563](https://arxiv.org/abs/2510.24563).
-- **AitW** · 2023 — [arXiv:2307.10088](https://arxiv.org/abs/2307.10088) · **Mobile-Env** · 2023 — [arXiv:2305.08144](https://arxiv.org/abs/2305.08144) · **AndroidWorld** · 2024 — [arXiv:2405.14573](https://arxiv.org/abs/2405.14573) · **AndroidControl** · 2024 · **Mobile-Bench** · 2024 · **MobileAgentBench** · 2024 — [arXiv:2406.08184](https://arxiv.org/abs/2406.08184) · **MobileWorld** · 2025 · **OpenCUA** · 2025 — [arXiv:2508.09123](https://arxiv.org/abs/2508.09123).
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **WebShop** | NeurIPS 2022 | Shoppable web environment; the founding web-agent benchmark. | `src:AEE-4.1,ES` | [2207.01206](https://arxiv.org/abs/2207.01206) |
+| **Mind2Web** | NeurIPS 2023 | General web-agent benchmark (static snapshot; grounded tasks). | `src:AEE-4.1` | [2306.04570](https://arxiv.org/abs/2306.04570) |
+| **WebArena** | ICLR 2024 | Self-hostable, reproducible interactive web environments. | `src:AEE-4.1,ES` | [2307.13854](https://arxiv.org/abs/2307.13854) |
+| **VisualWebArena** | 2024 | Multimodal extension of WebArena. | `src:AEE-4.1,ES` | [2401.13649](https://arxiv.org/abs/2401.13649) |
+| **WebVoyager** | 2024 | Live-web agent evaluation. | `src:AEE-4.1` | — |
+| **WorkArena** | 2024 | Enterprise web (ServiceNow) realistic workflows. | `src:AEE-4.1` | — |
+| **OSWorld** | NeurIPS 2024 | Real-OS interactive environments (cross-app, multimodal). | `src:AEE-4.1,ES` | [2404.07972](https://arxiv.org/abs/2404.07972) |
+| **WindowsAgentArena** | 2024 | Windows-OS environments at scale. | `src:AEE-4.1` | — |
+| **AgentStudio** | 2025 | Toolkit for building real-OS tasks. | `src:AEE-4.1` | — |
+| **OSWorld-MCP** | 2025 | GUI + standard-protocol tool access combined. | `src:AEE-4.1,5.1.2,ES` | [2510.24563](https://arxiv.org/abs/2510.24563) |
+| **AitW** | 2023 | Android-in-the-Wild trajectories. | `src:AEE-4.1` | [2307.10088](https://arxiv.org/abs/2307.10088) |
+| **Mobile-Env** | 2023 | Multi-step Android interaction environments. | `src:AEE-4.1` | [2305.08144](https://arxiv.org/abs/2305.08144) |
+| **AndroidWorld** | 2024 | Programmatic Android benchmark with 116 apps. | `src:AEE-4.1,ES` | [2405.14573](https://arxiv.org/abs/2405.14573) |
+| **AndroidControl** | 2024 | Hybrid human-collected control trajectories. | `src:AEE-4.1` | — |
+| **Mobile-Bench** | 2024 | Mobile agent benchmark with saturated/unsaturated tasks. | `src:AEE-4.1` | — |
+| **MobileAgentBench** | 2024 | Deterministic, reproducible mobile evaluation. | `src:AEE-4.1` | [2406.08184](https://arxiv.org/abs/2406.08184) |
+| **MobileWorld** | 2025 | Controllable mobile environments (rewardable). | `src:AEE-4.1` | — |
+| **OpenCUA** | 2025 | Open computer-use environment suite. | `src:ES` | [2508.09123](https://arxiv.org/abs/2508.09123) |
 
 ### 7.2 Tool / MCP
 
-- **API-Bank** · 2023 · **ToolBench/ToolLLM** · ICLR 2024 · **BFCL** · ICML 2025 · **AppWorld** · ACL 2024 — [arXiv:2407.18901](https://arxiv.org/abs/2407.18901) · **ToolSandbox** · NAACL 2025 — stateful, conversational tool evaluation.
-- **τ-bench** · 2024 — [arXiv:2406.12045](https://arxiv.org/abs/2406.12045) · **τ²-bench** · 2025 — dual-control environments — [arXiv:2506.07982](https://arxiv.org/abs/2506.07982) · **UserBench** · 2025 — [arXiv:2507.22034](https://arxiv.org/abs/2507.22034).
-- **MCP-Universe** · 2025 — [arXiv:2508.14704](https://arxiv.org/abs/2508.14704) · **MCPVerse** · 2025 — [arXiv:2508.16260](https://arxiv.org/abs/2508.16260) · **MCP-Bench** · 2025 — [arXiv:2508.20453](https://arxiv.org/abs/2508.20453) · **MCPMark** · 2026 — deep-operation tasks on real protocol servers · **ComplexMCP** · 2026 — dynamic, interdependent tool sandbox · **M³-Bench** · 2026.
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **API-Bank** | 2023 | 73 planner-style API tool tasks. | `src:AEE-4.5` | — |
+| **ToolBench / ToolLLM** | ICLR 2024 | 16k+ real APIs with instruction tuning. | `src:AEE-4.5,ACE-T1` | — |
+| **BFCL** | ICML 2025 | Function-calling leaderboards (v3 adds multi-turn + agents). | `src:AEE-4.5` | — |
+| **AppWorld** | ACL 2024 | 9 apps + 458 people; a controllable world of interlinked APIs. | `src:AEE-4.5,ES` | [2407.18901](https://arxiv.org/abs/2407.18901) |
+| **ToolSandbox** | NAACL 2025 | Stateful, conversational, interactive tool evaluation. | `src:ACE` | — |
+| **τ-bench** | 2024 | User-in-the-loop tool agent benchmark with policy compliance. | `src:AEE-4.5,ES` | [2406.12045](https://arxiv.org/abs/2406.12045) |
+| **τ²-bench** | 2025 | Dual-control: agent controls tools AND the user simulator. | `src:AEE-4.5,ES` | [2506.07982](https://arxiv.org/abs/2506.07982) |
+| **UserBench** | 2025 | Interactive environments with *imperfect* users. | `src:AEE-4.5` | [2507.22034](https://arxiv.org/abs/2507.22034) |
+| **MCP-Universe** | 2025 | 151 tools over real MCP servers; dynamic+static evaluators. | `src:AEE-4.5,5.3` | [2508.14704](https://arxiv.org/abs/2508.14704) |
+| **MCPVerse** | 2025 | MCP-server agent evaluation suite. | `src:AEE-4.5` | [2508.16260](https://arxiv.org/abs/2508.16260) |
+| **MCP-Bench** | 2025 | 104 MCP tools across 17 domains with dynamic truth determination. | `src:AEE-4.5` | [2508.20453](https://arxiv.org/abs/2508.20453) |
+| **MCPMark** | 2026 | Deep-operation tasks on real protocol servers (GitHub/Notion). | `src:AEE-5.1.2` | — |
+| **ComplexMCP** | 2026 | Dynamic, interdependent, large-scale tool sandbox. | `src:ACE` | — |
+| **M³-Bench** | 2026 | Multi-turn, multi-tool MCP benchmark. | `src:AEE-4.5` | — |
 
 ### 7.3 Coding / SWE / Terminal
 
-- **SWE-bench** · ICLR 2024 — the canonical executable SWE benchmark; variants: SWE-bench Pro, Multi-SWE-bench, SWE-bench Multimodal, SWE-rebench. Training environments: §3.1.
-- **InterCode** · 2023 — interactive terminal puzzles — [arXiv:2306.14898](https://arxiv.org/abs/2306.14898).
-- **Terminal-Bench** · 2026 — [arXiv:2601.11868](https://arxiv.org/abs/2601.11868).
-- **KernelBench** · 2025 — GPU-kernel synthesis with execution feedback — [arXiv:2502.10517](https://arxiv.org/abs/2502.10517).
-- **NL2Repo-bench** · 2025 — repo-level code understanding · **SWT-Bench / FEA-Bench** · 2024-25 — agentic SWE task trajectories.
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **SWE-bench** | ICLR 2024 | The canonical executable SWE benchmark (+ Pro / Multi / Multimodal / rebench variants). | `src:AEE-4.6` | — |
+| **InterCode** | 2023 | Interactive terminal puzzles with execution feedback. | `src:AEE-4.6,ES` | [2306.14898](https://arxiv.org/abs/2306.14898) |
+| **Terminal-Bench** | 2026 | Real terminal-agent tasks with verifiable end states. | `src:AEE-4.6` | [2601.11868](https://arxiv.org/abs/2601.11868) |
+| **KernelBench** | 2025 | GPU-kernel synthesis with execution feedback. | `src:AEE-4.6` | [2502.10517](https://arxiv.org/abs/2502.10517) |
+| **NL2Repo-bench** | 2025 | Repo-level code understanding. | `src:AEE-4.6` | — |
+| **SWT-Bench / FEA-Bench** | 2024-25 | Agentic SWE task-trajectory benchmarks. | `src:AEE-4.6` | — |
 
 ### 7.4 Deep Research (agentic only)
 
-- **GAIA** · ICLR 2024 · **WebWalker** · ACL 2025 · **BrowseComp** · 2025 — [arXiv:2504.12516](https://arxiv.org/abs/2504.12516).
-- **InfoDeepSeek** · 2025 — agentic information seeking — [arXiv:2505.15872](https://arxiv.org/abs/2505.15872).
-- **DeepResearch Bench** · 2025 — [arXiv:2506.11763](https://arxiv.org/abs/2506.11763).
-- **DeepDive** · 2025 — KG-random-walk synthesis with obfuscated key clues — [arXiv:2509.10446](https://arxiv.org/abs/2509.10446).
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **GAIA** | ICLR 2024 | General assistant benchmark requiring tool use and multimodal grounding. | `src:AEE-4.2,ES` | — |
+| **WebWalker** | ACL 2025 | Traversal-based web QA for agents. | `src:AEE-4.2` | — |
+| **BrowseComp** | 2025 | Hard browsing-compensation tasks against live web. | `src:AEE-4.2` | [2504.12516](https://arxiv.org/abs/2504.12516) |
+| **InfoDeepSeek** | 2025 | Agentic information seeking under explicit constraints. | `src:AEE-4.2` | [2505.15872](https://arxiv.org/abs/2505.15872) |
+| **DeepResearch Bench** | 2025 | 100 PhD-level research tasks with tool+doc environments. | `src:AEE-4.2` | [2506.11763](https://arxiv.org/abs/2506.11763) |
+| **DeepDive** | 2025 | KG-random-walk synthesis with obfuscated key clues. | `src:AEE-6.3` `paradigm:structure-first` | [2509.10446](https://arxiv.org/abs/2509.10446) |
 
 ### 7.5 Embodied & Game
 
-- Embodied: **ALFRED** · CVPR 2020 · **ALFWorld** · ICLR 2021 — [arXiv:2010.03768](https://arxiv.org/abs/2010.03768) · **TEACh** · AAAI 2022 · **Habitat** · ICCV 2019 · **RLBench** · RA-L 2020 · **BEHAVIOR** · 2021 · **RoboCasa** · RSS 2024 — [arXiv:2406.02523](https://arxiv.org/abs/2406.02523) · **EmbodiedBench** · ICML 2025.
-- Game: **MineDojo** · NeurIPS 2022 · **SmartPlay** · 2024 — [arXiv:2310.01557](https://arxiv.org/abs/2310.01557) · **Baba Is AI** · 2024 — rule-rewriting puzzles — [arXiv:2407.13729](https://arxiv.org/abs/2407.13729) · **BALROG** · 2024 — [arXiv:2411.13543](https://arxiv.org/abs/2411.13543) · **AvalonBench** · 2023 — hidden-role social deduction — [arXiv:2310.05036](https://arxiv.org/abs/2310.05036) · **TextArena** · 2025 — [arXiv:2504.11442](https://arxiv.org/abs/2504.11442) · **LMRL Gym** · 2023 — [arXiv:2311.18232](https://arxiv.org/abs/2311.18232) · **GameArena** · 2024 — [arXiv:2412.06394](https://arxiv.org/abs/2412.06394) · **CivRealm** · 2024 · **Factorio Learning Environment** · 2025 — [arXiv:2503.09617](https://arxiv.org/abs/2503.09617).
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **ALFRED** | CVPR 2020 | Language instructions + household tasks. | `src:AEE-4.3` | — |
+| **ALFWorld** | ICLR 2021 | Text-game embodied household environments. | `src:AEE-4.3,ES` | [2010.03768](https://arxiv.org/abs/2010.03768) |
+| **TEACh** | AAAI 2022 | Dialogue-grounded household collaboration. | `src:AEE-4.3` | — |
+| **Habitat** | ICCV 2019 | High-throughput 3D navigation simulation. | `src:AEE-4.3` | — |
+| **RLBench** | RA-L 2020 | 100 manipulation tasks with demos. | `src:AEE-4.3` | — |
+| **BEHAVIOR** | 2021 | Everyday activities with full activity definition. | `src:AEE-4.3` | — |
+| **RoboCasa** | RSS 2024 | Large-scale kitchen manipulation generation. | `src:AEE-4.3,ACE-T3` | [2406.02523](https://arxiv.org/abs/2406.02523) |
+| **EmbodiedBench** | ICML 2025 | Systematic embodied evaluation from planning to low-level control. | `src:AEE-4.3,5.1.2` | — |
+| **MineDojo** | NeurIPS 2022 | Open-world Minecraft with internet-scaled knowledge. | `src:AEE-4.4` | — |
+| **SmartPlay** | 2024 | Games as a probe of LLM capability dimensions. | `src:AEE-4.4` | [2310.01557](https://arxiv.org/abs/2310.01557) |
+| **Baba Is AI** | 2024 | Rule-rewriting puzzles. | `src:AEE-4.4` | [2407.13729](https://arxiv.org/abs/2407.13729) |
+| **BALROG** | 2024 | Game-based agentic evaluation (novel games, no contamination). | `src:AEE-4.4` | [2411.13543](https://arxiv.org/abs/2411.13543) |
+| **AvalonBench** | 2023 | Hidden-role social deduction. | `src:AEE-4.4` | [2310.05036](https://arxiv.org/abs/2310.05036) |
+| **TextArena** | 2025 | Unified competitive text-game arena. | `src:AEE-4.4` | [2504.11442](https://arxiv.org/abs/2504.11442) |
+| **LMRL Gym** | 2023 | RL environments for language agents. | `src:AEE-4.4` | [2311.18232](https://arxiv.org/abs/2311.18232) |
+| **GameArena** | 2024 | Strategic games as LLM evaluation. | `src:AEE-4.4` | [2412.06394](https://arxiv.org/abs/2412.06394) |
+| **CivRealm** | 2024 | Civilization as open-ended strategy environment. | `src:AEE-4.4` | — |
+| **Factorio Learning Environment** | 2025 | Open-ended factory-building with programmatic state. | `src:AEE-4.4` | [2503.09617](https://arxiv.org/abs/2503.09617) |
 
 ### 7.6 Science / Medical / Finance
 
-- **ScienceWorld** · 2022 · **DiscoveryWorld** · 2024 · **ScienceAgentBench** · 2024 · **MLE-bench** · ICLR 2025 · **MLE-Dojo** · 2025 · **PaperArena** · 2025.
-- **MedAgentBench** · 2025 — [arXiv:2501.14654](https://arxiv.org/abs/2501.14654) · **MedAgentGym** · 2025 — trainable medical tool environments.
-- **TravelPlanner** · 2024 · **CRMArena-Pro** · 2025 · **StockBench / FinDeepResearch** · 2025-26.
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **ScienceWorld** | 2022 | 30 task types across 10 science topics. | `src:AEE-4.7` | — |
+| **DiscoveryWorld** | 2024 | Scientific discovery in simulated worlds. | `src:AEE-4.7` | — |
+| **ScienceAgentBench** | 2024 | Data-analysis scientific tasks. | `src:AEE-4.7` | — |
+| **MLE-bench** | ICLR 2025 | ML engineering with real Kaggle competitions. | `src:AEE-4.7` | — |
+| **MLE-Dojo** | 2025 | Interactive ML debugging environments. | `src:AEE-4.7` | — |
+| **PaperArena** | 2025 | Cross-document literature analysis. | `src:AEE-4.7,5.1.1` | — |
+| **MedAgentBench** | 2025 | 300 tool-oriented medical tasks. | `src:AEE-4.7` | [2501.14654](https://arxiv.org/abs/2501.14654) |
+| **MedAgentGym** | 2025 | Trainable medical code-center environments (13k). | `src:AEE-4.7,5.1.1` | — |
+| **TravelPlanner** | 2024 | Planning with commonsense constraints. | `src:AEE-4.8` | — |
+| **CRMArena-Pro** | 2025 | Enterprise CRM operations. | `src:AEE-4.7` | — |
+| **StockBench / FinDeepResearch** | 2025-26 | Financial reasoning environments. | `src:AEE-4.7` | — |
 
 ### 7.7 Multi-Agent Society
 
-- **Generative Agents** · 2023 — 25 LLM agents in a simulated town — [arXiv:2304.03442](https://arxiv.org/abs/2304.03442).
-- **SOTOPIA** · 2024 — social-intelligence environments — [arXiv:2310.11667](https://arxiv.org/abs/2310.11667) · **SOTOPIA-ToM** · 2025.
-- **OASIS** · 2025 — open agent-society simulation at million scale — [arXiv:2411.11581](https://arxiv.org/abs/2411.11581).
-- **Melting Pot** · 2021 — multi-agent evaluation substrates · **Concordia** · 2023 — social-simulation GM + agents · **AgentScope** · 2024 — [arXiv:2402.14034](https://arxiv.org/abs/2402.14034).
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **Generative Agents** | 2023 | 25 LLM agents in a simulated town; the founding social sandbox. | `src:AEE-3.8,ACE-T3` | [2304.03442](https://arxiv.org/abs/2304.03442) |
+| **SOTOPIA** | 2024 | Social-intelligence environments. | `src:AEE-4.4,ACE-T3` | [2310.11667](https://arxiv.org/abs/2310.11667) |
+| **SOTOPIA-ToM** | 2025 | Theory-of-mind extension. | `src:ACE-T3` | — |
+| **OASIS** | 2025 | Open agent-society simulation at million scale. | `src:ES` | [2411.11581](https://arxiv.org/abs/2411.11581) |
+| **Melting Pot** | 2021 | Multi-agent evaluation substrates with cultural mixing. | `src:AEE-3.8,ACE-T3` | — |
+| **Concordia** | 2023 | Social-simulation GM + agents. | `src:ACE-T3` | — |
+| **AgentScope** | 2024 | Multi-agent platform with message exchange. | `src:ES` | [2402.14034](https://arxiv.org/abs/2402.14034) |
 
 ### 7.8 Cross-Domain Gyms
 
-- **OpenAI Gym** · 2016 — the ancestral API.
-- **AgentBench** · 2023 · **AgentBoard** · 2024 · **AgentGym** · 2024 — 14 environments, unified training — [arXiv:2406.04151](https://arxiv.org/abs/2406.04151) · **GEM** · 2025 — a gym for agentic LMs — [arXiv:2510.01051](https://arxiv.org/abs/2510.01051) · **AgencyBench** · 2025 · **lmgame-Bench** · 2025 — games wrapped in a Gymnasium API — [arXiv:2505.15146](https://arxiv.org/abs/2505.15146).
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **OpenAI Gym** | 2016 | The ancestral environment API. | — | — |
+| **AgentBench** | 2023 | 8 environments, unified evaluation. | `src:AEE-4.8` | — |
+| **AgentBoard** | 2024 | Analytic evaluation board with progress rate. | `src:AEE-4.8` | — |
+| **AgentGym** | 2024 | 14 environments, unified *training*. | `src:AEE-4.8,ES` | [2406.04151](https://arxiv.org/abs/2406.04151) |
+| **GEM** | 2025 | A gym for agentic LMs. | `src:AEE-4.8,ES` | [2510.01051](https://arxiv.org/abs/2510.01051) |
+| **AgencyBench** | 2025 | Cross-domain agency evaluation. | `src:AEE-4.8` | — |
+| **lmgame-Bench** | 2025 | Games wrapped in a Gymnasium API. | `src:AEE-5.1.2` | [2505.15146](https://arxiv.org/abs/2505.15146) |
 
 ## 8. Infrastructure & Environment-as-a-Service
 
@@ -451,16 +620,22 @@ Agent-specific infrastructure only.
 
 ### 8.1 Sandboxes & Runtimes
 
-- **E2B** — code sandboxes for AI agents. · **Modal** — cloud sandboxes/GPUs popular for agent rollouts. · Agent-oriented microVM stacks (Firecracker-class isolation for parallel environment rollouts).
+| Project | Type | One-liner | Link |
+|---|---|---|---|
+| **E2B** | sandbox | Code sandboxes for AI agents (agent-scoped standard). | [e2b.dev](https://e2b.dev) |
+| **Modal** | sandbox/GPU | Cloud sandboxes widely used for parallel agent rollouts. | [modal.com](https://modal.com) |
+| **Agent-oriented microVMs** | isolation | Firecracker-class VM isolation for parallel environment rollouts (see cloud-microVM ecosystems). | — |
 
 ### 8.2 Protocols & Platforms
 
-- **Model Context Protocol (MCP)** — the de-facto tool/environment interface standard. [modelcontextprotocol.io](https://modelcontextprotocol.io)
-- **ARE** · 2025 — heterogeneous environment construction/orchestration platform. [arXiv:2509.17158](https://arxiv.org/abs/2509.17158)
-- **GEM** · 2025 — "a gym for agentic LMs". [arXiv:2510.01051](https://arxiv.org/abs/2510.01051)
-- **SpeechGym** · 2026 — audio-native gym for training voice agents via RL. [arXiv:2608.26432](https://arxiv.org/abs/2608.26432)
-- **AgentGym** · 2024 — 14 environments, unified training. [arXiv:2406.04151](https://arxiv.org/abs/2406.04151)
-- **TextArena** · 2025 — unified competitive text-game arena. [arXiv:2504.11442](https://arxiv.org/abs/2504.11442)
+| Paper / Project | Venue | One-liner | Tags | Link |
+|---|---|---|---|---|
+| **Model Context Protocol (MCP)** | 2024 | The de-facto tool/environment interface standard. | — | [modelcontextprotocol.io](https://modelcontextprotocol.io) |
+| **ARE** | 2025 | Heterogeneous environment construction/orchestration platform (Meta). | `src:AEE-7.3.2,ES` `evolution:scaling` | [arXiv:2509.17158](https://arxiv.org/abs/2509.17158) |
+| **GEM** | 2025 | "A gym for agentic LMs". | `src:AEE-4.8,ES` | [arXiv:2510.01051](https://arxiv.org/abs/2510.01051) |
+| **AgentGym** | 2024 | 14 environments, unified training. | `src:AEE-4.8,ES` | [arXiv:2406.04151](https://arxiv.org/abs/2406.04151) |
+| **SpeechGym** | 2026 | Audio-native gym for training voice agents via RL. | `src:arxiv-watch` | [arXiv:2608.26432](https://arxiv.org/abs/2608.26432) |
+| **TextArena** | 2025 | Unified competitive text-game arena. | `src:AEE-4.4` | [arXiv:2504.11442](https://arxiv.org/abs/2504.11442) |
 
 ### 8.3 Environment-as-a-Service (EaaS)
 
@@ -472,24 +647,38 @@ How environments are consumed; only entries tightly coupled to the environment l
 
 ### 9.1 Agentic RL
 
-Search & tool-integrated RL:
-
-- **Search-R1** · 2025 — search-integrated RL. [arXiv:2503.09516](https://arxiv.org/abs/2503.09516) · **ReSearch** · 2025 — [arXiv:2503.19470](https://arxiv.org/abs/2503.19470) · **DeepRetrieval** · 2025 — [arXiv:2503.00223](https://arxiv.org/abs/2503.00223) · **MaskSearch** · 2025 — answer-masked multi-agent RL. [arXiv:2505.20285](https://arxiv.org/abs/2505.20285)
-- **ZeroSearch** · 2025 — an LLM simulates the search engine during RL. [arXiv:2505.04588](https://arxiv.org/abs/2505.04588)
-- **WebSailor** · 2025 — uncertainty-driven web-agent RL. [arXiv:2507.02592](https://arxiv.org/abs/2507.02592)
-
-Computer-use & GUI RL:
-
-- **ComputerRL** · 2025 — alternating RL/SFT against entropy collapse. [arXiv:2508.14040](https://arxiv.org/abs/2508.14040) · **WebRL** · ICLR 2025 — self-evolving online curricula · **UI-S1** · 2025 — semi-online RL.
-
-Credit assignment, sampling, and stability:
-
-- **GiGPO** · 2025 — anchor-state grouped step-level credit assignment. [arXiv:2505.10978](https://arxiv.org/abs/2505.10978) · **ARPO** · 2025 — tool-integrated exploration. [arXiv:2507.19849](https://arxiv.org/abs/2507.19849) · **RAGEN** · 2025 — reward-variance-aware multi-turn RL. [arXiv:2504.20073](https://arxiv.org/abs/2504.20073) · **AgentRL** · 2025 — cross-policy sampling. [arXiv:2510.04206](https://arxiv.org/abs/2510.04206) · **VAGEN** · 2025 — world-model rewards + bi-level GAE. [arXiv:2510.16907](https://arxiv.org/abs/2510.16907) · **AEPO** · 2025 — entropy-balanced agentic optimization. [arXiv:2510.14545](https://arxiv.org/abs/2510.14545) · **AgentFold** · 2025 — folding stale context for long-horizon RL. [arXiv:2510.24699](https://arxiv.org/abs/2510.24699)
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **Search-R1** | 2025 | Search-integrated RL. | `src:ACE-T3` `focus:search` | [2503.09516](https://arxiv.org/abs/2503.09516) |
+| **ReSearch** | 2025 | RL for search agents. | `src:AEE-6.4` `focus:search` | [2503.19470](https://arxiv.org/abs/2503.19470) |
+| **DeepRetrieval** | 2025 | RL for retrieval. | `src:AEE-6.4` `focus:search` | [2503.00223](https://arxiv.org/abs/2503.00223) |
+| **MaskSearch** | 2025 | Answer-masked multi-agent RL. | `src:AEE-6.3` `focus:search` | [2505.20285](https://arxiv.org/abs/2505.20285) |
+| **ZeroSearch** | 2025 | An LLM simulates the search engine during RL. | `src:AEE-6.4` `focus:search` | [2505.04588](https://arxiv.org/abs/2505.04588) |
+| **WebSailor** | 2025 | Uncertainty-driven web-agent RL. | `src:AEE-6.4,ES` `focus:search` | [2507.02592](https://arxiv.org/abs/2507.02592) |
+| **ComputerRL** | 2025 | Alternating RL/SFT against entropy collapse in computer-use RL. | `src:AEE-6.4` `focus:gui` | [2508.14040](https://arxiv.org/abs/2508.14040) |
+| **WebRL** | ICLR 2025 | Self-evolving online curricula for web agents. | `src:AEE-6.4,ES` `focus:gui` `evolution:difficulty` | — |
+| **UI-S1** | 2025 | Semi-online RL for GUI agents. | `src:AEE-6.4` `focus:gui` | — |
+| **GiGPO** | 2025 | Anchor-state grouped step-level credit assignment. | `src:AEE-6.4` `focus:credit` | [2505.10978](https://arxiv.org/abs/2505.10978) |
+| **ARPO** | 2025 | Agentic RL with tool-integrated exploration. | `src:AEE-6.4` `focus:credit` | [2507.19849](https://arxiv.org/abs/2507.19849) |
+| **RAGEN** | 2025 | Reward-variance-aware multi-turn RL. | `src:AEE-6.4` `focus:credit` | [2504.20073](https://arxiv.org/abs/2504.20073) |
+| **AgentRL** | 2025 | Cross-policy sampling. | `src:AEE-6.4` `focus:credit` | [2510.04206](https://arxiv.org/abs/2510.04206) |
+| **VAGEN** | 2025 | World-model rewards + bi-level GAE. | `src:AEE-6.4` `focus:credit` | [2510.16907](https://arxiv.org/abs/2510.16907) |
+| **AEPO** | 2025 | Entropy-balanced agentic optimization. | `src:AEE-6.4` `focus:credit` | [2510.14545](https://arxiv.org/abs/2510.14545) |
+| **AgentFold** | 2025 | Folding stale context for long-horizon RL. | `src:AEE-6.3` `focus:credit` | [2510.24699](https://arxiv.org/abs/2510.24699) |
 
 ### 9.2 Agentic SFT / Trajectory Synthesis
 
-- **Agent-FLAN** · 2024 — ReAct-style data restructured into multi-turn format · **AgentTuning** · 2023 — the founding agent-SFT mixture · **Aguvis** · ICML 2025 — automatic program generation + reasoning-trace augmentation · **UI-TARS** · 2025 — iterative collection + reflection · **APIGen-MT** · NeurIPS 2025 — [arXiv:2504.03601](https://arxiv.org/abs/2504.03601) · **Lingma SWE-GPT** · 2024 — three-stage SWE workflow trajectories. [arXiv:2411.00622](https://arxiv.org/abs/2411.00622)
-- Trajectory refinement: **ETO** · 2024 — trajectory-collection-then-train loop. [arXiv:2403.02502](https://arxiv.org/abs/2403.02502) · **GUI-Reflection** · 2025 — first-error localization + retrospective correction · **TopoCurate** · 2026 — interaction-topology-based curation.
+| Paper | Venue | One-liner | Tags | arXiv |
+|---|---|---|---|---|
+| **Agent-FLAN** | 2024 | ReAct-style data restructured into multi-turn format. | `src:AEE-6.3` | — |
+| **AgentTuning** | 2023 | The founding agent-SFT mixture. | `src:AEE-6.3` | — |
+| **Aguvis** | ICML 2025 | Automatic program generation + reasoning-trace augmentation. | `src:AEE-6.3` | — |
+| **UI-TARS** | 2025 | Iterative collection + reflection for GUI agents. | `src:AEE-6.3` | — |
+| **APIGen-MT** | NeurIPS 2025 | Verified blueprints → multi-turn dialogues. | `src:ACE-T2,ES` `paradigm:structure-first` | [2504.03601](https://arxiv.org/abs/2504.03601) |
+| **Lingma SWE-GPT** | 2024 | Three-stage SWE workflow trajectories. | `src:AEE-6.3` | [2411.00622](https://arxiv.org/abs/2411.00622) |
+| **ETO** | 2024 | Trajectory-collection-then-train loop. | `src:AEE-6.3` | [2403.02502](https://arxiv.org/abs/2403.02502) |
+| **GUI-Reflection** | 2025 | First-error localization + retrospective correction. | `src:AEE-6.3` | — |
+| **TopoCurate** | 2026 | Interaction-topology-based trajectory curation. | `src:ACE` | — |
 
 ### 9.3 Offline–Online Unification
 
