@@ -27,14 +27,13 @@ The field is converging on a paradigm shift: environments are no longer passive 
 
 - [1. Surveys & Position Papers](#1-surveys--position-papers)
 - [2. Formalization & Environment Attributes](#2-formalization--environment-attributes)
-- [3. Environment Synthesis](#3-environment-synthesis)
-- [4. Environment Evolution Mechanisms](#4-environment-evolution-mechanisms) ★
+- [3. Environment & Data Synthesis](#3-environment--data-synthesis)
+- [4. Environment Evolution Mechanisms](#4-environment-evolution-mechanisms-) ★
 - [5. Quality, Verification & Reward](#5-quality-verification--reward)
-- [6. Agentic Data Generation](#6-agentic-data-generation)
-- [7. Domain Environments & Benchmarks](#7-domain-environments--benchmarks)
-- [8. Infrastructure & Environment-as-a-Service](#8-infrastructure--environment-as-a-service)
-- [9. Training with Evolving Environments](#9-training-with-evolving-environments)
-- [10. Open Problems & Science of Environments](#10-open-problems--science-of-environments)
+- [6. Domain Environments & Benchmarks](#6-domain-environments--benchmarks)
+- [7. Infrastructure & Environment-as-a-Service](#7-infrastructure--environment-as-a-service)
+- [8. Training with Evolving Environments](#8-training-with-evolving-environments)
+- [9. Scaling Evidence & Open Problems](#9-scaling-evidence--open-problems)
 
 *Each category lists papers in a table. The **One-liner** column condenses what the source surveys say about the work; the **Tags** column records survey provenance and taxonomy labels (all keys optional):*
 
@@ -56,7 +55,7 @@ The field is converging on a paradigm shift: environments are no longer passive 
 
 | Survey | Venue | One-liner | Link |
 |---|---|---|---|
-| **Agentic Environment Engineering for LLMs** | 2026 | The lifecycle survey this list's skeleton follows: 8 attribute pairs × 8 domains × 2 synthesis paradigms × 4 quality dimensions × agent & environment evolution (582 refs). | [arXiv:2606.12191](https://arxiv.org/abs/2606.12191) |
+| **Agentic Environment Engineering for LLMs** | 2026 | The AEE survey this list's skeleton follows: 8 attribute pairs × 8 domains × 2 synthesis paradigms × 4 quality dimensions × agent & environment evolution (582 refs). | [arXiv:2606.12191](https://arxiv.org/abs/2606.12191) |
 | **Environment Scaling for Interactive Agentic Experience Collection** | NeurIPS'25 SEA Workshop | Environments as producers of experiential data; the Generation–Execution–Feedback (GEF) loop; generator–verifier asymmetry. | [arXiv:2511.09586](https://arxiv.org/abs/2511.09586) · [companion list](https://github.com/lukahhcm/Awesome_Scaling_Environments) |
 | **What Makes Good Agentic Data? An ACE Lens** | 2026 | Quality lens — Accuracy (admission condition) – Complexity (learner-relative calibration) – divErsity (behavioral coverage); data object d = (E, q, τ, v); forward vs. reverse generation. | [arXiv:2608.27260](https://arxiv.org/abs/2608.27260) |
 | **A Survey of Self-Evolving Agents** | 2025 | Agent-centric view of self-evolution; the environment appears as one component (contrast with this list's environment-centric axis). | [list](https://github.com/XMUDeepLIT/Awesome-Self-Evolving-Agents) |
@@ -73,18 +72,24 @@ The field is converging on a paradigm shift: environments are no longer passive 
 
 Two complementary cuts, plus the shared interaction formalism.
 
-- **POMDP formalism** — both the lifecycle survey (§2.1, E = ⟨S, A, P, R, Ω, O, γ⟩ extended for tool-augmented, language-centered agents) and ACE (§2.1, interaction as partial observability) ground "agentic environment" in a POMDP.
+- **POMDP formalism** — both the AEE survey (§2.1, E = ⟨S, A, P, R, Ω, O, γ⟩ extended for tool-augmented, language-centered agents) and ACE (§2.1, interaction as partial observability) ground "agentic environment" in a POMDP.
 - **Intra-environment decomposition (ACE §2.2)** — e = (D state carrier, F tool/action set, P_rule policies & constraints, Ω observation exposure, v success interface); E ranges from a *static interface specification* (tool schemas) to a *complete executable interaction substrate*. [arXiv:2608.27260](https://arxiv.org/abs/2608.27260)
-- **Inter-environment attribute pairs (lifecycle survey §3)** — symbolic vs. neural · open- vs. closed-loop · online vs. offline · MDP vs. POMDP · deterministic vs. stochastic · discrete vs. continuous · uni- vs. multi-modal · single- vs. multi-agent. [arXiv:2606.12191](https://arxiv.org/abs/2606.12191)
-- Terminology note: an **"LLM-synthesized environment"** (ACE) means LLMs generate *symbolic* tool specs/rules; a **"neural environment"** (lifecycle survey §3.1/§5.2) means the *transition function itself* is a network (world model). Different things — don't conflate.
+- **Inter-environment attribute pairs (AEE survey §3)** — symbolic vs. neural · open- vs. closed-loop · online vs. offline · MDP vs. POMDP · deterministic vs. stochastic · discrete vs. continuous · uni- vs. multi-modal · single- vs. multi-agent. [arXiv:2606.12191](https://arxiv.org/abs/2606.12191)
+- Terminology note: an **"LLM-synthesized environment"** (ACE) means LLMs generate *symbolic* tool specs/rules; a **"neural environment"** (AEE survey §3.1/§5.2) means the *transition function itself* is a network (world model). Different things — don't conflate.
 
-## 3. Environment Synthesis
+## 3. Environment & Data Synthesis
 
-Dual-label organization: the lifecycle survey's **synthesis route** (what real material seeds the pipeline) × ACE's **E-source** (how the resulting E is implemented).
+Environment construction and agentic data generation are two views of one activity. In ACE's factorization, data is the object d = (E, q, τ, v) and generation means designing a joint distribution over its factors — so this chapter merges both views and organizes pipelines by **anchor** (ACE §3: which factor drives construction):
 
-### 3.1 Symbolic / Programmatic Synthesis
+- **E-anchored (forward, E → q → τ)** — build the environment first; §3.1-3.4. Orthogonal tags: AEE's synthesis `route:` (what real material seeds the pipeline) × ACE's `E:` source (how the resulting artifact is implemented).
+- **Reverse-anchored** — task, trajectory, or an intermediate structure drives construction; §3.5.
+- **Adaptive** — the generation strategy itself is revised from accumulated experience; §3.6.
 
-**Task-driven** — wrap static real assets (repos, issues, tasks) into executable environments (AEE §5.1.1).
+*The quality objective for which generated instances get accepted (ACE: Accuracy–Complexity–divErsity) is a separate question — see §5.*
+
+### 3.1 E-Anchored Construction (Forward, E → q → τ)
+
+**Task-driven** — wrap static real assets (repos, issues, real APIs, tasks) into environments (AEE §5.1.1).
 
 | Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
 |---|---|---|---|---|
@@ -98,23 +103,28 @@ Dual-label organization: the lifecycle survey's **synthesis route** (what real m
 | **SCALER** | 2026 | Competitive-programming data → verifiable environments with tunable difficulty for RL. | `src:AEE-5.1.1,7.2` `route:task` `evolution:difficulty` | [2601.04809](https://arxiv.org/abs/2601.04809) |
 | **AgentFounder (Agentic CPT)** | 2025 | Wikipedia/CommonCrawl turned into interactive environments for continued pre-training. | `src:AEE-5.1.1` `route:task` | [2509.13310](https://arxiv.org/abs/2509.13310) |
 | **daVinci-Env (OpenSWE)** | 2026 | 45,320 transparent Docker environments from 12.8k repos; the largest open SWE environment stack. | `E:real` `route:task` `produces:E,v` | [2603.13023](https://arxiv.org/abs/2603.13023) |
+| **SWE-Universe** | 2026 | Million-scale real verifiable environments. | `src:AEE-5.1.2` `E:real` `route:task` | [2602.02361](https://arxiv.org/abs/2602.02361) |
+| **ToolLLM** | ICLR 2024 | 16k+ real APIs; the founding large-scale tool dataset (tool-description prompting; teacher-guided rollouts). | `src:ACE-T1,T3` `E:real` `route:task` `paradigm:forward` `produces:q,τ` | — |
+| **Gorilla** | NeurIPS 2024 | API-grounded instruction generation at scale. | `src:ACE-T1` `E:real` `route:task` `paradigm:forward` | — |
+| **APIGen** | NeurIPS 2024 | Format check → execution → semantic review; the canonical three-layer verification pipeline. | `src:ACE-T1` `E:real` `route:task` `paradigm:forward` `verify:judge` | — |
+| **ToolDial** | ICLR 2025 | Real API-graph-guided multi-turn dialogues. | `src:ACE-T1` `E:real` `route:task` `paradigm:forward` | — |
+| **Close the Loop (InfTool)** | 2025 | Multi-agent role-play toward "infinite" tool-use data. | `src:ACE-T1` `E:real` `route:task` `paradigm:forward` | — |
+| **TOUCAN** | 2025 | 1.5M tool-agent samples synthesized from real MCP environments. | `src:ACE-T1` `E:real` `route:task` `paradigm:forward` | — |
 
-**Real-world-driven** — project real interaction media (web, OS, games, tools) into simplified virtual environments (AEE §5.1.2).
+**Real-world-driven** — project real interaction media (web, OS, games, EHR) into simplified virtual environments (AEE §5.1.2).
 
 | Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
 |---|---|---|---|---|
 | **AgentSynth** | 2025 | Exploits information asymmetry: generating easy sub-tasks stepwise ≪ solving one hard long-horizon task; difficulty-controllable. | `src:AEE-5.1.2` `route:real-world` | [2506.14205](https://arxiv.org/abs/2506.14205) |
-| **TaskCraft** | 2025 | Web-grounded, difficulty-tunable tool-call task synthesis (compositional scaling). | `src:AEE-5.1.2,ES` `route:real-world` `produces:q` | [2506.10055](https://arxiv.org/abs/2506.10055) |
-| **OS-Genesis** | ACL 2025 | Reverse task synthesis from GUI trajectories, avoiding manual curation. | `src:ES,ACE-T2` `route:real-world` `paradigm:trajectory-first` | — |
+| **TaskCraft** | 2025 | Web-grounded, difficulty-tunable tool-call task synthesis (compositional scaling). | `src:AEE-5.1.2,ACE,ES` `route:real-world` `produces:q` | [2506.10055](https://arxiv.org/abs/2506.10055) |
 | **VeriEnv** | 2026 | LMs as *environment creators*: clone real websites into executable, programmatically verifiable environments. | `src:AEE-5.1.2` `route:real-world` `produces:E,v` | [2603.10505](https://arxiv.org/abs/2603.10505) |
 | **Training Needs Trustworthy Worlds** | 2026 | Verified synthetic web environments for agent learning. | `src:arxiv-watch` `route:real-world` | [2608.21898](https://arxiv.org/abs/2608.21898) |
 | **AutoWebWorld** | 2026 | Websites as finite-state machines; systematic enumeration and verification ("infinite verifiable web environments"). | `src:AEE-5.1.2,7.3.1` `route:real-world` | [2602.14296](https://arxiv.org/abs/2602.14296) |
 | **InfiniteWeb** | 2026 | Lightweight specs auto-expanded into functional websites + tasks + reward evaluators. | `src:AEE-5.1.2,7.3.1` `route:real-world` `produces:E,q,v` | [2601.04126](https://arxiv.org/abs/2601.04126) |
 | **V-GameGym** | 2025 | Visual-rendering feedback environments built on games. | `src:AEE-5.1.2` `route:real-world` | [2509.20136](https://arxiv.org/abs/2509.20136) |
 | **MedMCP-Calc** | 2026 | MCP environments over real EHR stores + clinical guideline retrieval. | `src:AEE-5.1.2` `route:real-world` | [2601.23049](https://arxiv.org/abs/2601.23049) |
-| **SWE-Universe** | 2026 | Million-scale real verifiable environments. | `src:AEE-5.1.2` `E:real` `route:task` | [2602.02361](https://arxiv.org/abs/2602.02361) |
 
-**De Novo** — synthesize environments from scratch with minimal seeds; the closest to "environment scaling as free expansion" (AEE §5.1.3).
+**De Novo** — synthesize from scratch with minimal seeds; the closest to "environment scaling as free expansion" (AEE §5.1.3). Covers both LLM-synthesized *symbolic* specs (`E:llm-synth`) and programmatic implementations (`E:programmatic`).
 
 | Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
 |---|---|---|---|---|
@@ -124,15 +134,32 @@ Dual-label organization: the lifecycle survey's **synthesis route** (what real m
 | **EnvFactory** | 2026 | Automatic exploration/validation of stateful executable tool environments; a *few strongly verified environments beat masses of redundant ones*. | `src:ACE-T1` `E:programmatic` `route:de-novo` | [2605.18703](https://arxiv.org/abs/2605.18703) |
 | **EnvScaler** | ACL Findings 2026 | SkelBuilder (environment skeletons) + ScenGenerator (scenario instantiation + rule validators); 191 environments / ~7k scenarios. | `src:AEE-7.3.1,ACE-T1` `E:programmatic` `route:de-novo` | [2601.05808](https://arxiv.org/abs/2601.05808) |
 | **Agent-World** | 2026 | Self-evolving training arena: autonomous MCP/tool environment discovery + difficulty-controlled task synthesis. | `src:ACE-T1` `E:programmatic` `route:de-novo` `evolution:co-evolve` | [2604.18292](https://arxiv.org/abs/2604.18292) |
-| **AutoEnv** | 2025 | Environments as factorizable distributions of transitions/observations/rewards; unified heterogeneous generation. | `src:AEE-5.1.3,7.3.2,ES` `route:de-novo` | [2511.19304](https://arxiv.org/abs/2511.19304) |
-| **LOGIGEN** | 2026 | Logic-driven forward deduction; rules compiled into SQLite-backed physical environments. | `src:AEE-5.1.3,ACE` `route:de-novo` | [2603.00540](https://arxiv.org/abs/2603.00540) |
-| **SWE-Playground** | 2025 | First fully synthetic SWE training pipeline, fully off GitHub. | `src:AEE-5.1.3` `route:de-novo` | [2512.12216](https://arxiv.org/abs/2512.12216) |
-| **Endless Terminals** | 2026 | Samples file-operation/network-config dimensions into thousands of terminal environments. | `src:AEE-5.1.3` `route:de-novo` | [2601.16443](https://arxiv.org/abs/2601.16443) |
-| **gg-bench** | 2025 | Randomly samples *brand-new* two-player games; contamination-proof by construction. | `src:AEE-5.1.3` `route:de-novo` | [2505.07215](https://arxiv.org/abs/2505.07215) |
-| **RandomWorld** | EMNLP 2025 | Procedural environment generation for tool agents. | `src:ES` `route:de-novo` | [2506.11045](https://arxiv.org/abs/2506.11045) |
-| **NL2Plan** | 2024 | Natural-language PDDL environment generation. | `src:AEE-5.1.3` `route:de-novo` | [2405.04215](https://arxiv.org/abs/2405.04215) |
-| **Envs-FORGE** | 2026 | Frontier-optimized, reward-grounded environment synthesis for agent RL. | `src:arxiv-watch` `route:de-novo` `evolution:difficulty` | [2608.14312](https://arxiv.org/abs/2608.14312) |
-| **AgentMercury** | 2026 | Agents synthesize verifiable business-scenario environments at scale. | `src:arxiv-watch` `route:de-novo` | [2608.20634](https://arxiv.org/abs/2608.20634) |
+| **AutoEnv** | 2025 | Environments as factorizable distributions of transitions/observations/rewards; unified heterogeneous generation. | `src:AEE-5.1.3,7.3.2,ES` `E:programmatic` `route:de-novo` | [2511.19304](https://arxiv.org/abs/2511.19304) |
+| **LOGIGEN** | 2026 | Logic-driven forward deduction; rules compiled into SQLite-backed physical environments. | `src:AEE-5.1.3,ACE` `E:programmatic` `route:de-novo` | [2603.00540](https://arxiv.org/abs/2603.00540) |
+| **SWE-Playground** | 2025 | First fully synthetic SWE training pipeline, fully off GitHub. | `src:AEE-5.1.3` `E:programmatic` `route:de-novo` | [2512.12216](https://arxiv.org/abs/2512.12216) |
+| **Endless Terminals** | 2026 | Samples file-operation/network-config dimensions into thousands of terminal environments. | `src:AEE-5.1.3` `E:programmatic` `route:de-novo` | [2601.16443](https://arxiv.org/abs/2601.16443) |
+| **gg-bench** | 2025 | Randomly samples *brand-new* two-player games; contamination-proof by construction. | `src:AEE-5.1.3` `E:programmatic` `route:de-novo` | [2505.07215](https://arxiv.org/abs/2505.07215) |
+| **RandomWorld** | EMNLP 2025 | Procedural environment generation for tool agents. | `src:ES` `E:programmatic` `route:de-novo` | [2506.11045](https://arxiv.org/abs/2506.11045) |
+| **NL2Plan** | 2024 | Natural-language PDDL environment generation. | `src:AEE-5.1.3` `E:programmatic` `route:de-novo` | [2405.04215](https://arxiv.org/abs/2405.04215) |
+| **Envs-FORGE** | 2026 | Frontier-optimized, reward-grounded environment synthesis for agent RL. | `src:arxiv-watch` `E:programmatic` `route:de-novo` `evolution:difficulty` | [2608.14312](https://arxiv.org/abs/2608.14312) |
+| **AgentMercury** | 2026 | Agents synthesize verifiable business-scenario environments at scale. | `src:arxiv-watch` `E:programmatic` `route:de-novo` | [2608.20634](https://arxiv.org/abs/2608.20634) |
+| **ToolACE** | ICLR 2025 | Self-evolving API pool + decision-tree retrieval. | `src:ACE-T1` `E:llm-synth` `route:de-novo` `paradigm:forward` | — |
+| **ToolAlpaca** | 2023 | 3k simulated tool cases; the early demonstration. | `src:ACE-T1` `E:llm-synth` `route:de-novo` `paradigm:forward` | — |
+| **Seal-Tools** | NLPCC 2024 | Self-instruct tool dataset. | `src:ACE-T1` `E:llm-synth` `route:de-novo` `paradigm:forward` | — |
+| **SynthTools** | 2025 | Hierarchical, verifiable synthesis for scaling agent development. | `src:ACE-T1` `E:llm-synth` `route:de-novo` `paradigm:forward` | — |
+| **ToolWeave** | 2026 | Synthetic tool graphs → complex multi-turn dialogues. | `src:ACE-T1` `E:llm-synth` `route:de-novo` `paradigm:forward` | — |
+| **CodeGym** | ICLR 2026 | Synthetic code environments for end-to-end tool-use RL. | `src:ACE-T1` `E:programmatic` `route:de-novo` `paradigm:forward` | [2509.17325](https://arxiv.org/abs/2509.17325) |
+| **ToolVerse** | 2026 | Many environments + long-horizon tasks unlocking agentic RL. | `src:ACE-T1` `E:programmatic` `route:de-novo` `paradigm:forward` | — |
+| **SciDisco** | 2026 | Scientific-discovery environments scaled for turn-level RL. | `src:ACE-T1,T3` `E:programmatic` `route:de-novo` `paradigm:forward` | — |
+| **ASTRA** | 2026 | Auto-synthesized trajectory and RL arenas. | `src:ACE-T1` `E:programmatic` `route:de-novo` `paradigm:forward` | — |
+
+**Simulator / environment-free variants** — no persistent E is built; an LLM simulates environment responses (ACE).
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **Simulating Environments with Reasoning Models** | 2025 | LLM simulators produce stateful responses from API specs. | `src:ACE` `E:llm-synth` `paradigm:forward` | — |
+| **Environment-free Synthetic Data Generation for API Agents** | 2026 | Skip the environment entirely; generate interactions directly. | `src:ACE` `paradigm:forward` | — |
+| **EnvACE** | 2026 | Internalizes environment dynamics via world-model rehearsal. | `src:ACE` `paradigm:forward` | — |
 
 ### 3.2 Neural Synthesis (World-Model-as-Environment)
 
@@ -172,14 +199,13 @@ The transition function P is parameterized by a network. Three abstraction level
 | **IWM** | 2024 | "In-context" world models. | `src:AEE-5.2.3` `E:neural` | [2403.00504](https://arxiv.org/abs/2403.00504) |
 | **AdaWorld** | ICML 2025 | Latent-action-conditioned, adaptable world models. | `src:AEE-5.2.3` `E:neural` | — |
 
-### 3.3 Compositional Synthesis
+### 3.3 Compositional Construction
 
-Compose verifiable environments/tasks recursively rather than linearly expanding.
+Compose verifiable environments recursively rather than linearly expanding (task-level composition lives in §3.5 task-first).
 
 | Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
 |---|---|---|---|---|
 | **RACES** | 2026 | "Verifiable Environments Are LEGO Bricks": recursive composition (type matching + SEQUENTIAL/PARALLEL/SORT/SELECT operators); 50 composed environments ≈ 300 standalone ones. | `E:programmatic` `produces:E,v` | [2606.12373](https://arxiv.org/abs/2606.12373) |
-| **BUTTON** | ICLR 2025 | Composes atomic tasks into complex multi-turn requests before synthesizing functions and trajectories. | `src:ACE-T2` `paradigm:task-first` `produces:q,τ` | — |
 
 ### 3.4 Harnessing Static Environments (Reuse over Rebuild)
 
@@ -191,9 +217,71 @@ Re-activate existing static worlds instead of synthesizing new ones.
 | **Environment Tuning** | 2025 | "Don't just fine-tune the agent, tune the environment": manual curricula + environment augmentation + progress feedback. | `src:AEE-7.2` `evolution:difficulty` | [2510.10197](https://arxiv.org/abs/2510.10197) |
 | **CLI-Gym** | 2026 | "Environment reversal": deliberately corrupts environments to generate error-recovery training data. | `src:AEE-5.1.1` `route:task` `produces:τ` | [2602.10999](https://arxiv.org/abs/2602.10999) |
 
+### 3.5 Reverse-Anchored Generation
+
+Pipelines where the environment is *not* the anchor (ACE §3.3): a task, a trajectory, or an intermediate structure drives construction, and E is built or recovered afterwards.
+
+**Task-first** (q → E → τ).
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AgentInstruct** | 2024 | Capability targets drive agentic-flow synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
+| **BUTTON** | ICLR 2025 | Composes atomic tasks into complex multi-turn requests before synthesizing functions and trajectories. | `src:ACE-T2` `paradigm:task-first` `produces:q,τ` | — |
+| **Agentic Proposing** | 2026 | Problem-first compositional skill synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToolBridge** | 2024 | Retrofit existing tasks with tools. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToRA** | ICLR 2024 | Tool-integrated mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **MathCoder** | ICLR 2024 | Code-assisted mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **MARIO** | ACL Findings 2024 | Code-interpreter augmented reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **AgentMath** | 2025 | Tool-augmented math reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ReTool** | ICLR 2026 | Strategic tool-use reasoning via RL. | `src:ACE-T2` `paradigm:task-first` | — |
+| **ToRL** | 2025 | Tool-integrated RL at scale. | `src:ACE-T2` `paradigm:task-first` | — |
+| **AutoSDT** | EMNLP 2025 | Scaling scientific-discovery tasks. | `src:ACE-T2,T3` `paradigm:task-first` | — |
+| **Agentic-Ideation** | 2026 | Sample-efficient ideation trajectories from reference ideas. | `src:ACE-T2` `paradigm:task-first` | — |
+
+**Trajectory-first** (τ → q; explore/mine behavior, then write the task).
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **OS-Genesis** | ACL 2025 | Reverse task synthesis from GUI trajectories, avoiding manual curation. | `src:ES,ACE-T2` `paradigm:trajectory-first` | — |
+| **Learn-by-interact** | ICLR 2025 | Interaction-derived task synthesis for real environments. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Trajectory2Task** | ACL 2026 | Executable trajectories → complex user intents. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Unlocking Implicit Experience** | ACL 2026 | Mine implicit tool workflows from text. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Explorer** | ACL Findings 2025 | Exploration-driven web trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **OpenMobile** | 2026 | Task+trajectory co-synthesis for mobile agents. | `src:ACE-T2,T3` `paradigm:trajectory-first` | — |
+| **AgentTrek** | ICLR 2025 | Web tutorials → replayable trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
+| **Scaling Synthetic Task Generation via Exploration** | 2025 | Expand reachable states, then derive tasks. | `src:ACE` `paradigm:trajectory-first` | — |
+| **WebExplorer** | 2025 | Explore-and-evolve for long-horizon web agents. | `src:ES,AEE-6.3` `paradigm:trajectory-first` | [2509.06501](https://arxiv.org/abs/2509.06501) |
+
+**Structure-first** (generate an intermediate scaffold — tool graph, blueprint, plan — then realize E/q/τ; the scaffold is a construction device, not a fourth factor, ACE §3.3).
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **APIGen-MT** | NeurIPS 2025 | Verified blueprints before dialogue realization. | `src:ACE-T2,ES` `paradigm:structure-first` | [2504.03601](https://arxiv.org/abs/2504.03601) |
+| **Magnet** | ACL 2025 | Tool-graph → dialogue translation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **ToolFlow** | NAACL 2025 | Tool-graph-guided coherent dialogues. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **ToolACE-MT** | ICLR 2026 | Non-autoregressive coarse-to-fine multi-turn generation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **Execution-First** | 2026 | Execute tool traces first, then write tasks. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **Plan-and-Act** | ICML 2025 | Plan-first long-horizon planning. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **Taskbench** | NeurIPS 2024 | Task-graph benchmark for task automation. | `src:ACE-T2` `paradigm:structure-first` | — |
+| **DeepPlanning** | ACL 2026 | Verifiable long-horizon planning benchmark. | `src:ACE` `paradigm:structure-first` | — |
+
+### 3.6 Adaptive & Self-Evolving Generation
+
+Cross-cutting (ACE-T2): the generation strategy itself is revised from accumulated experience, verified outcomes, and coverage gaps. For agent–environment *co-evolution as an evolution mechanism* (difficulty tracking, self-play), see §4.
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **AFlow** | ICLR 2025 | Searched agentic workflows. | `src:ACE-T2` `paradigm:adaptive` | [2410.10762](https://arxiv.org/abs/2410.10762) |
+| **Chain-of-Agents** | 2025 | Distill multi-agent systems into one agent-foundation model. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **SESA** | 2026 | Self-play task posing + skill evolution. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **Socratic-SWE** | 2026 | Trace-derived skills for adaptive task generation. | `src:ACE-T2` `paradigm:adaptive` | — |
+| **AgentGen** | KDD 2025 | Environment+task generation with bidirectional difficulty. | `src:ACE,ES` `paradigm:adaptive` | [2408.00764](https://arxiv.org/abs/2408.00764) |
+| **From Failure to Mastery** | 2026 | Failure-driven hard-sample generation. | `src:ACE` `paradigm:adaptive` | — |
+| **Recursive Synthesis** | 2026 | Recursive composition of long-horizon terminal tasks. | `src:ACE` `paradigm:adaptive` | — |
+
 ## 4. Environment Evolution Mechanisms ★
 
-The core differentiator of this list: how environments *change over training time*. Five mechanisms (lifecycle survey §7 + extensions).
+The core differentiator of this list: how environments *change over training time*. Five mechanisms (AEE survey §7 + extensions).
 
 ### 4.1 Difficulty-Driven Evolution (Curricula)
 
@@ -289,7 +377,7 @@ Verifiers themselves are generated and refined alongside environments — the an
 
 ## 5. Quality, Verification & Reward
 
-What makes an environment *good* — four dimensions (lifecycle survey §5.3) unified with the ACE lens (Accuracy admission / Complexity calibration / divErsity coverage).
+What makes an environment *good*. This chapter is where the **ACE data objective** lives — the generation paradigm (how candidates are built, §3) is a separate question from which candidates get *accepted*: **Accuracy** (admission condition), **Complexity** (learner-relative placement), **divErsity** (batch-level coverage). Four quality dimensions (AEE §5.3) unified with that lens below.
 
 ### 5.1 Correctness
 
@@ -307,12 +395,11 @@ State transitions must be legal, tasks solvable, validators trustworthy — accu
 
 ### 5.2 Complexity & Learnability
 
-Difficulty is learner- and configuration-relative (ACE §5): C_z(d) = 1 − Pr[v(d,τ)=1 | d, z] for model+scaffold+tools+budget z. Train in the "learnable band" near the capability frontier; keep harder tails for evaluation. Structural quantification exemplars: AutoForge (DAG depth), OSWorld-MCP (tool turns), LOGIGEN (permissions + irreversible transitions), NL2Plan (planner length).
+Difficulty is learner- and configuration-relative (ACE §5): C_z(d) = 1 − Pr[v(d,τ)=1 | d, z] for model+scaffold+tools+budget z. Train in the "learnable band" near the capability frontier; keep harder tails for evaluation. Structural quantification exemplars: AutoForge (DAG depth), OSWorld-MCP (tool turns), LOGIGEN (permissions + irreversible transitions), NL2Plan (planner length); band-targeting: GenEnv (§4.1).
 
 | Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
 |---|---|---|---|---|
 | **AgentFrontier** | 2025 | ZPD-guided synthesis pushing the capability frontier as the model advances. | `src:ACE,AEE-7.2` `quality:complexity` | [2510.24695](https://arxiv.org/abs/2510.24695) |
-| **GenEnv** | 2025 | Task-generation success rate steered toward a target band. | `src:AEE-7.2,ACE` `quality:complexity` | [2512.19682](https://arxiv.org/abs/2512.19682) |
 | **Recursive Synthesis** | 2026 | Per-round pass-rate descent as *verified* difficulty growth. | `src:ACE` `quality:complexity` | — |
 | **From Failure to Mastery** | 2026 | Failure-driven hard-sample generation. | `src:ACE` `quality:complexity` | — |
 | **Learning with Challenges** | 2026 | Adaptive difficulty for mobile-GUI training. | `src:ACE` `quality:complexity` | — |
@@ -361,133 +448,11 @@ ACE's warning: optimizing against a *fixed* validator breeds validator-friendly 
 | **MONA** | 2025 | Multi-step-lookahead mitigation for long-horizon reward hacking. | `src:ES` `quality:reward` | — |
 | **Hack-Verifiable Terminal Bench** | 2026 | Evaluates reward hacking in executable terminal environments. | `src:arxiv-watch` `quality:reward` | [2608.22103](https://arxiv.org/abs/2608.22103) |
 
-## 6. Agentic Data Generation
-
-Data-generation paradigms and quality objectives for agents (ACE §3). The environment is one *factor* of the data object d = (E, q, τ, v); the "environments replace data" thesis itself belongs to the surveys in §1. Two questions are kept separate throughout: the generation *paradigm* (how candidates are built) and the data *objective* (which get accepted — the ACE lens, §5).
-
-### 6.1 The ACE Objective
-
-Accuracy (admission condition) – Complexity (learner-relative placement) – divErsity (batch-level coverage). [arXiv:2608.27260](https://arxiv.org/abs/2608.27260)
-
-### 6.2 Forward Generation (E → q → τ)
-
-**Real / curated environments** (ACE-T1 group 1; SWE pipelines from real repos: SWE-Gym, R2E-Gym, SWE-smith, SWE-rebench — see §3.1).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **ToolLLM** | ICLR 2024 | 16k+ real APIs; the founding large-scale tool dataset. | `src:ACE-T1,T3` `E:real` `paradigm:forward` | — |
-| **Gorilla** | NeurIPS 2024 | API-grounded instruction generation at scale. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
-| **APIGen** | NeurIPS 2024 | Format check → execution → semantic review; the canonical three-layer verification pipeline. | `src:ACE-T1` `E:real` `paradigm:forward` `verify:judge` | — |
-| **ToolDial** | ICLR 2025 | Real API-graph-guided multi-turn dialogues. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
-| **Close the Loop (InfTool)** | 2025 | Multi-agent role-play toward "infinite" tool-use data. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
-| **TOUCAN** | 2025 | 1.5M tool-agent samples synthesized from real MCP environments. | `src:ACE-T1` `E:real` `paradigm:forward` | — |
-
-**LLM-synthesized (symbolic) environments** (ACE-T1 group 2 — LLMs generate tool specs/rules; the artifacts remain symbolic).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **ToolACE** | ICLR 2025 | Self-evolving API pool + decision-tree retrieval. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
-| **ToolAlpaca** | 2023 | 3k simulated tool cases; the early demonstration. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
-| **Seal-Tools** | NLPCC 2024 | Self-instruct tool dataset. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
-| **SynthTools** | 2025 | Hierarchical, verifiable synthesis for scaling agent development. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
-| **ToolWeave** | 2026 | Synthetic tool graphs → complex multi-turn dialogues. | `src:ACE-T1` `E:llm-synth` `paradigm:forward` | — |
-
-**Programmatic / executable environments** (ACE-T1 group 3; also EnvScaler, Agent-World, EnvFactory, ScaleEnv, Agent World Model, LOGIGEN — §3.1).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **CodeGym** | ICLR 2026 | Synthetic code environments for end-to-end tool-use RL. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | [2509.17325](https://arxiv.org/abs/2509.17325) |
-| **ToolVerse** | 2026 | Many environments + long-horizon tasks unlocking agentic RL. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | — |
-| **SciDisco** | 2026 | Scientific-discovery environments scaled for turn-level RL. | `src:ACE-T1,T3` `E:programmatic` `paradigm:forward` | — |
-| **ASTRA** | 2026 | Auto-synthesized trajectory and RL arenas. | `src:ACE-T1` `E:programmatic` `paradigm:forward` | — |
-
-**Simulator / environment-free variants** (ACE: LLM-based simulators generate stateful responses from specs).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **Simulating Environments with Reasoning Models** | 2025 | LLM simulators produce stateful responses from API specs. | `src:ACE` `E:llm-synth` `paradigm:forward` | — |
-| **Environment-free Synthetic Data Generation for API Agents** | 2026 | Skip the environment entirely; generate interactions directly. | `src:ACE` `paradigm:forward` | — |
-| **EnvACE** | 2026 | Internalizes environment dynamics via world-model rehearsal. | `src:ACE` `paradigm:forward` | — |
-
-### 6.3 Reverse Generation
-
-**Task-first** (ACE-T2; specify capability/goal, then build E and τ).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **AgentInstruct** | 2024 | Capability targets drive agentic-flow synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
-| **BUTTON** | ICLR 2025 | Compose atomic tasks into complex multi-turn requests. | `src:ACE-T2` `paradigm:task-first` | — |
-| **Agentic Proposing** | 2026 | Problem-first compositional skill synthesis. | `src:ACE-T2` `paradigm:task-first` | — |
-| **ToolBridge** | 2024 | Retrofit existing tasks with tools. | `src:ACE-T2` `paradigm:task-first` | — |
-| **ToRA** | ICLR 2024 | Tool-integrated mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
-| **MathCoder** | ICLR 2024 | Code-assisted mathematical reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
-| **MARIO** | ACL Findings 2024 | Code-interpreter augmented reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
-| **AgentMath** | 2025 | Tool-augmented math reasoning. | `src:ACE-T2` `paradigm:task-first` | — |
-| **ReTool** | ICLR 2026 | Strategic tool-use reasoning via RL. | `src:ACE-T2` `paradigm:task-first` | — |
-| **ToRL** | 2025 | Tool-integrated RL at scale. | `src:ACE-T2` `paradigm:task-first` | — |
-| **AutoSDT** | EMNLP 2025 | Scaling scientific-discovery tasks. | `src:ACE-T2,T3` `paradigm:task-first` | — |
-| **Agentic-Ideation** | 2026 | Sample-efficient ideation trajectories from reference ideas. | `src:ACE-T2` `paradigm:task-first` | — |
-
-**Trajectory-first** (ACE-T2; explore/mine behavior, then write the task).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **OS-Genesis** | ACL 2025 | Reverse GUI trajectory → task. | `src:ACE-T2,T3,ES` `paradigm:trajectory-first` | — |
-| **Learn-by-interact** | ICLR 2025 | Interaction-derived task synthesis for real environments. | `src:ACE-T2` `paradigm:trajectory-first` | — |
-| **Trajectory2Task** | ACL 2026 | Executable trajectories → complex user intents. | `src:ACE-T2` `paradigm:trajectory-first` | — |
-| **Unlocking Implicit Experience** | ACL 2026 | Mine implicit tool workflows from text. | `src:ACE-T2` `paradigm:trajectory-first` | — |
-| **Explorer** | ACL Findings 2025 | Exploration-driven web trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
-| **OpenMobile** | 2026 | Task+trajectory co-synthesis for mobile agents. | `src:ACE-T2,T3` `paradigm:trajectory-first` | — |
-| **AgentTrek** | ICLR 2025 | Web tutorials → replayable trajectories. | `src:ACE-T2` `paradigm:trajectory-first` | — |
-| **Scaling Synthetic Task Generation via Exploration** | 2025 | Expand reachable states, then derive tasks. | `src:ACE` `paradigm:trajectory-first` | — |
-| **WebExplorer** | 2025 | Explore-and-evolve for long-horizon web agents. | `src:ES,AEE-6.3` `paradigm:trajectory-first` | [2509.06501](https://arxiv.org/abs/2509.06501) |
-
-**Structure-first** (ACE-T2; generate an intermediate scaffold — tool graph, blueprint, plan — then realize E/q/τ).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **APIGen-MT** | NeurIPS 2025 | Verified blueprints before dialogue realization. | `src:ACE-T2,ES` `paradigm:structure-first` | [2504.03601](https://arxiv.org/abs/2504.03601) |
-| **Magnet** | ACL 2025 | Tool-graph → dialogue translation. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **ToolFlow** | NAACL 2025 | Tool-graph-guided coherent dialogues. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **ToolACE-MT** | ICLR 2026 | Non-autoregressive coarse-to-fine multi-turn generation. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **Execution-First** | 2026 | Execute tool traces first, then write tasks. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **Plan-and-Act** | ICML 2025 | Plan-first long-horizon planning. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **TaskCraft** | 2025 | Scalable agentic-task generation with tunable complexity. | `src:AEE-5.1.2,ACE,ES` `paradigm:structure-first` | [2506.10055](https://arxiv.org/abs/2506.10055) |
-| **Taskbench** | NeurIPS 2024 | Task-graph benchmark for task automation. | `src:ACE-T2` `paradigm:structure-first` | — |
-| **DeepPlanning** | ACL 2026 | Verifiable long-horizon planning benchmark. | `src:ACE` `paradigm:structure-first` | — |
-
-**Adaptive / self-evolving** (ACE-T2 cross-cutting; generation strategy revised from accumulated experience).
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **AFlow** | ICLR 2025 | Searched agentic workflows. | `src:ACE-T2` `paradigm:adaptive` | [2410.10762](https://arxiv.org/abs/2410.10762) |
-| **Chain-of-Agents** | 2025 | Distill multi-agent systems into one agent-foundation model. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **AgentEvolver** | 2025 | Self-questioning + experience-guided evolution. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **WebEvolver** | EMNLP 2025 | Self-improvement with a co-evolving world model. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **SESA** | 2026 | Self-play task posing + skill evolution. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **Socratic-SWE** | 2026 | Trace-derived skills for adaptive task generation. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **AgentGen** | KDD 2025 | Environment+task generation with bidirectional difficulty. | `src:ACE,ES` `paradigm:adaptive` | [2408.00764](https://arxiv.org/abs/2408.00764) |
-| **Tool-R0** | 2026 | Zero-data self-evolving tool learning. | `src:ACE-T2` `paradigm:adaptive` | — |
-| **From Failure to Mastery** | 2026 | Failure-driven hard-sample generation. | `src:ACE` `paradigm:adaptive` | — |
-| **Recursive Synthesis** | 2026 | Recursive composition of long-horizon terminal tasks. | `src:ACE` `paradigm:adaptive` | — |
-
-### 6.4 Scaling Evidence
-
-| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
-|---|---|---|---|---|
-| **DIVE** | 2026 | Tool-pool coverage → OOD generalization. | `src:ACE` `quality:diversity` | — |
-| **Beyond Quantity** | 2026 | Diversity scaling > quantity scaling. | `src:ACE` `quality:diversity` | — |
-| **ScaleEnv** | 2026 | Domain count → held-out generalization. | `src:ACE-T1` | [2602.06820](https://arxiv.org/abs/2602.06820) |
-| **EnvFactory** | 2026 | Few strongly-verified environments > masses of redundant ones. | `src:ACE-T1` | [2605.18703](https://arxiv.org/abs/2605.18703) |
-| **Skywork-SWE** | 2025 | SWE data scaling laws. | `src:ACE` | — |
-
-*ACE's synthesis: the effective scaling variable is the **effective support** of the distribution (valid + learnable + non-redundant), not raw count; quantity scaling saturates as the learner grows.*
-
-## 7. Domain Environments & Benchmarks
+## 6. Domain Environments & Benchmarks
 
 Only *environmental* resources: interactive, stateful, executable. Static QA benchmarks are out of scope. (The AEE survey §4 carries exhaustive per-domain benchmark tables; here we keep the environment-defining works per domain.)
 
-### 7.1 GUI / Web / OS
+### 6.1 GUI / Web / OS
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -510,7 +475,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **MobileWorld** | 2025 | Controllable mobile environments (rewardable). | `src:AEE-4.1` | — |
 | **OpenCUA** | 2025 | Open computer-use environment suite. | `src:ES` | [2508.09123](https://arxiv.org/abs/2508.09123) |
 
-### 7.2 Tool / MCP
+### 6.2 Tool / MCP
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -529,7 +494,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **ComplexMCP** | 2026 | Dynamic, interdependent, large-scale tool sandbox. | `src:ACE` | — |
 | **M³-Bench** | 2026 | Multi-turn, multi-tool MCP benchmark. | `src:AEE-4.5` | — |
 
-### 7.3 Coding / SWE / Terminal
+### 6.3 Coding / SWE / Terminal
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -540,7 +505,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **NL2Repo-bench** | 2025 | Repo-level code understanding. | `src:AEE-4.6` | — |
 | **SWT-Bench / FEA-Bench** | 2024-25 | Agentic SWE task-trajectory benchmarks. | `src:AEE-4.6` | — |
 
-### 7.4 Deep Research (agentic only)
+### 6.4 Deep Research (agentic only)
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -551,7 +516,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **DeepResearch Bench** | 2025 | 100 PhD-level research tasks with tool+doc environments. | `src:AEE-4.2` | [2506.11763](https://arxiv.org/abs/2506.11763) |
 | **DeepDive** | 2025 | KG-random-walk synthesis with obfuscated key clues. | `src:AEE-6.3` `paradigm:structure-first` | [2509.10446](https://arxiv.org/abs/2509.10446) |
 
-### 7.5 Embodied & Game
+### 6.5 Embodied & Game
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -574,7 +539,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **CivRealm** | 2024 | Civilization as open-ended strategy environment. | `src:AEE-4.4` | — |
 | **Factorio Learning Environment** | 2025 | Open-ended factory-building with programmatic state. | `src:AEE-4.4` | [2503.09617](https://arxiv.org/abs/2503.09617) |
 
-### 7.6 Science / Medical / Finance
+### 6.6 Science / Medical / Finance
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -590,7 +555,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **CRMArena-Pro** | 2025 | Enterprise CRM operations. | `src:AEE-4.7` | — |
 | **StockBench / FinDeepResearch** | 2025-26 | Financial reasoning environments. | `src:AEE-4.7` | — |
 
-### 7.7 Multi-Agent Society
+### 6.7 Multi-Agent Society
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -602,7 +567,7 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **Concordia** | 2023 | Social-simulation GM + agents. | `src:ACE-T3` | — |
 | **AgentScope** | 2024 | Multi-agent platform with message exchange. | `src:ES` | [2402.14034](https://arxiv.org/abs/2402.14034) |
 
-### 7.8 Cross-Domain Gyms
+### 6.8 Cross-Domain Gyms
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -614,11 +579,11 @@ Only *environmental* resources: interactive, stateful, executable. Static QA ben
 | **AgencyBench** | 2025 | Cross-domain agency evaluation. | `src:AEE-4.8` | — |
 | **lmgame-Bench** | 2025 | Games wrapped in a Gymnasium API. | `src:AEE-5.1.2` | [2505.15146](https://arxiv.org/abs/2505.15146) |
 
-## 8. Infrastructure & Environment-as-a-Service
+## 7. Infrastructure & Environment-as-a-Service
 
 Agent-specific infrastructure only.
 
-### 8.1 Sandboxes & Runtimes
+### 7.1 Sandboxes & Runtimes
 
 | Project | Type | One-liner | Link |
 |---|---|---|---|
@@ -626,7 +591,7 @@ Agent-specific infrastructure only.
 | **Modal** | sandbox/GPU | Cloud sandboxes widely used for parallel agent rollouts. | [modal.com](https://modal.com) |
 | **Agent-oriented microVMs** | isolation | Firecracker-class VM isolation for parallel environment rollouts (see cloud-microVM ecosystems). | — |
 
-### 8.2 Protocols & Platforms
+### 7.2 Protocols & Platforms
 
 | Paper / Project | Venue | One-liner | Tags | Link |
 |---|---|---|---|---|
@@ -637,15 +602,15 @@ Agent-specific infrastructure only.
 | **SpeechGym** | 2026 | Audio-native gym for training voice agents via RL. | `src:arxiv-watch` | [arXiv:2608.26432](https://arxiv.org/abs/2608.26432) |
 | **TextArena** | 2025 | Unified competitive text-game arena. | `src:AEE-4.4` | [arXiv:2504.11442](https://arxiv.org/abs/2504.11442) |
 
-### 8.3 Environment-as-a-Service (EaaS)
+### 7.3 Environment-as-a-Service (EaaS)
 
-Vision (lifecycle survey §8.1): unified API + cloud hosting decoupling agent development from environment deployment — live environments served on demand instead of shipped as containers. Early instances: managed agent runtime offerings from major cloud/LLM vendors.
+Vision (AEE survey §8.1): unified API + cloud hosting decoupling agent development from environment deployment — live environments served on demand instead of shipped as containers. Early instances: managed agent runtime offerings from major cloud/LLM vendors.
 
-## 9. Training with Evolving Environments
+## 8. Training with Evolving Environments
 
 How environments are consumed; only entries tightly coupled to the environment loop.
 
-### 9.1 Agentic RL
+### 8.1 Agentic RL
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -666,7 +631,7 @@ How environments are consumed; only entries tightly coupled to the environment l
 | **AEPO** | 2025 | Entropy-balanced agentic optimization. | `src:AEE-6.4` `focus:credit` | [2510.14545](https://arxiv.org/abs/2510.14545) |
 | **AgentFold** | 2025 | Folding stale context for long-horizon RL. | `src:AEE-6.3` `focus:credit` | [2510.24699](https://arxiv.org/abs/2510.24699) |
 
-### 9.2 Agentic SFT / Trajectory Synthesis
+### 8.2 Agentic SFT / Trajectory Synthesis
 
 | Paper | Venue | One-liner | Tags | arXiv |
 |---|---|---|---|---|
@@ -680,13 +645,29 @@ How environments are consumed; only entries tightly coupled to the environment l
 | **GUI-Reflection** | 2025 | First-error localization + retrospective correction. | `src:AEE-6.3` | — |
 | **TopoCurate** | 2026 | Interaction-topology-based trajectory curation. | `src:ACE` | — |
 
-### 9.3 Offline–Online Unification
+### 8.3 Offline–Online Unification
 
 - **On-Policy Distillation** · Thinking Machines, 2025 — an early bridge; multi-turn open problems remain (early errors change state → teacher supervision inconsistency).
 
-## 10. Open Problems & Science of Environments
+## 9. Scaling Evidence & Open Problems
 
-From the lifecycle survey (§8) and Environment Scaling survey future-work; a research agenda rather than a paper list.
+### 9.1 Environment-Scaling Evidence
+
+What the empirical record says about scaling environments (the seed of "environment scaling laws").
+
+| Paper | Venue | One-liner (survey-derived) | Tags | arXiv |
+|---|---|---|---|---|
+| **DIVE** | 2026 | Tool-pool coverage → OOD generalization. | `src:ACE` `quality:diversity` | — |
+| **Beyond Quantity** | 2026 | Diversity scaling > quantity scaling. | `src:ACE` `quality:diversity` | — |
+| **ScaleEnv** | 2026 | Domain count → held-out generalization. | `src:ACE-T1` | [2602.06820](https://arxiv.org/abs/2602.06820) |
+| **EnvFactory** | 2026 | Few strongly-verified environments > masses of redundant ones. | `src:ACE-T1` | [2605.18703](https://arxiv.org/abs/2605.18703) |
+| **Skywork-SWE** | 2025 | SWE data scaling laws. | `src:ACE` | — |
+
+*ACE's synthesis: the effective scaling variable is the **effective support** of the distribution (valid + learnable + non-redundant), not raw count; quantity scaling saturates as the learner grows.*
+
+### 9.2 Open Directions
+
+From the AEE survey (its §8) and the ES survey's future-work section; a research agenda rather than a paper list.
 
 - **Environment scaling laws** — how do environment count / diversity / horizon / complexity quantitatively drive capability and generalization?
 - **Environment learnability** — which environments produce stable learning signals (sparse rewards, huge state spaces, long horizons all fail)?

@@ -212,3 +212,15 @@ awesome-agentic-environment-evolving
 3. **基础设施深度**：只列 agent 场景专用（E2B、Modal、面向 agent 的 microVM 等）；通用云原生设施（Docker/K8s 全家桶）不收。
 4. **仓库语言**：英文 README 为主 + `README.zh-CN.md` 精简镜像。
 5. **papers 库引用**：不同步建（本地精读笔记不进仓库）。
+
+---
+
+## 附记：结构演进（2026-09-01 v2）
+
+初版十章中的 §3（环境合成，AEE 的"构造轴"）与 §6（Agentic Data Generation，ACE 的"正向/逆向生成轴"）存在结构性重复——同一批论文（EnvScaler、Agent World Model、TaskCraft、OS-Genesis 等）在两章各出现一次。v2 合并为单一章 **§3 Environment & Data Synthesis**，按 ACE 的"锚点"概念组织：
+
+- **E 锚定**（正向 E→q→τ）：§3.1 四组（任务驱动/真实世界驱动/从零/免环境模拟器），`route:`×`E:` 双标签正交标注；§3.2 神经合成；§3.3 组合；§3.4 存量再利用
+- **逆向锚定**（任务/轨迹/结构优先）：§3.5
+- **自适应生成**：§3.6（与 §4 演化机制以交叉引用衔接）
+
+由此：ACE 质量目标（原 6.1）归入 §5（质量章引言），scaling 实证（原 6.4）归入 §9.1（与新 §9"Scaling Evidence & Open Problems"合并）。全列表从十章缩为九章（领域环境→§6、基础设施→§7、训练栈→§8）。

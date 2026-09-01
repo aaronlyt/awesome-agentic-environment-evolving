@@ -15,20 +15,19 @@
 - ✅ 收：环境合成（程序化/世界模型/组合式）、环境演化（课程/自博弈/规模/共进化）、质量控制（正确性/复杂度/多样性/保真度/奖励）、agentic 数据生成范式、训练型环境与"环境性强"的基准（可交互、有状态、可执行）、agent 专用基础设施（沙箱/平台/协议/EaaS）。
 - ❌ 不收：与 LLM/VLA agent 训练无关的纯视频生成、游戏重建世界模型；静态 QA 型基准；通用云原生设施。
 
-## 十章结构
+## 九章结构
 
 | 章 | 内容 | 代表工作 |
 |---|---|---|
 | 1. 综述与立场 | 三篇核心综述 + 宣言 | 环境工程综述 (2606.12191) · Environment Scaling (2511.09586) · ACE (2608.27260) · Era of Experience · AgentScaler |
 | 2. 形式化与属性 | POMDP 形式化；环境**内部分解** e=(D,F,P_rule,Ω,v)（ACE）；环境**间差异** 8 属性对（环境工程综述） | — |
-| 3. 环境合成 | 符号合成三路线（任务驱动/真实世界驱动/从零）· 神经合成三层级（像素/词/潜空间）· 组合合成 · **存量环境再激活** | SWE-Gym · Agent World Model · ScaleEnv · EnvFactory · WebWorld · EnvHarness |
+| 3. 环境与数据合成（按 ACE 锚点组织） | **E 锚定**（正向 E→q→τ：任务驱动/真实世界驱动/从零/免环境模拟，3.1-3.4）· 神经合成三层级（像素/词/潜空间）· 组合合成 · **逆向锚定**（任务/轨迹/结构优先，3.5）· **自适应生成**（3.6） | SWE-Gym · Agent World Model · ScaleEnv · EnvFactory · WebWorld · EnvHarness · OS-Genesis · APIGen-MT |
 | 4. 环境演化机制 ★ | 难度驱动（课程）· 神经驱动（自博弈/世界模型）· 规模驱动 · agent-环境共进化 · 生成-验证器共进化 | RLVE · Absolute Zero · AgentScaler · ARE · GenEnv · EvoEnv · Rubrics as Rewards |
-| 5. 质量/验证/奖励 | 正确性 · 复杂度与可学习性 · 多样性度量 · 保真度 · 奖励设计 | MCP-Universe · Vendi Score · Web Turing Score |
-| 6. Agentic 数据生成 | ACE 质量目标；正向生成（E→q→τ，按 E 来源三分）；逆向生成（任务/轨迹/结构优先 + 自演化横切）；scaling 实证 | ToolLLM · APIGen · ToolACE · OS-Genesis · APIGen-MT |
-| 7. 领域环境 | GUI/Web · Tool/MCP · SWE/Terminal · Deep Research · 具身/游戏 · 多智能体社会 | WebArena · OSWorld · τ²-bench · TextArena |
-| 8. 基础设施 | 沙箱/运行时 · 协议与平台（MCP、ARE、GEM）· EaaS 愿景 | E2B · Modal · MCP |
-| 9. 训练栈 | Agentic RL · 轨迹合成 SFT · 离线-在线统一 | Search-R1 · WebSailor · ComputerRL · On-Policy Distillation |
-| 10. 开放问题 | environment scaling laws · 可学习性 · 环境-能力映射 · sim-to-real · 生成-验证不对称 · 多智能体环境 · EaaS 标准化 | — |
+| 5. 质量/验证/奖励（ACE 数据目标所在章） | 正确性 · 复杂度与可学习性 · 多样性度量 · 保真度 · 奖励设计；Accuracy-Complexity-divErsity 三维 | MCP-Universe · Vendi Score · Web Turing Score |
+| 6. 领域环境 | GUI/Web · Tool/MCP · SWE/Terminal · Deep Research · 具身/游戏 · 科学/医疗/金融 · 多智能体社会 · 跨域 Gym | WebArena · OSWorld · τ²-bench · TextArena |
+| 7. 基础设施 | 沙箱/运行时 · 协议与平台（MCP、ARE、GEM）· EaaS 愿景 | E2B · Modal · MCP |
+| 8. 训练栈 | Agentic RL · 轨迹合成 SFT · 离线-在线统一 | Search-R1 · WebSailor · ComputerRL · On-Policy Distillation |
+| 9. Scaling 实证与开放问题 | 环境 scaling 实证（DIVE、Beyond Quantity、ScaleEnv 等）· scaling laws · 可学习性 · 环境-能力映射 · sim-to-real · 生成-验证不对称 · 多智能体环境 · EaaS 标准化 | — |
 
 ## 术语提醒
 

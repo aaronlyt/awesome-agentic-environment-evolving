@@ -34,13 +34,13 @@ The tag vocabulary is defined in the README legend (`src:` survey provenance, `E
 
 Quick decision guide:
 
-- Does the paper **build** new environments? → §3 (route decides the subsection: task-driven wraps real assets · real-world-driven projects real media · de novo synthesizes from scratch · §3.4 reuses static worlds).
+- Does the paper **build** new environments or generate agentic data? → §3, organized by **anchor**: E-anchored construction (route decides the group: task-driven wraps real assets · real-world-driven projects real media · de novo from scratch · simulator/environment-free, §3.1; neural §3.2; compositional §3.3; static-world reuse §3.4), reverse-anchored (task-/trajectory-/structure-first, §3.5), or adaptive generation (§3.6).
 - Does the environment **change during training** (curriculum, self-play, scaling, co-evolution)? → §4.
-- Is it about **measuring or ensuring environment quality** (correctness/difficulty/diversity/fidelity/rewards)? → §5.
-- Is it a **data-generation pipeline** whose primary product is training data (SFT trajectories, tasks)? → §6.
-- Is it a **ready-to-use environment/benchmark** in a domain? → §7.
-- Is it **infrastructure** (sandbox, protocol, platform, serving)? → §8.
-- Is it a **training algorithm** tightly coupled to environments? → §9.
+- Is it about **measuring or ensuring environment/data quality** (correctness/difficulty/diversity/fidelity/rewards — the ACE objective)? → §5.
+- Is it a **ready-to-use environment/benchmark** in a domain? → §6.
+- Is it **infrastructure** (sandbox, protocol, platform, serving)? → §7.
+- Is it a **training algorithm** tightly coupled to environments? → §8.
+- Is it **empirical scaling evidence or an open research question**? → §9.
 
 Cross-cutting papers may appear in two sections; the canonical (most detailed) entry should live in the closest section, others can cross-reference it ("see §3.1").
 
