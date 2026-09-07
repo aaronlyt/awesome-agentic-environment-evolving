@@ -38,3 +38,13 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-08-03] [SyncPlan: Long-Horizon LLM Coordination with Explicit Synchronization and Adaptive Correction](https://arxiv.org/abs/2608.01652) `arXiv:2608.01652`
 - [2026-08-03] [Does the Competitive Component of Adversarial Self-Play Improve Legal Reasoning? A Controlled Negative Result](https://arxiv.org/abs/2608.01559) `arXiv:2608.01559`
 - [2026-08-02] [From AI Technical Debt to Agentic Technical Debt: A Systematic Mapping of Root Causes and Manifestations in Agentic AI Systems](https://arxiv.org/abs/2608.01001) `arXiv:2608.01001`
+
+## 2026-09-07 (auto)
+
+- [2026-09-04] [Compact Bellman-Grounded Cognitive Maps for Cost-Aware Navigation](https://arxiv.org/abs/2609.05104) `arXiv:2609.05104`
+- [2026-09-03] [Environment Evolution for Terminal Agents](https://arxiv.org/abs/2609.04128) `arXiv:2609.04128`
+- [2026-09-02] [A Finger on the Scale: Covert Policy Steering through Agentic Skills](https://arxiv.org/abs/2609.02564) `arXiv:2609.02564`
+- [2026-09-02] [Examining the Vulnerability of Multi-Agent Medical Systems to Human Interventions for Clinical Reasoning](https://arxiv.org/abs/2609.02191) `arXiv:2609.02191`
+- [2026-09-02] [Monitoring Web Agents Without Internal Signals: Observable Trajectories and Key-Step Supervision](https://arxiv.org/abs/2609.02057) `arXiv:2609.02057`
+- [2026-08-30] [GUI-CC: Benchmarking Contextual Consistency of GUI World Models as Agent Environments](https://arxiv.org/abs/2609.00048) `arXiv:2609.00048`
+- [2026-08-26] [Towards Scaling Reinforcement Learning to Massive Populations: Learning Mean-Field Representations](https://arxiv.org/abs/2609.02928) `arXiv:2609.02928`
