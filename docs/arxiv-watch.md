@@ -48,3 +48,43 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-09-02] [Monitoring Web Agents Without Internal Signals: Observable Trajectories and Key-Step Supervision](https://arxiv.org/abs/2609.02057) `arXiv:2609.02057`
 - [2026-08-30] [GUI-CC: Benchmarking Contextual Consistency of GUI World Models as Agent Environments](https://arxiv.org/abs/2609.00048) `arXiv:2609.00048`
 - [2026-08-26] [Towards Scaling Reinforcement Learning to Massive Populations: Learning Mean-Field Representations](https://arxiv.org/abs/2609.02928) `arXiv:2609.02928`
+
+## 2026-10-05 (auto)
+
+- [2026-10-01] [Bellman Meets Lyapunov: Unsupervised Reinforcement Learning via Mastering Chaos](https://arxiv.org/abs/2610.02012) `arXiv:2610.02012`
+- [2026-10-01] [Sharpening Tax in Post-Training](https://arxiv.org/abs/2610.01509) `arXiv:2610.01509`
+- [2026-10-01] [Auditing Action Settlement in LLM Agent Environments: Order, Progress, and Replay](https://arxiv.org/abs/2610.01138) `arXiv:2610.01138`
+- [2026-10-01] [How Much Can Language Models Gain from Test-Time Computation?](https://arxiv.org/abs/2610.01110) `arXiv:2610.01110`
+- [2026-09-30] [PhantomEnvironments: Training LLM Agents in Fictional Worlds](https://arxiv.org/abs/2609.40221) `arXiv:2609.40221`
+- [2026-09-30] [Rep2Skill: Representation-Guided Skill Self-Evolution for LLM Agents](https://arxiv.org/abs/2609.39149) `arXiv:2609.39149`
+- [2026-09-29] [NAQD Env: A benchmark for selective withdrawal in language agents](https://arxiv.org/abs/2609.38460) `arXiv:2609.38460`
+- [2026-09-29] [SkillGym: Training Skill-Use Agents with Automatic Verifiable Environment Generation](https://arxiv.org/abs/2609.37539) `arXiv:2609.37539`
+- [2026-09-29] [Do Agent Benchmarks Do What They Say? An Executable-Contract Audit of Tool-Using Agent Environments](https://arxiv.org/abs/2609.37315) `arXiv:2609.37315`
+- [2026-09-29] [WEFT: Scaling Tool-Use Post-Training for General-Purpose Agents](https://arxiv.org/abs/2609.36887) `arXiv:2609.36887`
+- [2026-09-29] [MLToolBench: Learning Tool-Augmented Agents for Machine Learning Development](https://arxiv.org/abs/2609.36679) `arXiv:2609.36679`
+- [2026-09-28] [Engineering Simplicity: Simple Mechanism Interfaces Steer LLM Agents](https://arxiv.org/abs/2609.36365) `arXiv:2609.36365`
+- [2026-09-28] [AuxMark: Defending Against Unauthorized Agent Distillation via Auxiliary Behavioral Watermarking](https://arxiv.org/abs/2609.34597) `arXiv:2609.34597`
+- [2026-09-27] [Skill2Env: Capability-Oriented Environment Synthesis from Skills for General Agents](https://arxiv.org/abs/2609.33772) `arXiv:2609.33772`
+- [2026-09-27] [A Spectral Theory of Compositional Learning](https://arxiv.org/abs/2609.33708) `arXiv:2609.33708`
+- [2026-09-27] [CompoWorld: Compositional Environment Scaling for General Agents](https://arxiv.org/abs/2609.33665) `arXiv:2609.33665`
+- [2026-09-27] [ECG-Scroll: A Long-Horizon, Streaming Benchmark and Agent Environment for Interpretation of Ambulatory Electrocardiograms](https://arxiv.org/abs/2609.33117) `arXiv:2609.33117`
+- [2026-09-27] [ORBIT: A Framework for Multi-Agent Safety and Security Evaluations](https://arxiv.org/abs/2609.33102) `arXiv:2609.33102`
+- [2026-09-25] [When Should a Human Take Back Control? Optimal Delegation under Turbulent AI Risk](https://arxiv.org/abs/2609.32083) `arXiv:2609.32083`
+- [2026-09-25] [I Act Therefore I Am: When Is JEPA's Action-Conditioning Enough to Learn Causal Mechanisms?](https://arxiv.org/abs/2609.31161) `arXiv:2609.31161`
+- [2026-09-23] [Verifiable Hidden Dynamics Play: Generating Agentic RL Environments from Solved Mechanisms](https://arxiv.org/abs/2609.27321) `arXiv:2609.27321`
+- [2026-09-21] [Emergent Collusion in Long-Horizon LLM Agent Interaction](https://arxiv.org/abs/2609.24967) `arXiv:2609.24967`
+- [2026-09-18] [Fairly Compensated Distributed Information Retrieval and Augmentation for AI Agents](https://arxiv.org/abs/2609.22601) `arXiv:2609.22601`
+- [2026-09-18] [Do Student LLMs Inherit OOD Robustness? Invariance-Weighted Distillation for Reliable Knowledge Transfer](https://arxiv.org/abs/2609.22566) `arXiv:2609.22566`
+- [2026-09-18] [RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents](https://arxiv.org/abs/2609.22000) `arXiv:2609.22000`
+- [2026-09-17] [Odds-Ratio Thompson Sampling: A Specification and Design Guide for Contrast-Based Multi-Armed Bandits](https://arxiv.org/abs/2609.19709) `arXiv:2609.19709`
+- [2026-09-17] [DataCanvas-EDU: An Agentic Framework for Instructor-Guided Synthetic Data Generation in Business Analytics Education](https://arxiv.org/abs/2609.19617) `arXiv:2609.19617`
+- [2026-09-16] [Social Laws for Multi-agent Coordination in Stochastic Environments](https://arxiv.org/abs/2609.18929) `arXiv:2609.18929`
+- [2026-09-15] [Emergence World: Adversarial Stress-Testing of Long-Horizon Multi-Agent Systems](https://arxiv.org/abs/2609.17320) `arXiv:2609.17320`
+- [2026-09-15] [QART: A Quantum-Classical Hybrid Architecture for Long-Horizon Reasoning -- Exploring a Conditional Path toward Quantum Scaling](https://arxiv.org/abs/2609.16887) `arXiv:2609.16887`
+- [2026-09-14] [BLINDSPOT: A Benchmark for Safety and Refusal Calibration in Long-Horizon Tool-Using Agents](https://arxiv.org/abs/2609.16305) `arXiv:2609.16305`
+- [2026-09-14] [Spurious Tool Use: When RL Agents Learn the Wrong Reason to Act](https://arxiv.org/abs/2609.16268) `arXiv:2609.16268`
+- [2026-09-10] [Ensemble Forecast Updates without Model Re-integration Based on Ultra-rapid Data Assimilation: Idealized Experiments with a Heavy Rainfall Case](https://arxiv.org/abs/2609.12274) `arXiv:2609.12274`
+- [2026-09-07] [Translation Indeterminacy and the Distributional Fallacy](https://arxiv.org/abs/2609.07717) `arXiv:2609.07717`
+- [2026-09-07] [Online Surrogate Repair: Decoupling High-Fidelity Feedback from Search Length in Closed-Loop Discovery](https://arxiv.org/abs/2609.07655) `arXiv:2609.07655`
+- [2026-09-07] [Efficient Exploration Is Enough](https://arxiv.org/abs/2609.07575) `arXiv:2609.07575`
+- [2026-09-07] [Long-Horizon Language Model Reinforcement Learning via Progressive Point Matching](https://arxiv.org/abs/2609.07303) `arXiv:2609.07303`
