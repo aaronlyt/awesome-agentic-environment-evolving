@@ -88,3 +88,15 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-09-07] [Online Surrogate Repair: Decoupling High-Fidelity Feedback from Search Length in Closed-Loop Discovery](https://arxiv.org/abs/2609.07655) `arXiv:2609.07655`
 - [2026-09-07] [Efficient Exploration Is Enough](https://arxiv.org/abs/2609.07575) `arXiv:2609.07575`
 - [2026-09-07] [Long-Horizon Language Model Reinforcement Learning via Progressive Point Matching](https://arxiv.org/abs/2609.07303) `arXiv:2609.07303`
+
+## 2026-10-12 (auto)
+
+- [2026-10-09] [State-OPD: State-Grounded On-Policy Distillation for Multi-Turn Agents](https://arxiv.org/abs/2610.13238) `arXiv:2610.13238`
+- [2026-10-09] [Scaling Agentic Data for Long-Horizon Terminal Intelligence](https://arxiv.org/abs/2610.13166) `arXiv:2610.13166`
+- [2026-10-08] [Dynamic Mechanism and Information Design in AI-Agent Environments: A General Analytical Framework](https://arxiv.org/abs/2610.11177) `arXiv:2610.11177`
+- [2026-10-06] [SIGMA: Self-Improving Alignment Generalization from a Model Spec](https://arxiv.org/abs/2610.07935) `arXiv:2610.07935`
+- [2026-10-05] [VERA: Scaling Verifiable Environments for Agentic co-Evolution](https://arxiv.org/abs/2610.05923) `arXiv:2610.05923`
+- [2026-10-05] [Topology-Conditioned Backdoors: Language Models That Insert Vulnerabilities When They Infer They Are in a Multi-Agent System](https://arxiv.org/abs/2610.05793) `arXiv:2610.05793`
+- [2026-10-04] [Who Is Your Agent Serving? Provider-Side Indirect Prompt Injection in Proactive Agents](https://arxiv.org/abs/2610.05266) `arXiv:2610.05266`
+- [2026-10-04] [Scaling Verifiable Environments for Long-horizon Work Agents](https://arxiv.org/abs/2610.04906) `arXiv:2610.04906`
+- [2026-10-02] [InvestigationWorlds: An Agentic Environment for Legal Investigation](https://arxiv.org/abs/2610.04129) `arXiv:2610.04129`
