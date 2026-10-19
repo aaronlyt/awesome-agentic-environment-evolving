@@ -100,3 +100,31 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-10-04] [Who Is Your Agent Serving? Provider-Side Indirect Prompt Injection in Proactive Agents](https://arxiv.org/abs/2610.05266) `arXiv:2610.05266`
 - [2026-10-04] [Scaling Verifiable Environments for Long-horizon Work Agents](https://arxiv.org/abs/2610.04906) `arXiv:2610.04906`
 - [2026-10-02] [InvestigationWorlds: An Agentic Environment for Legal Investigation](https://arxiv.org/abs/2610.04129) `arXiv:2610.04129`
+
+## 2026-10-19 (auto)
+
+- [2026-10-16] [GatewayBench: Unified Capability and Security Evaluation Platform for MCP Gateways](https://arxiv.org/abs/2610.23449) `arXiv:2610.23449`
+- [2026-10-16] [Bayesian Learning of Parametric Mean Field Games with Common Noise](https://arxiv.org/abs/2610.23387) `arXiv:2610.23387`
+- [2026-10-15] [Human Interventions as Labels: Localizing, Steering, and (Sometimes) Editing the Computations Behind LLM Agent Failures](https://arxiv.org/abs/2610.21708) `arXiv:2610.21708`
+- [2026-10-15] [MetaExp: Learning to Self-Improve through Experience via Verifiable Cross-Task Environment Scaling](https://arxiv.org/abs/2610.21492) `arXiv:2610.21492`
+- [2026-10-15] [A Responsibility-Centered Coordination Mechanism for Decentralized Multi-Agent Systems](https://arxiv.org/abs/2610.21243) `arXiv:2610.21243`
+- [2026-10-15] [Learning When to Withdraw: Curriculum Coverage and Rule-Specific Failures in Fine-Tuned Language Agents](https://arxiv.org/abs/2610.21045) `arXiv:2610.21045`
+- [2026-10-14] [AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks](https://arxiv.org/abs/2610.20675) `arXiv:2610.20675`
+- [2026-10-14] [Player-1: Learning to Play from Synthetic Experience](https://arxiv.org/abs/2610.20584) `arXiv:2610.20584`
+- [2026-10-14] [PerSo: Investigating Facets of LLMs' Social Intelligence in Real-World Persuasion Scenarios](https://arxiv.org/abs/2610.20548) `arXiv:2610.20548`
+- [2026-10-14] [Drivers of LLM Consensus Formation Under Competing Incentives: A Simulation Study](https://arxiv.org/abs/2610.20200) `arXiv:2610.20200`
+- [2026-10-13] [Verifier-Grounded Agentic RL for Provably Correct Code](https://arxiv.org/abs/2610.19298) `arXiv:2610.19298`
+- [2026-10-13] [Tev: Scaling Long-Horizon Agentic Environments with Dense Progress Rewards](https://arxiv.org/abs/2610.18868) `arXiv:2610.18868`
+- [2026-10-13] [Agent-Reflex: Teaching Language Agents to Act Reflectively](https://arxiv.org/abs/2610.17953) `arXiv:2610.17953`
+- [2026-10-13] [Training LLMs for Multi-Agent Collaboration with Verifiable Information Rewards](https://arxiv.org/abs/2610.17893) `arXiv:2610.17893`
+- [2026-10-13] [Can Agents Truly Forget? Explore Machine Unlearning for LLM Agents](https://arxiv.org/abs/2610.17659) `arXiv:2610.17659`
+- [2026-10-12] [Reinforcement Learning In Partially Verifiable Environments for Colon Cancer Treatment Planning](https://arxiv.org/abs/2610.17426) `arXiv:2610.17426`
+- [2026-10-12] [Neos: Learning to Interleave Search and Visual Reasoning](https://arxiv.org/abs/2610.17043) `arXiv:2610.17043`
+- [2026-10-12] [Davinci-Tool: Scaling Agentic Tool-Use Supervision with Verifiable Executable Environments](https://arxiv.org/abs/2610.16867) `arXiv:2610.16867`
+- [2026-10-12] [Recursive Environment Scaling for General Long-Horizon Agents](https://arxiv.org/abs/2610.16397) `arXiv:2610.16397`
+- [2026-10-11] [Scalable Weak-to-Strong Verifier Hardening for Agent Environments](https://arxiv.org/abs/2610.15924) `arXiv:2610.15924`
+- [2026-10-10] [WorkBorne: Discovering Agentic Tasks from Real-World Artifact Transitions](https://arxiv.org/abs/2610.14915) `arXiv:2610.14915`
+- [2026-10-10] [Bridging Risk Approximation Gaps in Model Predictive Task Sampling via In-Context Modeling](https://arxiv.org/abs/2610.14913) `arXiv:2610.14913`
+- [2026-10-10] [ProgAgent: Learning Tool Orchestration through Programmatic Training](https://arxiv.org/abs/2610.14774) `arXiv:2610.14774`
+- [2026-10-10] [What Counts as the Same Task? Executable Contracts for Robustness Evaluation of Tool-Using Agents](https://arxiv.org/abs/2610.14477) `arXiv:2610.14477`
+- [2026-10-09] [AutoEnvScaling: Automating the Data Flywheel with Terminal Agents](https://arxiv.org/abs/2610.14163) `arXiv:2610.14163`
