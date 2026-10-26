@@ -128,3 +128,19 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-10-10] [ProgAgent: Learning Tool Orchestration through Programmatic Training](https://arxiv.org/abs/2610.14774) `arXiv:2610.14774`
 - [2026-10-10] [What Counts as the Same Task? Executable Contracts for Robustness Evaluation of Tool-Using Agents](https://arxiv.org/abs/2610.14477) `arXiv:2610.14477`
 - [2026-10-09] [AutoEnvScaling: Automating the Data Flywheel with Terminal Agents](https://arxiv.org/abs/2610.14163) `arXiv:2610.14163`
+
+## 2026-10-26 (auto)
+
+- [2026-10-23] [POSEIDON: Scaling Training Environments for Scientific Agents from Code Repositories](https://arxiv.org/abs/2610.32448) `arXiv:2610.32448`
+- [2026-10-23] [When Statisticians Can Also Be AI Engineers, What Could We Build?](https://arxiv.org/abs/2610.32105) `arXiv:2610.32105`
+- [2026-10-21] [A Three-Pillar Governance Framework for Safe and Trustworthy AI Agents](https://arxiv.org/abs/2610.30445) `arXiv:2610.30445`
+- [2026-10-21] [Benchmarking and Error Analysis of Deep Search and Deep Research LLM Agents](https://arxiv.org/abs/2610.29346) `arXiv:2610.29346`
+- [2026-10-20] [Attention-based Classification for Indirect Prompt Injection](https://arxiv.org/abs/2610.28988) `arXiv:2610.28988`
+- [2026-10-20] [Ask to Learn: Query-Based Collaborative Reinforcement Learning](https://arxiv.org/abs/2610.27606) `arXiv:2610.27606`
+- [2026-10-19] [Agent World Model in the Wild: Computer-Use Agent Environment Synthesis](https://arxiv.org/abs/2610.26828) `arXiv:2610.26828`
+- [2026-10-19] [Causal Robustness from Synthetic Environments](https://arxiv.org/abs/2610.26250) `arXiv:2610.26250`
+- [2026-10-19] [Anytime-Valid Monitoring of Robust Stochastic Models](https://arxiv.org/abs/2610.26193) `arXiv:2610.26193`
+- [2026-10-19] [CUA-Lite: An Open Platform for Computer Use Agents](https://arxiv.org/abs/2610.26071) `arXiv:2610.26071`
+- [2026-10-16] [ROAR: Benchmarking LMM Agents under Real-Time Constraints in Multiplayer Action-Shooter Games](https://arxiv.org/abs/2610.24282) `arXiv:2610.24282`
+- [2026-10-16] [AM-Bench: A Unified Taxonomy and Evaluation Suite for Agentic Misalignment](https://arxiv.org/abs/2610.24264) `arXiv:2610.24264`
+- [2026-10-14] [RL Teaches VLMs Where to Attend but Not How to Perceive](https://arxiv.org/abs/2610.23983) `arXiv:2610.23983`
