@@ -144,3 +144,16 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-10-16] [ROAR: Benchmarking LMM Agents under Real-Time Constraints in Multiplayer Action-Shooter Games](https://arxiv.org/abs/2610.24282) `arXiv:2610.24282`
 - [2026-10-16] [AM-Bench: A Unified Taxonomy and Evaluation Suite for Agentic Misalignment](https://arxiv.org/abs/2610.24264) `arXiv:2610.24264`
 - [2026-10-14] [RL Teaches VLMs Where to Attend but Not How to Perceive](https://arxiv.org/abs/2610.23983) `arXiv:2610.23983`
+
+## 2026-11-02 (auto)
+
+- [2026-10-29] [Towards Understanding Score-Seeking in LLMs](https://arxiv.org/abs/2610.41014) `arXiv:2610.41014`
+- [2026-10-28] [Masked Erosion: How Acceptance Gates Lose Redundant Safeguards in Self-Improving Agents](https://arxiv.org/abs/2610.38392) `arXiv:2610.38392`
+- [2026-10-27] [WebAnything: From the Wild Web to Scalable Agent Environments](https://arxiv.org/abs/2610.37786) `arXiv:2610.37786`
+- [2026-10-27] [Scaling Laws for Tool-Use Agents via Controllable Environment Synthesis](https://arxiv.org/abs/2610.37648) `arXiv:2610.37648`
+- [2026-10-27] [TANDEM: Balancing Centralized and Decentralized Critics to Address the Information Gap in Complex Multi-Agent Environments](https://arxiv.org/abs/2610.37592) `arXiv:2610.37592`
+- [2026-10-26] [The Trinity:Capability-Driven Recursive Self-Improvement for Multimodal Agents](https://arxiv.org/abs/2610.36077) `arXiv:2610.36077`
+- [2026-10-26] [Jaxnasium: Embracing PyTrees For Any-Agent, Cross-Suite Reinforcement Learning](https://arxiv.org/abs/2610.36075) `arXiv:2610.36075`
+- [2026-10-26] [ClinVerse: A Realistic Multi-Agent Diagnostic Environment for Training and Evaluating Medical Agents](https://arxiv.org/abs/2610.34878) `arXiv:2610.34878`
+- [2026-10-25] [InteractiveWorld: A Verifiable Human-Centric Environment for Building Better Interactive MLLM Assistants](https://arxiv.org/abs/2610.33966) `arXiv:2610.33966`
+- [2026-10-23] [Gaussian Episodic Memory for Long-Term Spatiotemporal Reasoning](https://arxiv.org/abs/2610.33158) `arXiv:2610.33158`
