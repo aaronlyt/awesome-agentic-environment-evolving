@@ -157,3 +157,20 @@ then delete the line here. Out-of-scope lines are deleted without action.
 - [2026-10-26] [ClinVerse: A Realistic Multi-Agent Diagnostic Environment for Training and Evaluating Medical Agents](https://arxiv.org/abs/2610.34878) `arXiv:2610.34878`
 - [2026-10-25] [InteractiveWorld: A Verifiable Human-Centric Environment for Building Better Interactive MLLM Assistants](https://arxiv.org/abs/2610.33966) `arXiv:2610.33966`
 - [2026-10-23] [Gaussian Episodic Memory for Long-Term Spatiotemporal Reasoning](https://arxiv.org/abs/2610.33158) `arXiv:2610.33158`
+
+## 2026-11-09 (auto)
+
+- [2026-11-06] [GreyZone: Production-quality Agentic Application Threats](https://arxiv.org/abs/2611.09161) `arXiv:2611.09161`
+- [2026-11-05] [Scientist World: Grow a Research World for AI-Scientists](https://arxiv.org/abs/2611.08478) `arXiv:2611.08478`
+- [2026-11-05] [The Promise of Strategic Agentic Scambaiting](https://arxiv.org/abs/2611.08170) `arXiv:2611.08170`
+- [2026-11-05] [EnvOpt: Automated Optimization for Agent Environments](https://arxiv.org/abs/2611.07372) `arXiv:2611.07372`
+- [2026-11-04] [Meta-Frieren: Beyond Single Level Online Learning](https://arxiv.org/abs/2611.07169) `arXiv:2611.07169`
+- [2026-11-03] [VirtualTrialHarness: Coordinating Agentic Operationalization of Virtual Trial Protocols Across Complex Clinical Schemas](https://arxiv.org/abs/2611.05551) `arXiv:2611.05551`
+- [2026-11-03] [ToolSpace: Scaling Tool-Centric Environment Synthesis for Long-Horizon Agents](https://arxiv.org/abs/2611.05036) `arXiv:2611.05036`
+- [2026-11-02] [WebHarbor: Docking Real Websites for Evolving GUI Agent Environments](https://arxiv.org/abs/2611.03634) `arXiv:2611.03634`
+- [2026-11-02] [Characterizing When Language Models Take Harmful Actions to Protect Their Assigned Goals](https://arxiv.org/abs/2611.03374) `arXiv:2611.03374`
+- [2026-11-02] [An Axiomatic Framework for Reinforcement Learning in Open Multi-Agent Systems](https://arxiv.org/abs/2611.03301) `arXiv:2611.03301`
+- [2026-11-02] [Gibbs Variational Last Layers for Long-Horizon Dynamics Learning](https://arxiv.org/abs/2611.02891) `arXiv:2611.02891`
+- [2026-11-01] [LegoEnv: Self-Evolving Agentic Environments via Modular Recombination](https://arxiv.org/abs/2611.01834) `arXiv:2611.01834`
+- [2026-10-31] [Spotting the Artificial: Dialogic Humor Improvisation in Humans and LLMs](https://arxiv.org/abs/2611.00492) `arXiv:2611.00492`
+- [2026-10-22] [Aegis OS: A Transactional Multi-Tenant Operating System Runtime for Eliminating Authorization Fatigue in Autonomous Coding Agents](https://arxiv.org/abs/2611.08516) `arXiv:2611.08516`
